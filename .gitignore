@@ -1,0 +1,23 @@
+# macOS / OS noise
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Editor / IDE
+.idea/
+.vscode/
+
+# Dependency directories (we vendor Three.js directly under `vendor/`, no npm install needed)
+node_modules/
+
+# Build artefacts (none currently, but harmless to have)
+dist/
+build/
+
+# Local server logs
+*.log
+
+# Temp files
+*.tmp
+.~lock.*

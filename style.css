@@ -1,0 +1,2407 @@
+/* ============================================================
+   Ubud Jungle Ballers — site styles
+   See ../BRAND.md for the full brand system.
+   ============================================================ */
+
+:root {
+  /* Original UJB tokens (kept for legacy components) */
+  --ujb-green:        #1E4F3F;
+  --ujb-green-deep:   #0F2D24;
+  --ujb-jungle:       #2A6B53;
+  --ujb-bone:         #F5F1E8;
+  --ujb-white:        #FFFFFF;
+  --ujb-gold:         #C9A14A;
+  --ujb-gold-soft:    #E0BE6E;
+  --ujb-mint:         #B7E0C9;
+  --ujb-ink:          #0E1410;
+  --ujb-mist:         #8B9892;
+
+  --border-soft:      rgba(245, 241, 232, 0.12);
+  --border-mid:       rgba(245, 241, 232, 0.22);
+  --shadow-deep:      0 30px 60px rgba(0, 0, 0, 0.45);
+
+  --ease:             cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* === Claude-design tokens (jungle palette) === */
+  --bg:        #0a1f15;
+  --bg-2:      #0e2a1c;
+  --bg-3:      #133525;
+  --line:      #1f4530;
+  --ink:       #f3ecdc;
+  --ink-dim:   #b9b59c;
+  --gold:      #e8b339;
+  --gold-2:    #f3c861;
+  --rust:      #c8552d;
+  --jade:      #4fa37a;
+
+  --display:   "Anton", "Bebas Neue", Impact, sans-serif;
+  --body:      "Archivo", "Inter", system-ui, sans-serif;
+  --mono:      "JetBrains Mono", ui-monospace, monospace;
+
+  --maxw:      1440px;
+}
+
+/* === Reusable utilities (Claude-design) === */
+.display {
+  font-family: var(--display);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 0.88;
+  text-transform: uppercase;
+}
+.mono { font-family: var(--mono); }
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+.container {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 40px;
+}
+.hairline { height: 1px; background: var(--line); width: 100%; }
+.label-line { display: flex; align-items: center; gap: 12px; }
+.label-line::before {
+  content: "";
+  width: 24px;
+  height: 1px;
+  background: var(--gold);
+  display: inline-block;
+}
+.gold { color: var(--gold); }
+.tag {
+  display: inline-block;
+  padding: 4px 8px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border: 1px solid var(--line);
+  color: var(--ink-dim);
+}
+.ph {
+  background:
+    repeating-linear-gradient(135deg, transparent 0 12px, rgba(255,255,255,.04) 12px 13px),
+    var(--bg-3);
+  color: var(--ink-dim);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  text-align: center;
+}
+
+::selection { background: var(--gold); color: var(--bg); }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--line); border-radius: 0; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+@keyframes spin360 { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes flicker { 0%, 98%, 100% { opacity: 1; } 99% { opacity: 0.6; } }
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  /* NOTE: do NOT set overflow-x: hidden here — it breaks position:sticky on
+     descendants of body (a CSS quirk).  Horizontal overflow is contained by
+     `.hero` itself (overflow: hidden), which is what catches the slid-out
+     hero-text without disrupting the page-level sticky context.            */
+}
+
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; }
+
+/* ---------- Decorative background gradient ---------- */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(31, 69, 48, 0.55), transparent 55%),
+    radial-gradient(ellipse at 80% 90%, rgba(232, 179, 57, 0.08), transparent 60%),
+    var(--bg);
+  z-index: -2;
+  pointer-events: none;
+}
+
+/* ---------- NAV (Claude design) ---------- */
+.site-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 50;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background 250ms ease, border-color 250ms ease, backdrop-filter 250ms ease;
+}
+.site-nav.is-scrolled {
+  background: rgba(10, 31, 21, 0.86);
+  backdrop-filter: blur(10px);
+  border-bottom-color: var(--line);
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 76px;
+}
+
+.brand-mark {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.brand-mark .brand-icon {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.45));
+  display: block;
+}
+.brand-wordmark {
+  line-height: 1;
+}
+.brand-name {
+  font-family: var(--display);
+  font-size: 16px;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.brand-eyebrow {
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  color: var(--ink-dim);
+  margin-top: 4px;
+}
+
+.site-nav .links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.site-nav .links a {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  padding-bottom: 4px;
+  border-bottom: 1px solid transparent;
+  transition: color 150ms ease, border-color 150ms ease;
+}
+.site-nav .links a:hover {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+.nav-cta {
+  margin-left: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--gold);
+  color: #1a1408 !important;
+  border: 1px solid var(--gold);
+  padding: 12px 18px !important;
+  font-family: var(--body) !important;
+  font-weight: 700 !important;
+  font-size: 12px !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase;
+  transition: all 200ms ease;
+}
+.nav-cta:hover {
+  background: var(--gold-2);
+  border-color: var(--gold-2);
+  color: #1a1408 !important;
+  border-bottom-color: var(--gold-2) !important;
+}
+
+/* ---------- HERO (scroll-driven cinematic) ----------
+   .hero-anchor reserves 200vh of scroll. Inside, .hero is sticky-pinned at the
+   top for one extra viewport. As the user scrolls within the anchor, JS sets
+   --scroll-progress (0..1) on :root. CSS reads that variable to slide the
+   text out, grow the globe, and recenter it. After the anchor, scrolling
+   continues naturally to the next section.                                  */
+
+:root {
+  --scroll-progress: 0;
+}
+
+section.hero-anchor {
+  position: relative;
+  /* One unified cinematic — globe zoom + jungle journey + badge climax all
+     in the same sticky stage:
+       100vh visible viewport
+     + 100vh for the globe-zoom phase    (--scroll-progress 0 → 1)
+     + 130vh for the jungle phase, which crossfades on TOP of the globe
+                                        (--jungle-progress 0 → 1)
+     +  70vh hold on the climax before sticky releases.                   */
+  height: 400vh;
+}
+
+.hero {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Hero topographic line pattern (decorative) */
+.hero-topo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 0;
+  /* Fade out as the user scrolls into the jungle */
+  opacity: calc(0.4 * (1 - var(--jungle-progress)));
+}
+
+.hero-text {
+  position: absolute;
+  top: 50%;
+  /* Inset from the left edge — scales with viewport so the text feels
+     anchored to a "page width" rather than glued to the chrome edge.       */
+  left: clamp(120px, 12vw, 280px);
+  max-width: 540px;
+  /* Always on top of the globe and the jungle canopy / SVG layers           */
+  z-index: 20;
+  transform:
+    translateY(-50%)
+    translateX(calc(-130% * var(--scroll-progress)));
+  opacity: calc(1 - var(--scroll-progress) * 1.6);
+  transition: opacity 80ms linear;
+  pointer-events: auto;
+}
+.hero-text:empty + *, .hero-text { will-change: transform, opacity; }
+
+.hero-eyebrow {
+  margin-bottom: 28px;
+}
+.hero-eyebrow .mono {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: var(--gold);
+}
+
+.hero-text .hero-headline {
+  font-size: clamp(64px, 8vw, 128px);
+  margin: 0 0 24px;
+  color: var(--ink);
+}
+/* Each sentence stays on its own line and never breaks mid-line */
+.hero-line {
+  display: block;
+  white-space: nowrap;
+}
+
+.hero-text .tagline {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--body);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--ink);
+  margin: 0 0 18px;
+}
+.hero-text .tagline::before {
+  content: "";
+  display: inline-block;
+  width: 36px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.hero-text .lede {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink-dim);
+  max-width: 480px;
+  margin: 0 0 32px;
+}
+
+.cta-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Sharp-corner button system from Claude design */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
+  font-family: var(--body);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  background: transparent;
+  cursor: pointer;
+  transition: all 180ms ease;
+  border-radius: 0;
+}
+.btn:hover { background: var(--ink); color: var(--bg); }
+.btn--gold {
+  background: var(--gold);
+  color: #1a1408;
+  border-color: var(--gold);
+}
+.btn--gold:hover {
+  background: var(--gold-2);
+  border-color: var(--gold-2);
+  color: #1a1408;
+}
+.btn--ghost {
+  border-color: var(--line);
+  color: var(--ink);
+}
+.btn--ghost:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+/* Meta strip below hero CTAs */
+.hero-meta {
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  max-width: 540px;
+}
+.hero-meta-cell {
+  /* Equal padding both sides + center content so labels and values
+     never crowd the dividing borders. */
+  padding: 18px 16px;
+  border-right: 1px solid var(--line);
+  text-align: center;
+}
+.hero-meta-cell:last-child { border-right: none; }
+.hero-meta-key {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--ink-dim);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+.hero-meta-val {
+  font-size: 28px;
+}
+
+/* ---------- GLOBE ---------- */
+.globe-wrap {
+  /* Sits on top of the hero text. Scroll-progress slides it from the right
+     half toward center and *visually* grows it via transform:scale — pure
+     compositor work, no layout, no flicker.  The canvas itself stays at the
+     MAX displayed size so internal resolution is always crisp; we scale
+     down for the smaller initial state.                                    */
+  position: absolute;
+  top: 50%;
+  /* Center-X interpolates from 62% (closer to text) to 50% (page center) */
+  left: calc(62% - var(--scroll-progress) * 12%);
+  /* MAX displayed size — full circle fits with margin inside the viewport */
+  width: 80vh;
+  aspect-ratio: 1 / 1;
+  max-width: min(80vh, 90vw);
+  /* Visual size: 0.6× at p=0 → 1.0× at p=1.
+     0.6 × 80vh = 48vh meaningful initial state on the right,
+     1.0 × 80vh = 80vh full-bleed centered state.                          */
+  transform:
+    translate(-50%, -50%)
+    scale(calc(0.6 + 0.4 * var(--scroll-progress)));
+  transform-origin: center center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: none;
+  overscroll-behavior: contain;
+  will-change: transform, opacity;
+  /* Fade out smoothly as the jungle takes over the stage */
+  opacity: calc(1 - min(1, max(0, (var(--jungle-progress) - 0.05) * 2.4)));
+}
+
+#globe-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: grab;
+  touch-action: none;
+}
+#globe-canvas:active { cursor: grabbing; }
+
+.globe-hint {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ujb-mist);
+  background: rgba(15, 45, 36, 0.6);
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--border-soft);
+  pointer-events: none;
+  white-space: nowrap;
+  /* Fades in as the globe takes center stage */
+  opacity: calc(0.3 + 0.7 * var(--scroll-progress));
+  transition: opacity 80ms linear;
+}
+
+/* Scroll affordance — invites the user to start the animation */
+.scroll-cue {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ujb-mist);
+  pointer-events: none;
+  /* Fades out fast — once the user starts scrolling we don't need to nudge them */
+  opacity: calc(1 - var(--scroll-progress) * 3);
+}
+.scroll-cue-arrow {
+  font-size: 18px;
+  color: var(--ujb-gold);
+  animation: scroll-cue-bob 1.6s ease-in-out infinite;
+}
+@keyframes scroll-cue-bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(6px); }
+}
+
+.globe-tooltip {
+  position: fixed;
+  top: 0; left: 0;
+  background: var(--ujb-ink);
+  color: var(--ujb-bone);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid var(--ujb-gold);
+  pointer-events: none;
+  transform: translate(-50%, -135%);
+  opacity: 0;
+  transition: opacity 160ms var(--ease);
+  z-index: 30;
+  white-space: nowrap;
+}
+
+.globe-tooltip.visible { opacity: 1; }
+
+/* Loading state for globe */
+.globe-loader {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  color: var(--ujb-mist);
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: opacity 400ms var(--ease);
+}
+.globe-loader.hidden { opacity: 0; }
+
+/* ---------- COUNTRY PANEL (slides from right) ---------- */
+aside.country-panel {
+  position: fixed;
+  top: 0; right: 0;
+  height: 100vh;
+  width: min(420px, 92vw);
+  background: linear-gradient(180deg, var(--ujb-green) 0%, var(--ujb-green-deep) 100%);
+  border-left: 1px solid var(--ujb-gold);
+  box-shadow: var(--shadow-deep);
+  transform: translateX(100%);
+  transition: transform 380ms var(--ease);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  padding: 32px 36px;
+}
+
+aside.country-panel.open {
+  transform: translateX(0);
+}
+
+.panel-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid var(--border-mid);
+  color: var(--ujb-bone);
+  font-size: 22px;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  transition: all 200ms var(--ease);
+}
+.panel-close:hover {
+  background: var(--ujb-gold);
+  color: var(--ujb-ink);
+  border-color: var(--ujb-gold);
+}
+
+.panel-flag {
+  font-size: 56px;
+  line-height: 1;
+  margin: 4px 0 16px;
+}
+
+.panel-country {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: 44px;
+  letter-spacing: 0.04em;
+  margin: 0 0 6px;
+  color: var(--ujb-bone);
+}
+
+.panel-meta {
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ujb-gold);
+  margin: 0 0 8px;
+}
+
+.panel-note {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 16px;
+  color: var(--ujb-mint);
+  margin: 0 0 24px;
+  line-height: 1.5;
+}
+
+.panel-roster {
+  flex: 1;
+  overflow-y: auto;
+  margin: 0 -8px;
+  padding: 0 8px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.player-row {
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  background: rgba(245, 241, 232, 0.04);
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  transition: all 200ms var(--ease);
+}
+.player-row:hover {
+  background: rgba(201, 161, 74, 0.08);
+  border-color: var(--ujb-gold);
+}
+
+.player-num {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: 28px;
+  color: var(--ujb-gold);
+  text-align: center;
+  line-height: 1;
+}
+
+.player-name {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--ujb-bone);
+}
+
+.player-pos {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+  color: var(--ujb-mist);
+  background: rgba(245, 241, 232, 0.06);
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+/* ============================================================
+   JUNGLE LAYERS — PAINTED ON TOP OF THE HERO STAGE
+   Lives inside .hero (same sticky pin as the globe).
+   --jungle-progress (0..1) crossfades them in over the globe so
+   the user feels the camera "pushing through" canopy after the
+   ball has done its zoom.
+   ============================================================ */
+:root { --jungle-progress: 0; }
+
+/* Canopy gradient — fades in over the dark hero background as jungle starts */
+.jungle-canopy {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;       /* sits between the globe (z 0) and the SVG layers (z 2+) */
+  opacity: calc(min(1, var(--jungle-progress) * 1.4));
+  background:
+    radial-gradient(
+      ellipse at 50% 55%,
+      rgba(255, 210, 80, calc(0.20 * var(--jungle-progress))) 0%,
+      transparent 45%
+    ),
+    radial-gradient(ellipse at 50% 100%, rgba(0, 0, 0, 0.5) 0%, transparent 60%),
+    linear-gradient(180deg, #0a1f17 0%, #061410 65%, #030a07 100%);
+}
+
+.jungle-layer { will-change: transform, opacity; }
+
+/* Blend-mode backstop: any residual white pixels in Canva-exported PNGs
+   multiply against the dark green canopy and disappear, while the colored
+   interiors of leaves/trunks survive (slightly darker but intact).         */
+.jungle-tree,
+.jungle-fg {
+  mix-blend-mode: multiply;
+}
+
+/* (removed bg-treeline — pure dark canopy gradient backdrop instead) */
+
+/* ----- Layer 1: trees (multiple instances, different depths/scales) ----- */
+.jungle-tree {
+  position: absolute;
+  width: auto;
+  z-index: 3;
+  will-change: transform, opacity;
+  transform-origin: bottom center;
+  /* Default: invisible until jungle phase starts */
+  opacity: 0;
+}
+
+/* === FAR PALMS === — anchored deep below, only crown visible */
+.tree-palm-far-l {
+  bottom: -55vh;
+  left: 16vw;
+  height: 110vh;
+  transform: translateY(calc(40vh - 40vh * min(1, var(--jungle-progress) * 1.8)))
+             scale(calc(0.7 + 0.3 * var(--jungle-progress)));
+  opacity: calc(min(1, max(0, (var(--jungle-progress) - 0.05) * 2.5)) * 0.85);
+}
+.tree-palm-far-r {
+  bottom: -55vh;
+  right: 16vw;
+  height: 110vh;
+  transform: translateY(calc(40vh - 40vh * min(1, var(--jungle-progress) * 1.8)))
+             scale(calc(-0.7 - 0.3 * var(--jungle-progress)), calc(0.7 + 0.3 * var(--jungle-progress)));
+  opacity: calc(min(1, max(0, (var(--jungle-progress) - 0.05) * 2.5)) * 0.85);
+}
+
+/* === MID-BACK BANANA CLUSTER === — wider, anchored deep so only fronds show */
+.tree-banana-l {
+  bottom: -45vh;
+  left: 4vw;
+  height: 100vh;
+  transform: translateY(calc(50vh - 50vh * min(1, var(--jungle-progress) * 1.6)))
+             scale(calc(0.85 + 0.4 * var(--jungle-progress)));
+  opacity: calc(min(1, max(0, (var(--jungle-progress) - 0.10) * 2.5)));
+}
+.tree-banana-mid {
+  bottom: -55vh;
+  left: 50%;
+  margin-left: -28vh;
+  height: 100vh;
+  transform: translateY(calc(60vh - 60vh * min(1, var(--jungle-progress) * 1.4)))
+             scale(calc(0.8 + 0.45 * var(--jungle-progress)));
+  opacity: calc(min(1, max(0, (var(--jungle-progress) - 0.18) * 2.5)) * 0.85);
+}
+.tree-banana-r {
+  bottom: -45vh;
+  right: 4vw;
+  height: 100vh;
+  transform: translateY(calc(50vh - 50vh * min(1, var(--jungle-progress) * 1.6)))
+             scale(calc(0.85 + 0.4 * var(--jungle-progress)));
+  opacity: calc(min(1, max(0, (var(--jungle-progress) - 0.10) * 2.5)));
+}
+
+/* === BIG OUTER PALMS === — sky-tall, deeply anchored, only sweeping fronds show */
+.tree-palm-l {
+  bottom: -85vh;
+  left: -6vw;
+  height: 180vh;
+  transform: translateY(calc(60vh - 60vh * min(1, var(--jungle-progress) * 1.7)))
+             scale(calc(0.9 + 0.35 * var(--jungle-progress)))
+             translateX(calc(-6vw * var(--jungle-progress)));
+  opacity: calc(min(1, max(0, (var(--jungle-progress) - 0.12) * 2.8)));
+}
+.tree-palm-r {
+  bottom: -85vh;
+  right: -6vw;
+  height: 180vh;
+  transform: translateY(calc(60vh - 60vh * min(1, var(--jungle-progress) * 1.7)))
+             scale(calc(-0.9 - 0.35 * var(--jungle-progress)), calc(0.9 + 0.35 * var(--jungle-progress)))
+             translateX(calc(6vw * var(--jungle-progress)));
+  opacity: calc(min(1, max(0, (var(--jungle-progress) - 0.12) * 2.8)));
+}
+
+/* === FRAME PALMS === — flank the badge climax, very tall, only crown visible */
+.tree-palm-frame-l {
+  bottom: -70vh;
+  left: 26vw;
+  height: 150vh;
+  z-index: 2;
+  transform: translateY(calc(80vh - 80vh * min(1, var(--jungle-progress) * 1.5)))
+             scale(calc(0.7 + 0.3 * var(--jungle-progress)));
+  opacity: calc(min(1, max(0, (var(--jungle-progress) - 0.22) * 2.4)) * 0.7);
+}
+.tree-palm-frame-r {
+  bottom: -70vh;
+  right: 26vw;
+  height: 150vh;
+  z-index: 2;
+  transform: translateY(calc(80vh - 80vh * min(1, var(--jungle-progress) * 1.5)))
+             scale(calc(-0.7 - 0.3 * var(--jungle-progress)), calc(0.7 + 0.3 * var(--jungle-progress)));
+  opacity: calc(min(1, max(0, (var(--jungle-progress) - 0.22) * 2.4)) * 0.7);
+}
+
+/* ----- Layer 3: foreground vines + leaves ----- */
+.jungle-fg {
+  position: absolute;
+  z-index: 5;
+  will-change: transform, opacity;
+  opacity: 0;            /* default invisible during hero */
+}
+
+/* === HANGING VINES (top edges) === */
+.vine-top-l {
+  top: -6vh;
+  left: 1vw;
+  height: 65vh;
+  transform-origin: top left;
+  transform: scale(calc(0.7 + 1.4 * var(--jungle-progress)))
+             translateX(calc(-30vw * var(--jungle-progress)));
+  opacity: calc(min(1, max(0, (var(--jungle-progress) - 0.05) * 2.5)));
+}
+.vine-top-mid {
+  top: -8vh;
+  left: 50%;
+  margin-left: -7vw;
+  height: 50vh;
+  transform-origin: top center;
+  transform: scale(calc(0.6 + 1.0 * var(--jungle-progress)))
+             translateY(calc(-30vh * var(--jungle-progress)));
+  opacity: calc(min(1, max(0, (var(--jungle-progress) - 0.10) * 2.0)) * 0.85);
+}
+.vine-top-r {
+  top: -6vh;
+  right: 1vw;
+  height: 65vh;
+  transform-origin: top right;
+  transform: scaleX(-1)
+             scale(calc(0.7 + 1.4 * var(--jungle-progress)))
+             translateX(calc(-30vw * var(--jungle-progress)));
+  opacity: calc(min(1, max(0, (var(--jungle-progress) - 0.05) * 2.5)));
+}
+
+/* === CANVA LEAVES — bottom corners, draping in (oversized to cover bottom edge) === */
+.frond-bot-l {
+  bottom: -25vh;
+  left: -18vw;
+  height: 130vh;
+  transform-origin: bottom left;
+  transform: rotate(-10deg)
+             scale(calc(0.8 + 1.2 * var(--jungle-progress)))
+             translate(calc(-10vw * var(--jungle-progress)), calc(8vh * var(--jungle-progress)));
+  opacity: calc(min(1, max(0, (var(--jungle-progress) - 0.05) * 2.4)));
+}
+.frond-bot-r {
+  bottom: -25vh;
+  right: -18vw;
+  height: 130vh;
+  transform-origin: bottom right;
+  transform: scaleX(-1) rotate(-10deg)
+             scale(calc(0.8 + 1.2 * var(--jungle-progress)))
+             translate(calc(-10vw * var(--jungle-progress)), calc(8vh * var(--jungle-progress)));
+  opacity: calc(min(1, max(0, (var(--jungle-progress) - 0.05) * 2.4)));
+}
+
+/* === CANVA LEAVES — top corners, hanging down (flipped vertically) === */
+.frond-top-l {
+  top: -22vh;
+  left: -8vw;
+  height: 70vh;
+  transform-origin: top left;
+  transform: scaleY(-1) rotate(8deg)
+             scale(calc(0.7 + 1.0 * var(--jungle-progress)))
+             translate(calc(-10vw * var(--jungle-progress)), calc(-8vh * var(--jungle-progress)));
+  opacity: calc(min(1, max(0, (var(--jungle-progress) - 0.15) * 2.2)) * 0.9);
+}
+.frond-top-r {
+  top: -22vh;
+  right: -8vw;
+  height: 70vh;
+  transform-origin: top right;
+  transform: scaleY(-1) scaleX(-1) rotate(8deg)
+             scale(calc(0.7 + 1.0 * var(--jungle-progress)))
+             translate(calc(-10vw * var(--jungle-progress)), calc(-8vh * var(--jungle-progress)));
+  opacity: calc(min(1, max(0, (var(--jungle-progress) - 0.15) * 2.2)) * 0.9);
+}
+
+/* ----- Layer 4: climax — badge logo emerges with golden glow ----- */
+.jungle-climax {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  /* Hidden until the journey is mostly through.  Reaches FULL opacity
+     by jp ≈ 0.85, well before the user finishes the scroll, so the
+     badge is unmistakably solid by the time they pause on it.            */
+  opacity: calc(min(1, max(0, (var(--jungle-progress) - 0.55) * 3.5)));
+}
+
+.jungle-climax-glow {
+  position: absolute;
+  width: 70vh;
+  height: 70vh;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    rgba(255, 210, 80, 0.35) 0%,
+    rgba(255, 210, 80, 0.15) 30%,
+    transparent 65%);
+  filter: blur(12px);
+  /* Slow breathe */
+  animation: jungle-glow-breathe 4s ease-in-out infinite;
+}
+@keyframes jungle-glow-breathe {
+  0%, 100% { transform: scale(1);   opacity: 0.85; }
+  50%      { transform: scale(1.06); opacity: 1;    }
+}
+
+.jungle-climax img {
+  position: relative;
+  /* Scales up as it appears */
+  width: calc(28vh + 18vh * min(1, max(0, (var(--jungle-progress) - 0.65) * 3)));
+  height: auto;
+  filter: drop-shadow(0 0 28px rgba(201, 161, 74, 0.6))
+          drop-shadow(0 8px 28px rgba(0, 0, 0, 0.65));
+}
+
+/* On narrow viewports, simplify and shrink */
+@media (max-width: 960px) {
+  section.jungle-anchor { height: 180vh; }
+  .jungle-tree { height: 50vh; }
+  .frond-bot-l, .frond-bot-r { height: 60vh; }
+  .vine-top-l, .vine-top-r { height: 40vh; }
+  .jungle-climax img { width: 50vw; }
+}
+
+/* ============================================================
+   CLAUDE-DESIGN SECTIONS — Manifesto, Community, Squad, Partners, CTA, Footer
+   Tighter, editorial, monospace-led; sharp corners; gold accents.
+   ============================================================ */
+.cd-section {
+  position: relative;
+  background: var(--bg);
+}
+.cd-section + .cd-section { border-top: 1px solid var(--line); }
+
+.cd-section .container { padding: 120px 40px; }
+
+.cd-section-head {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 24px;
+  align-items: end;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--line);
+}
+.cd-section-idx {
+  font-size: 12px;
+  color: var(--gold);
+  letter-spacing: 0.18em;
+}
+.cd-section-titles .eyebrow { margin-bottom: 12px; }
+.cd-section-title {
+  font-size: clamp(44px, 6vw, 92px);
+  margin: 0;
+}
+.cd-section-kicker {
+  font-size: 11px;
+  color: var(--ink-dim);
+  text-align: right;
+  max-width: 240px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ----- 02 / Club / Manifesto ----- */
+.club-body {
+  margin-top: 80px;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 80px;
+}
+.club-pull {
+  font-size: 36px;
+  line-height: 1;
+  margin: 0 0 32px;
+}
+.club-para {
+  color: var(--ink-dim);
+  font-size: 17px;
+  line-height: 1.7;
+  margin: 0 0 20px;
+}
+.tenets {
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+}
+.tenets-head {
+  margin-bottom: 14px;
+}
+.tenet {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+}
+.tenet-num {
+  color: var(--gold);
+  font-size: 12px;
+  padding-top: 4px;
+  letter-spacing: 0.12em;
+}
+.tenet-title {
+  font-size: 22px;
+  margin-bottom: 6px;
+}
+.tenet-body {
+  color: var(--ink-dim);
+  font-size: 14px;
+}
+
+.club-media {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+/* Figures act like the old striped placeholders, but hold actual images */
+.club-media-hero,
+.club-media-sub {
+  margin: 0;
+  position: relative;
+  border: 1px solid var(--line);
+  overflow: hidden;
+  background: var(--bg-3);
+}
+.club-media-hero { height: 360px; }
+.club-media-sub  { height: 220px; }
+
+.club-media-hero img,
+.club-media-sub img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  /* Slight green tint baked in via filter for cohesion */
+  filter: saturate(0.85) brightness(0.92) contrast(1.05);
+}
+
+/* Brand-tone overlay so every photo lands with the same atmospheric mood */
+.club-media-hero::after,
+.club-media-sub::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(10, 31, 21, 0.55) 0%, transparent 60%),
+    linear-gradient(180deg, rgba(232, 179, 57, 0.05) 0%, rgba(15, 45, 36, 0.30) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+/* Make sure the caption sits above the overlay */
+.club-media-cap { z-index: 2; }
+
+.club-media-cap {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--ink);
+  background: rgba(10, 31, 21, 0.7);
+  padding: 6px 10px;
+  text-transform: uppercase;
+  border: 1px solid var(--line);
+}
+
+.club-media-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.club-quote {
+  margin: 0;
+  border: 1px solid var(--line);
+  padding: 28px;
+  background: var(--bg-2);
+}
+.club-quote-head { margin-bottom: 12px; }
+.club-quote-body {
+  font-size: 28px;
+  line-height: 1.05;
+  margin: 0;
+}
+.club-quote-attrib {
+  font-size: 11px;
+  margin-top: 16px;
+  color: var(--ink-dim);
+  letter-spacing: 0.2em;
+}
+
+@media (max-width: 960px) {
+  .cd-section .container { padding: 80px 24px; }
+  .cd-section-head {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .cd-section-kicker { text-align: left; max-width: 100%; }
+  .club-body { grid-template-columns: 1fr; gap: 48px; }
+  .club-media-row { grid-template-columns: 1fr; }
+}
+
+/* ----- 03 / Community / Sessions grid ----- */
+.sessions-grid {
+  margin-top: 60px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--line);
+}
+.session-card {
+  position: relative;
+  padding: 32px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.session-card:nth-child(3n) { border-right: none; }
+.session-card:nth-last-child(-n+3) { border-bottom: none; }
+
+.session-tag {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  padding: 3px 8px;
+}
+.session-day {
+  font-size: 56px;
+  line-height: 0.9;
+}
+.session-time {
+  font-size: 11px;
+  color: var(--ink-dim);
+  letter-spacing: 0.18em;
+  margin-top: 8px;
+  text-transform: uppercase;
+}
+.session-title {
+  font-size: 24px;
+  margin-top: 24px;
+}
+.session-body {
+  color: var(--ink-dim);
+  font-size: 14px;
+  margin-top: 8px;
+  line-height: 1.6;
+}
+
+.community-foot {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.community-foot-loc {
+  color: var(--ink-dim);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+}
+
+/* ----- 04 / Squad / Tier tabs + roster list + portrait detail ----- */
+.tier-tabs {
+  margin-top: 60px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--line);
+}
+.tier-tab {
+  appearance: none;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  background: var(--bg);
+  border: none;
+  border-right: 1px solid var(--line);
+  padding: 28px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--ink);
+  transition: background 200ms ease, color 200ms ease;
+}
+.tier-tab:last-child { border-right: none; }
+.tier-tab:hover {
+  background: var(--bg-2);
+}
+.tier-tab.is-active {
+  background: var(--bg-3);
+  color: var(--gold);
+  position: relative;
+}
+.tier-tab.is-active::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  height: 2px;
+  background: var(--gold);
+}
+
+.tier-tab-num {
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 0.18em;
+}
+.tier-tab-name {
+  font-size: 28px;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+}
+.tier-tab.is-active .tier-tab-name { color: var(--ink); }
+.tier-tab-meta {
+  font-size: 10px;
+  color: var(--ink-dim);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.roster-shell {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--line);
+  border-top: none;
+}
+
+.roster-list {
+  display: flex;
+  flex-direction: column;
+}
+.roster-row {
+  display: grid;
+  grid-template-columns: 70px 1fr 60px 60px;
+  align-items: center;
+  padding: 22px 24px;
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+  transition: background 150ms ease, color 150ms ease;
+}
+.roster-row:last-child { border-bottom: none; }
+.roster-row:hover, .roster-row.is-hover {
+  background: var(--bg-3);
+}
+.roster-row.is-hover .roster-row-num { color: var(--gold); }
+.roster-row.is-hover .roster-row-arrow { color: var(--gold); }
+
+.roster-row-num {
+  font-family: var(--display);
+  font-size: 36px;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+}
+.roster-row-name {
+  font-family: var(--display);
+  font-size: 22px;
+  letter-spacing: 0.02em;
+}
+.roster-row-name .role {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--gold);
+  margin-left: 8px;
+  letter-spacing: 0.2em;
+}
+.roster-row-meta {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-dim);
+  letter-spacing: 0.18em;
+  margin-top: 4px;
+}
+.roster-row-flag {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-dim);
+  text-align: right;
+  letter-spacing: 0.18em;
+}
+.roster-row-arrow {
+  text-align: right;
+  color: var(--ink-dim);
+  font-family: var(--mono);
+  font-size: 18px;
+}
+
+.roster-detail {
+  border-left: 1px solid var(--line);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.roster-portrait {
+  height: 300px;
+}
+.roster-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.roster-stat {
+  border: 1px solid var(--line);
+  padding: 16px;
+}
+.roster-stat-key {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: var(--ink-dim);
+  text-transform: uppercase;
+}
+.roster-stat-val {
+  font-size: 28px;
+  margin-top: 6px;
+}
+.roster-blurb {
+  font-size: 14px;
+  color: var(--ink-dim);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ----- 05 / Partners / Sponsors table ----- */
+.partners-table {
+  margin-top: 60px;
+  border: 1px solid var(--line);
+}
+.partner-row {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  border-bottom: 1px solid var(--line);
+}
+.partner-row:last-child { border-bottom: none; }
+
+.partner-tier {
+  padding: 28px;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: var(--gold);
+  border-right: 1px solid var(--line);
+  background: var(--bg-2);
+  display: flex;
+  align-items: center;
+}
+.partner-cells {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.partner-cells--four {
+  grid-template-columns: repeat(4, 1fr);
+}
+.partner-cell {
+  padding: 28px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  border-right: 1px solid var(--line);
+  letter-spacing: 0.04em;
+}
+.partner-cell:last-child { border-right: none; }
+.partner-cell--lg { font-size: 28px; }
+.partner-cell--md { font-size: 22px; }
+.partner-cell--sm { font-size: 16px; }
+.partner-cell--empty {
+  color: var(--ink-dim);
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: 0.01em;
+  font-family: var(--body);
+  font-weight: 500;
+}
+
+.partner-cta {
+  margin-top: 32px;
+  padding: 28px;
+  border: 1px dashed var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.partner-cta-title {
+  font-size: 24px;
+}
+.partner-cta-meta {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--ink-dim);
+  margin-top: 4px;
+}
+
+/* ----- 06 / Yellow CTA / WhatsApp ----- */
+.cd-cta {
+  background: var(--gold);
+  color: #1a1408;
+}
+.cd-cta-inner {
+  padding: 120px 40px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+.cd-cta-text { color: #1a1408; }
+.cd-cta-idx {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  margin-bottom: 20px;
+}
+.cd-cta-title {
+  font-size: clamp(56px, 8vw, 128px);
+  margin: 0;
+  color: #1a1408;
+}
+.cd-cta-body {
+  max-width: 460px;
+  font-size: 17px;
+  line-height: 1.6;
+  margin-top: 24px;
+  color: #1a1408;
+}
+.cd-cta-card {
+  background: #1a1408;
+  color: var(--ink);
+  padding: 32px;
+  border: 2px solid #1a1408;
+}
+.cd-cta-card-head {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+.cd-cta-checklist {
+  list-style: none;
+  margin: 0 0 24px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.cd-cta-checklist li {
+  font-size: 16px;
+  color: var(--ink);
+  position: relative;
+  padding-left: 22px;
+}
+.cd-cta-checklist li::before {
+  content: "›";
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-weight: 700;
+}
+.cd-cta-btn {
+  width: 100%;
+  justify-content: center;
+}
+.cd-cta-fineprint {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--ink-dim);
+  margin-top: 16px;
+  text-transform: uppercase;
+}
+.cd-cta-fineprint a { color: var(--gold); border-bottom: 1px dotted var(--gold); }
+
+/* ----- 07 / Footer ----- */
+.cd-footer {
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+}
+.cd-footer .container {
+  padding: 80px 40px 32px;
+}
+.cd-footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 48px;
+}
+.cd-footer-brand { display: flex; flex-direction: column; }
+.cd-footer-badge {
+  width: 96px;
+  height: auto;
+  filter: drop-shadow(0 0 18px rgba(232, 179, 57, 0.18));
+}
+.cd-footer-tagline {
+  margin-top: 24px;
+  color: var(--ink-dim);
+  font-size: 14px;
+  max-width: 320px;
+  line-height: 1.6;
+}
+.cd-footer-socials { margin-top: 24px; }
+
+.cd-footer-col { display: flex; flex-direction: column; gap: 10px; }
+.cd-footer-col .eyebrow { margin-bottom: 16px; }
+.cd-footer-col a {
+  font-size: 14px;
+  color: var(--ink);
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  align-self: start;
+  transition: color 150ms ease, border-color 150ms ease;
+}
+.cd-footer-col a:hover {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+
+.cd-footer-contact {
+  font-size: 14px;
+  line-height: 1.8;
+}
+.cd-footer-link a {
+  border-bottom: 1px solid var(--line);
+}
+
+.cd-footer-rule {
+  margin: 60px 0 24px;
+}
+.cd-footer-fine {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.cd-footer-fine .mono {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: var(--ink-dim);
+}
+
+@media (max-width: 1100px) {
+  .roster-shell { grid-template-columns: 1fr; }
+  .roster-detail { border-left: none; border-top: 1px solid var(--line); }
+}
+@media (max-width: 960px) {
+  .sessions-grid { grid-template-columns: 1fr; }
+  .session-card { border-right: none; }
+  .tier-tabs { grid-template-columns: 1fr; }
+  .tier-tab { border-right: none; border-bottom: 1px solid var(--line); }
+  .partner-row { grid-template-columns: 1fr; }
+  .partner-tier { border-right: none; border-bottom: 1px solid var(--line); }
+  .partner-cells, .partner-cells--four { grid-template-columns: 1fr; }
+  .partner-cell { border-right: none; border-bottom: 1px solid var(--line); }
+  .cd-cta-inner { grid-template-columns: 1fr; padding: 80px 24px; }
+  .cd-footer-grid { grid-template-columns: 1fr 1fr; }
+  .cd-footer-fine { flex-direction: column; align-items: flex-start; }
+}
+
+/* ============================================================
+   ORIGINAL PAGE SECTIONS (legacy — kept for any leftover refs)
+   ============================================================ */
+
+.page-section {
+  position: relative;
+  padding: clamp(80px, 10vw, 140px) clamp(24px, 6vw, 80px);
+  border-top: 1px solid var(--border-soft);
+}
+
+.section-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ujb-gold);
+  margin-bottom: 22px;
+}
+.section-eyebrow::before {
+  content: "";
+  width: 28px; height: 1px;
+  background: var(--ujb-gold);
+}
+
+.section-title {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: clamp(36px, 4.5vw, 64px);
+  line-height: 0.98;
+  letter-spacing: 0.01em;
+  margin: 0 0 22px;
+  color: var(--ujb-bone);
+}
+
+.section-lead {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(17px, 1.4vw, 21px);
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--ujb-mint);
+  max-width: 680px;
+  margin: 0 0 56px;
+}
+
+/* ---------- THE CLUB ---------- */
+section.club .values {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 16px;
+}
+
+.value-card {
+  padding: 28px 26px;
+  background: rgba(245, 241, 232, 0.03);
+  border: 1px solid var(--border-soft);
+  border-radius: 14px;
+  transition: border-color 240ms var(--ease), background 240ms var(--ease);
+}
+.value-card:hover {
+  background: rgba(201, 161, 74, 0.07);
+  border-color: var(--ujb-gold);
+}
+
+.value-card h3 {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: 26px;
+  letter-spacing: 0.05em;
+  color: var(--ujb-gold);
+  margin: 0 0 14px;
+}
+
+.value-card p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ujb-bone);
+  opacity: 0.82;
+  margin: 0;
+}
+
+/* ---------- SQUAD ---------- */
+.squads {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-top: 20px;
+}
+
+.squad-card {
+  /* Reset button defaults so the styling stays exactly as before */
+  appearance: none;
+  -webkit-appearance: none;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  /* Card visuals */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 36px 30px 32px;
+  background: linear-gradient(160deg,
+    rgba(42, 107, 83, 0.18) 0%,
+    rgba(15, 45, 36, 0.45) 100%);
+  border: 1px solid var(--border-soft);
+  border-radius: 16px;
+  transition: border-color 280ms var(--ease), transform 280ms var(--ease), box-shadow 280ms var(--ease);
+}
+.squad-card:hover {
+  border-color: var(--ujb-gold);
+  transform: translateY(-4px);
+}
+.squad-card--feature {
+  border-color: var(--ujb-gold);
+  background: linear-gradient(160deg,
+    rgba(201, 161, 74, 0.16) 0%,
+    rgba(15, 45, 36, 0.55) 100%);
+}
+
+/* Selected state — gold border + glow + bottom indicator */
+.squad-card.is-selected {
+  border-color: var(--ujb-gold);
+  background: linear-gradient(160deg,
+    rgba(201, 161, 74, 0.22) 0%,
+    rgba(15, 45, 36, 0.6) 100%);
+  box-shadow: 0 0 0 1px var(--ujb-gold), 0 18px 40px rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px);
+}
+.squad-card.is-selected::after {
+  content: "";
+  position: absolute;
+  left: 50%; bottom: -10px;
+  width: 18px; height: 18px;
+  background: var(--ujb-gold);
+  transform: translateX(-50%) rotate(45deg);
+  border-radius: 3px;
+}
+
+.squad-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 22px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ujb-gold);
+}
+.squad-card.is-selected .squad-card-cta { color: var(--ujb-gold-soft); }
+
+.squad-card-tier {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.18em;
+  color: var(--ujb-gold);
+  margin-bottom: 10px;
+}
+
+.squad-card-title {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: 38px;
+  letter-spacing: 0.03em;
+  color: var(--ujb-bone);
+  margin: 0 0 8px;
+}
+
+.squad-card-meta {
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ujb-mist);
+  margin: 0 0 18px;
+}
+
+.squad-card-body {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ujb-bone);
+  opacity: 0.85;
+  margin: 0 0 24px;
+  flex: 1;
+}
+
+.squad-card-tags {
+  list-style: none;
+  margin: 0; padding: 0;
+  display: flex; flex-wrap: wrap;
+  gap: 8px;
+}
+.squad-card-tags li {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px 11px;
+  border: 1px solid var(--border-soft);
+  border-radius: 999px;
+  color: var(--ujb-mist);
+}
+
+/* ---------- SQUAD ROSTER (revealed below the cards) ---------- */
+.squad-roster {
+  margin-top: 56px;
+  padding: 40px clamp(24px, 4vw, 48px);
+  background: linear-gradient(180deg,
+    rgba(15, 45, 36, 0.65) 0%,
+    rgba(15, 45, 36, 0.25) 100%);
+  border: 1px solid var(--border-soft);
+  border-radius: 18px;
+  animation: roster-in 280ms var(--ease);
+}
+
+@keyframes roster-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.squad-roster-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.squad-roster-tier {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ujb-gold);
+  margin-bottom: 4px;
+}
+
+.squad-roster-title {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: clamp(28px, 3.4vw, 44px);
+  letter-spacing: 0.03em;
+  color: var(--ujb-bone);
+  margin: 0;
+}
+
+.squad-roster-blurb {
+  flex: 1;
+  min-width: 280px;
+  max-width: 540px;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ujb-mist);
+}
+
+/* Player grid */
+.roster-grid {
+  list-style: none;
+  margin: 0; padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.player-card {
+  display: grid;
+  grid-template-columns: 30px 44px 1fr auto;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: rgba(245, 241, 232, 0.04);
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  transition: background 200ms var(--ease), border-color 200ms var(--ease);
+}
+.player-card:hover {
+  background: rgba(201, 161, 74, 0.08);
+  border-color: var(--ujb-gold);
+}
+
+.player-card-flag {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.player-card-num {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: 28px;
+  letter-spacing: 0.04em;
+  color: var(--ujb-gold);
+  text-align: center;
+  line-height: 1;
+}
+
+.player-card-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ujb-bone);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.player-card-pos {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+  color: var(--ujb-mist);
+  background: rgba(245, 241, 232, 0.06);
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+/* Captain / vice / academy badges */
+.player-card-role {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 3px 6px;
+  border-radius: 4px;
+  background: rgba(201, 161, 74, 0.18);
+  color: var(--ujb-gold);
+  border: 1px solid var(--ujb-gold);
+  white-space: nowrap;
+}
+.player-card-role--captain {
+  background: var(--ujb-gold);
+  color: var(--ujb-ink);
+  border-color: var(--ujb-gold);
+}
+
+@media (max-width: 1100px) {
+  .roster-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .roster-grid { grid-template-columns: 1fr; }
+  .squad-card.is-selected::after { display: none; }
+}
+
+/* ---------- FIXTURES ---------- */
+.fixture-list {
+  list-style: none;
+  margin: 0; padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid var(--border-soft);
+}
+
+.fixture-row {
+  display: grid;
+  grid-template-columns: 120px 1fr 220px;
+  align-items: center;
+  gap: 24px;
+  padding: 26px 0;
+  border-bottom: 1px solid var(--border-soft);
+  transition: padding-left 240ms var(--ease);
+}
+.fixture-row:hover {
+  padding-left: 16px;
+}
+
+.fixture-day {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.fixture-dow {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: 36px;
+  letter-spacing: 0.03em;
+  color: var(--ujb-gold);
+}
+.fixture-num {
+  color: var(--ujb-mist);
+  font-size: 14px;
+}
+
+.fixture-meta h4 {
+  margin: 0 0 4px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ujb-bone);
+}
+.fixture-meta p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--ujb-mist);
+}
+
+.fixture-time {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+.fixture-time .time {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: 32px;
+  letter-spacing: 0.04em;
+  color: var(--ujb-bone);
+}
+.fixture-time .venue {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ujb-mist);
+  margin-top: 2px;
+}
+
+.fixture-footnote {
+  margin: 36px 0 0;
+  font-size: 14px;
+  color: var(--ujb-mist);
+  font-style: italic;
+}
+
+/* ---------- COMMUNITY ---------- */
+.community-inner {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.community-text .cta-row {
+  margin-top: 32px;
+}
+
+.community-body {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--ujb-bone);
+  opacity: 0.82;
+  margin: 0 0 12px;
+}
+
+.community-card {
+  padding: 36px 32px;
+  background: linear-gradient(160deg,
+    rgba(34, 86, 67, 0.4) 0%,
+    rgba(10, 30, 22, 0.65) 100%);
+  border: 1px solid var(--ujb-gold);
+  border-radius: 18px;
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.35);
+}
+
+.community-card-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--ujb-gold);
+  color: var(--ujb-green-deep);
+  margin-bottom: 18px;
+}
+.community-card-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.community-card-name {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: 24px;
+  letter-spacing: 0.05em;
+  color: var(--ujb-bone);
+  margin-bottom: 4px;
+}
+.community-card-meta {
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ujb-mist);
+  margin-bottom: 22px;
+}
+
+.community-rules {
+  list-style: none;
+  margin: 0; padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.community-rules li {
+  position: relative;
+  padding-left: 22px;
+  font-size: 14px;
+  color: var(--ujb-bone);
+  opacity: 0.85;
+}
+.community-rules li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 9px;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--ujb-gold);
+}
+
+/* ---------- CONTACT ---------- */
+.contact-inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 56px;
+}
+.contact-head .section-lead { margin-bottom: 0; }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.contact-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 28px 28px 26px;
+  background: rgba(245, 241, 232, 0.03);
+  border: 1px solid var(--border-soft);
+  border-radius: 14px;
+  transition: border-color 220ms var(--ease), background 220ms var(--ease), transform 220ms var(--ease);
+  cursor: pointer;
+}
+.contact-card:hover {
+  border-color: var(--ujb-gold);
+  background: rgba(201, 161, 74, 0.06);
+  transform: translateY(-2px);
+}
+
+.contact-card-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ujb-gold);
+}
+.contact-card-value {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: 26px;
+  letter-spacing: 0.04em;
+  color: var(--ujb-bone);
+}
+.contact-card-hint {
+  font-size: 13px;
+  color: var(--ujb-mist);
+}
+
+/* ---------- Mobile / responsive (sections) ---------- */
+@media (max-width: 960px) {
+  section.club .values,
+  .squads,
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+  .community-inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .fixture-row {
+    grid-template-columns: 80px 1fr;
+    grid-template-rows: auto auto;
+    gap: 8px 16px;
+  }
+  .fixture-time {
+    grid-column: 2;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .fixture-time .time { font-size: 24px; }
+}
+
+footer.site-footer {
+  padding: 56px clamp(24px, 6vw, 80px);
+  border-top: 1px solid var(--border-soft);
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  font-size: 13px;
+  color: var(--ujb-mist);
+}
+
+.footer-badge {
+  width: 150px;
+  height: auto;
+  flex-shrink: 0;
+  /* Soft warm glow lifts the dark-green badge off the dark-green background */
+  filter:
+    drop-shadow(0 0 22px rgba(201, 161, 74, 0.18))
+    drop-shadow(0 6px 16px rgba(0, 0, 0, 0.55));
+  transition: transform 360ms var(--ease), filter 360ms var(--ease);
+}
+.footer-badge:hover {
+  transform: rotate(-2deg) scale(1.04);
+  filter:
+    drop-shadow(0 0 30px rgba(201, 161, 74, 0.32))
+    drop-shadow(0 8px 22px rgba(0, 0, 0, 0.6));
+}
+
+.footer-meta {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+footer .marks {
+  display: flex;
+  gap: 24px;
+}
+footer .marks a {
+  position: relative;
+  transition: color 200ms var(--ease);
+}
+footer .marks a:hover { color: var(--ujb-gold); }
+
+/* Social icon buttons (footer + reusable) */
+.socials {
+  list-style: none;
+  margin: 0; padding: 0;
+  display: flex;
+  gap: 14px;
+}
+
+.social-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border-mid);
+  background: transparent;
+  color: var(--ujb-bone);
+  transition: all 220ms var(--ease);
+}
+.social-btn svg {
+  width: 20px;
+  height: 20px;
+}
+.social-btn:hover {
+  background: var(--ujb-gold);
+  color: var(--ujb-ink);
+  border-color: var(--ujb-gold);
+  transform: translateY(-2px);
+}
+
+/* ---------- RESPONSIVE ---------- */
+/* ============================================================
+   MOBILE OPTIMIZATION (≤ 960px)  — comprehensive override block
+   - Drop the heavy parallax/jungle animation entirely
+   - Stack hero text + globe vertically
+   - Compact nav (hide menu items, keep brand + CTA)
+   - Tighten section padding and typography
+   ============================================================ */
+@media (max-width: 960px) {
+  /* === NAV === keep brand + CTA, hide menu items (no hamburger yet) */
+  .site-nav .nav-inner {
+    padding: 0 20px;
+    height: 64px;
+  }
+  .site-nav .links a:not(.nav-cta) { display: none; }
+  .nav-cta {
+    padding: 10px 14px !important;
+    font-size: 11px !important;
+    letter-spacing: 0.10em !important;
+  }
+  .brand-name { font-size: 14px; }
+  .brand-eyebrow { font-size: 8px; }
+  .brand-mark .brand-icon { width: 30px; height: 30px; }
+
+  /* === HERO === no sticky, no extra scroll height, stack text + globe */
+  section.hero-anchor {
+    height: auto;
+    min-height: 100vh;
+  }
+  .hero {
+    position: relative;          /* no sticky on mobile */
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+    padding: 88px 20px 60px;
+  }
+  .hero-topo { display: none; }
+  .hero-text {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;             /* never slides out on mobile */
+    opacity: 1;
+    max-width: 100%;
+    margin: 0 auto 32px;
+  }
+  .hero-text .hero-headline {
+    font-size: clamp(48px, 13vw, 72px);
+  }
+  .hero-text .lede { max-width: 100%; }
+  .hero-meta { max-width: 100%; }
+  .hero-meta-val { font-size: 22px; }
+  .hero-meta-key { font-size: 9px; }
+
+  .globe-wrap {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    max-width: 90vw;
+    max-height: 60vh;
+    transform: none;
+    margin: 0 auto;
+    opacity: 1 !important;       /* override the jungle-progress fade-out */
+  }
+
+  .scroll-cue { display: none; }
+
+  /* === JUNGLE ANIMATION OFF on mobile === */
+  .jungle-canopy,
+  .jungle-tree,
+  .jungle-fg,
+  .jungle-climax {
+    display: none !important;
+  }
+
+  /* === Claude-design sections === */
+  .cd-section .container { padding: 64px 20px; }
+  .cd-section-head {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .cd-section-kicker {
+    text-align: left;
+    max-width: 100%;
+    font-size: 11px;
+  }
+  .cd-section-title { font-size: clamp(36px, 10vw, 56px); }
+
+  /* Manifesto / Club */
+  .club-body { grid-template-columns: 1fr; gap: 40px; }
+  .club-media-hero { height: 280px; }
+  .club-media-sub { height: 180px; }
+  .club-media-row { grid-template-columns: 1fr; gap: 16px; }
+  .club-pull { font-size: 28px; }
+  .club-quote-body { font-size: 22px; }
+
+  /* Community sessions — single column */
+  .sessions-grid { grid-template-columns: 1fr; }
+  .session-card {
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+  }
+  .session-card:last-child { border-bottom: none; }
+  .session-day { font-size: 44px; }
+  .session-title { font-size: 20px; }
+
+  /* Squad — tier tabs stack, roster shell collapses */
+  .tier-tabs { grid-template-columns: 1fr; }
+  .tier-tab {
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+    padding: 20px 24px;
+  }
+  .tier-tab:last-child { border-bottom: none; }
+  .tier-tab-name { font-size: 22px; }
+  .roster-shell { grid-template-columns: 1fr; }
+  .roster-detail {
+    border-left: none;
+    border-top: 1px solid var(--line);
+    padding: 24px;
+  }
+  .roster-row {
+    grid-template-columns: 50px 1fr 60px;
+    padding: 18px 16px;
+    gap: 12px;
+  }
+  .roster-row-num { font-size: 28px; }
+  .roster-row-name { font-size: 18px; }
+  .roster-row-arrow { display: none; }
+
+  /* Partners */
+  .partner-row { grid-template-columns: 1fr; }
+  .partner-tier {
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+    padding: 18px 20px;
+  }
+  .partner-cells, .partner-cells--four { grid-template-columns: 1fr; }
+  .partner-cell {
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+    padding: 18px 20px;
+    font-size: 18px !important;
+  }
+  .partner-cell:last-child { border-bottom: none; }
+  .partner-cta {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+  }
+  .partner-cta-title { font-size: 20px; }
+
+  /* Yellow CTA */
+  .cd-cta-inner {
+    grid-template-columns: 1fr;
+    padding: 64px 20px;
+    gap: 32px;
+  }
+  .cd-cta-title { font-size: clamp(44px, 12vw, 72px); }
+  .cd-cta-card { padding: 24px; }
+
+  /* Footer */
+  .cd-footer .container { padding: 56px 20px 24px; }
+  .cd-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .cd-footer-fine {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .cd-footer-rule { margin: 36px 0 18px; }
+
+  /* Buttons full-width */
+  .cta-row .btn { flex: 1; justify-content: center; }
+}
+
+/* Extra-small phones */
+@media (max-width: 480px) {
+  .hero-text .hero-headline { font-size: clamp(40px, 14vw, 60px); }
+  .hero-meta-val { font-size: 18px; }
+  .cd-section-title { font-size: clamp(32px, 11vw, 48px); }
+  .session-day { font-size: 36px; }
+  .tier-tab-name { font-size: 18px; }
+}

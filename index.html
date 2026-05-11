@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ubud Jungle Ballers — Community. Brotherhood. Football.</title>
+  <meta name="description" content="A football brotherhood rooted in Ubud, Bali. Locals and internationals — one squad, many flags." />
+
+  <!-- Google Fonts: see ../BRAND.md -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800;900&family=Bebas+Neue&family=Bricolage+Grotesque:wght@400;500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Real chameleon-icon favicon -->
+  <link rel="icon" type="image/png" href="./assets/favicon.png" />
+  <link rel="apple-touch-icon" href="./assets/icon-logo.png" />
+
+  <!-- Three.js via importmap — vendored locally, no CDN required -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "./vendor/three.module.js",
+      "three/addons/": "./vendor/addons/"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ============== NAV ============== -->
+  <header class="site-nav" id="site-nav">
+    <div class="container nav-inner">
+      <a class="brand-mark" href="#">
+        <img class="brand-icon" src="./assets/icon-logo-bone.png" alt="" aria-hidden="true" />
+        <div class="brand-wordmark">
+          <div class="brand-name">Ubud Jungle <span class="gold">Ballers</span></div>
+          <div class="brand-eyebrow mono">EST. 2026 · UBUD · BALI</div>
+        </div>
+      </a>
+      <nav class="links">
+        <a href="#about">The Club</a>
+        <a href="#community">Community</a>
+        <a href="#squad">Squad</a>
+        <a href="#partners">Partners</a>
+        <a href="#contact">Contact</a>
+        <a href="#join" class="nav-cta">Join the Brotherhood →</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============== HERO (scroll-pinned, 200vh anchor) ============== -->
+  <section class="hero-anchor" id="hero-anchor">
+    <div class="hero">
+      <!-- Topographic line pattern background (decorative) -->
+      <svg class="hero-topo" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <defs>
+          <radialGradient id="hero-vignette" cx="50%" cy="40%" r="70%">
+            <stop offset="0%" stop-color="rgba(0,0,0,0)"/>
+            <stop offset="100%" stop-color="rgba(0,0,0,0.6)"/>
+          </radialGradient>
+        </defs>
+        <g stroke="var(--line)" stroke-width="0.6" fill="none">
+          <path d="M -100 100 C 200 60, 600 160, 900 80 S 1500 140, 1600 110"/>
+          <path d="M -100 160 C 200 120, 600 220, 900 140 S 1500 200, 1600 170"/>
+          <path d="M -100 220 C 200 180, 600 280, 900 200 S 1500 260, 1600 230"/>
+          <path d="M -100 280 C 200 240, 600 340, 900 260 S 1500 320, 1600 290"/>
+          <path d="M -100 340 C 200 300, 600 400, 900 320 S 1500 380, 1600 350"/>
+          <path d="M -100 400 C 200 360, 600 460, 900 380 S 1500 440, 1600 410"/>
+          <path d="M -100 460 C 200 420, 600 520, 900 440 S 1500 500, 1600 470"/>
+          <path d="M -100 520 C 200 480, 600 580, 900 500 S 1500 560, 1600 530"/>
+          <path d="M -100 580 C 200 540, 600 640, 900 560 S 1500 620, 1600 590"/>
+          <path d="M -100 640 C 200 600, 600 700, 900 620 S 1500 680, 1600 650"/>
+          <path d="M -100 700 C 200 660, 600 760, 900 680 S 1500 740, 1600 710"/>
+          <path d="M -100 760 C 200 720, 600 820, 900 740 S 1500 800, 1600 770"/>
+        </g>
+        <rect width="1440" height="900" fill="url(#hero-vignette)"/>
+      </svg>
+
+      <div class="hero-text">
+        <div class="label-line hero-eyebrow">
+          <span class="mono">EST. 2026 · UBUD · BALI · ID</span>
+        </div>
+        <h1 class="display hero-headline">
+          <span class="hero-line">One ball.</span>
+          <span class="hero-line">One <span class="gold">jungle</span>.</span>
+          <span class="hero-line">Many flags.</span>
+        </h1>
+        <p class="tagline">Community. Brotherhood. Football.</p>
+        <p class="lede">
+          A Bali football club competing at regional level — built by Balinese
+          and international men who travelled here to wear the green.
+          Spin the ball. Find the squad.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn--gold" href="#join">Join the Brotherhood →</a>
+          <a class="btn btn--ghost" href="#about">Read the story</a>
+        </div>
+
+        <!-- Meta strip (4 quick stats) -->
+        <div class="hero-meta">
+          <div class="hero-meta-cell">
+            <div class="mono hero-meta-key">Founded</div>
+            <div class="display hero-meta-val">2026</div>
+          </div>
+          <div class="hero-meta-cell">
+            <div class="mono hero-meta-key">Squad</div>
+            <div class="display hero-meta-val">45</div>
+          </div>
+          <div class="hero-meta-cell">
+            <div class="mono hero-meta-key">Nations</div>
+            <div class="display hero-meta-val">12</div>
+          </div>
+          <div class="hero-meta-cell">
+            <div class="mono hero-meta-key">League</div>
+            <div class="display hero-meta-val">Bali</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============== GLOBE ============== -->
+      <div class="globe-wrap">
+        <canvas id="globe-canvas"></canvas>
+        <div class="globe-loader" id="globe-loader">Loading the ball…</div>
+        <div class="globe-hint">Drag to spin · click a country to meet the players</div>
+      </div>
+
+      <!-- ============== JUNGLE LAYERS (overlap on the globe) ============== -->
+      <!-- Painted across the same sticky stage as the globe.  As the user
+           keeps scrolling past the globe-zoom phase, --jungle-progress rises:
+           the canopy gradient fades in, jungle layers populate, the globe
+           fades out, and finally the badge crystallises out of the canopy. -->
+      <div class="jungle-canopy" aria-hidden="true"></div>
+
+      <!-- Tall background palms — anchored below viewport so trunks are never visible -->
+      <img class="jungle-tree tree-palm-far-l"  src="./assets/jungle/palm-tree.svg"   alt="" aria-hidden="true" />
+      <img class="jungle-tree tree-palm-far-r"  src="./assets/jungle/palm-tree.svg"   alt="" aria-hidden="true" />
+
+      <!-- Mid-back banana cluster -->
+      <img class="jungle-tree tree-banana-l"    src="./assets/jungle/banana-tree.svg" alt="" aria-hidden="true" />
+      <img class="jungle-tree tree-banana-mid"  src="./assets/jungle/banana-tree.svg" alt="" aria-hidden="true" />
+      <img class="jungle-tree tree-banana-r"    src="./assets/jungle/banana-tree.svg" alt="" aria-hidden="true" />
+
+      <!-- Big foreground palms on the edges (very tall, only crown visible) -->
+      <img class="jungle-tree tree-palm-l"      src="./assets/jungle/palm-tree.svg"   alt="" aria-hidden="true" />
+      <img class="jungle-tree tree-palm-r"      src="./assets/jungle/palm-tree.svg"   alt="" aria-hidden="true" />
+
+      <!-- Inner foreground palms framing the badge climax -->
+      <img class="jungle-tree tree-palm-frame-l" src="./assets/jungle/palm-tree.svg"  alt="" aria-hidden="true" />
+      <img class="jungle-tree tree-palm-frame-r" src="./assets/jungle/palm-tree.svg"  alt="" aria-hidden="true" />
+
+      <!-- (vines and foreground leaves removed — canopy is built from palms + bananas only) -->
+
+      <div class="jungle-climax" aria-hidden="true">
+        <div class="jungle-climax-glow"></div>
+        <img src="./assets/badge-logo.png" alt="Ubud Jungle Ballers" />
+      </div>
+
+      <!-- Scroll affordance — fades out as the animation progresses -->
+      <div class="scroll-cue" aria-hidden="true">
+        <span>Scroll to enter the jungle</span>
+        <span class="scroll-cue-arrow">↓</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== 02 / THE CLUB (Manifesto) ============== -->
+  <section class="cd-section" id="about">
+    <div class="container">
+      <header class="cd-section-head">
+        <div class="mono cd-section-idx">02 / THE CLUB</div>
+        <div class="cd-section-titles">
+          <div class="eyebrow">Manifesto</div>
+          <h2 class="display cd-section-title">Brotherhood,<br/>built to compete.</h2>
+        </div>
+        <div class="mono cd-section-kicker">
+          A football club with regional ambition. Brotherhood as foundation. Standards as the gate.
+        </div>
+      </header>
+
+      <div class="club-body">
+        <div class="club-copy">
+          <p class="display club-pull">
+            We didn't get scouted.<br/>
+            We got <span class="gold">here</span>.
+          </p>
+          <p class="club-para">
+            Ubud Jungle Ballers is a football club with a clear ambition:
+            to become Ubud's largest club and one of the most respected
+            amateur sides in Bali. We're building a world-class amateur
+            ecosystem — competitive at regional level, professionally
+            structured, and deeply Balinese.
+          </p>
+          <p class="club-para">
+            Some of us were born five minutes from the pitch. Some flew
+            sixteen hours and never went back. The green doesn't ask where
+            you're from — only if you'll run for the man next to you.
+          </p>
+
+          <div class="tenets">
+            <div class="eyebrow tenets-head">Three tenets</div>
+            <div class="tenet">
+              <div class="mono tenet-num">01</div>
+              <div>
+                <div class="display tenet-title">The Chameleon.</div>
+                <div class="tenet-body">Adapt. Watch. Arrive grounded — the jungle teaches you how to play.</div>
+              </div>
+            </div>
+            <div class="tenet">
+              <div class="mono tenet-num">02</div>
+              <div>
+                <div class="display tenet-title">Local + Global.</div>
+                <div class="tenet-body">Equal seats, one shirt. Balinese leadership. Open doors.</div>
+              </div>
+            </div>
+            <div class="tenet">
+              <div class="mono tenet-num">03</div>
+              <div>
+                <div class="display tenet-title">Standards earn brotherhood.</div>
+                <div class="tenet-body">Brotherhood without structure stagnates. Show up. Train honestly. Earn the green.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="club-media">
+          <!-- Hero: floodlit soccer pitch / sunset training -->
+          <figure class="club-media-hero">
+            <img
+              src="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=1600&q=80&auto=format&fit=crop"
+              onerror="this.onerror=null;this.src='https://picsum.photos/seed/ujb-pitch-sunset/1400/900';"
+              alt="A floodlit football pitch at dusk" loading="lazy" />
+            <figcaption class="mono club-media-cap">TRAINING NIGHT · UBUD</figcaption>
+          </figure>
+
+          <div class="club-media-row">
+            <!-- Bottom-left: ball / boots / mud close-up -->
+            <figure class="club-media-sub">
+              <img
+                src="https://images.unsplash.com/photo-1577471488278-16eec37ffcc2?w=900&q=80&auto=format&fit=crop"
+                onerror="this.onerror=null;this.src='https://picsum.photos/seed/ujb-boots/900/600';"
+                alt="Football boots on muddy grass" loading="lazy" />
+              <figcaption class="mono club-media-cap">MATCHDAY · BOOTS</figcaption>
+            </figure>
+
+            <!-- Bottom-right: action / pass / tropical pitch -->
+            <figure class="club-media-sub">
+              <img
+                src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=900&q=80&auto=format&fit=crop"
+                onerror="this.onerror=null;this.src='https://picsum.photos/seed/ujb-pitch/900/600';"
+                alt="Player about to strike a ball on a green pitch" loading="lazy" />
+              <figcaption class="mono club-media-cap">SESSION · TIER 01</figcaption>
+            </figure>
+          </div>
+          <blockquote class="club-quote">
+            <div class="eyebrow club-quote-head">Quote · Captain</div>
+            <p class="display club-quote-body">
+              "If you can run, you can play.<br/>If you can listen, you can lead."
+            </p>
+            <div class="mono club-quote-attrib">— MADE PUTRA, #08 · CAPTAIN</div>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- (Squad section moved further down — comes after Community per new layout) -->
+
+  <!-- ============== 03 / COMMUNITY (Sessions grid) ============== -->
+  <section class="cd-section community" id="community">
+    <div class="container">
+      <header class="cd-section-head">
+        <div class="mono cd-section-idx">03 / COMMUNITY</div>
+        <div class="cd-section-titles">
+          <div class="eyebrow">Open Sessions</div>
+          <h2 class="display cd-section-title">The pitch is<br/><span class="gold">open</span>.</h2>
+        </div>
+        <div class="mono cd-section-kicker">
+          The non-negotiable rhythm. Show up to one. Show up to all four. Bring boots.
+        </div>
+      </header>
+
+      <div class="sessions-grid">
+        <div class="session-card">
+          <div class="session-tag mono">FIRST TEAM</div>
+          <div class="display session-day">MON</div>
+          <div class="mono session-time">19:00 — late</div>
+          <div class="display session-title">First Team training</div>
+          <div class="session-body">Tactical work, set pieces, match prep for the regional league.</div>
+        </div>
+        <div class="session-card">
+          <div class="session-tag mono">SECOND TEAM</div>
+          <div class="display session-day">WED</div>
+          <div class="mono session-time">19:00 — late</div>
+          <div class="display session-title">Second Team training</div>
+          <div class="session-body">Skills, game scenarios, conditioning. The bridge to Tier 01.</div>
+        </div>
+        <div class="session-card">
+          <div class="session-tag mono">OPEN</div>
+          <div class="display session-day">THU</div>
+          <div class="mono session-time">19:00 — late</div>
+          <div class="display session-title">Fun First — community</div>
+          <div class="session-body">Open to all members. Mixed levels, mixed pace, futsal/mini-soccer.</div>
+        </div>
+        <div class="session-card">
+          <div class="session-tag mono">MANDATORY</div>
+          <div class="display session-day">FRI</div>
+          <div class="mono session-time">19:00 — late</div>
+          <div class="display session-title">First Team — mandatory</div>
+          <div class="session-body">Sharper. Faster. Where match-day selection is decided.</div>
+        </div>
+        <div class="session-card">
+          <div class="session-tag mono">CHAT</div>
+          <div class="display session-day">DAILY</div>
+          <div class="mono session-time">always on</div>
+          <div class="display session-title">WhatsApp main channel</div>
+          <div class="session-body">Sign-ups, venue calls, match selection, ride-shares, banter.</div>
+        </div>
+        <div class="session-card">
+          <div class="session-tag mono">MATCH-DAY</div>
+          <div class="display session-day">SAT</div>
+          <div class="mono session-time">posted weekly</div>
+          <div class="display session-title">Regional fixtures</div>
+          <div class="session-body">League and cup. Announced in WhatsApp 48 hours ahead.</div>
+        </div>
+      </div>
+
+      <div class="community-foot">
+        <div class="mono community-foot-loc">📍 Ubud, Bali · GPS 8°30′24″S 115°15′45″E · Venues posted weekly</div>
+        <a href="#join" class="btn btn--ghost">Request to join →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== 04 / SQUAD (Tier selector + roster list) ============== -->
+  <section class="cd-section squad" id="squad">
+    <div class="container">
+      <header class="cd-section-head">
+        <div class="mono cd-section-idx">04 / SQUAD</div>
+        <div class="cd-section-titles">
+          <div class="eyebrow">The Brotherhood</div>
+          <h2 class="display cd-section-title">Three teams.<br/><span class="gold">One standard.</span></h2>
+        </div>
+        <div class="mono cd-section-kicker">
+          From open community sessions to a competitive first team chasing Bali regional honours.
+        </div>
+      </header>
+
+      <!-- Tier selector tabs -->
+      <div class="tier-tabs" id="tier-tabs">
+        <button type="button" class="tier-tab is-active" data-squad="first-team">
+          <span class="mono tier-tab-num">01</span>
+          <span class="display tier-tab-name">First Team</span>
+          <span class="mono tier-tab-meta">Competitive</span>
+        </button>
+        <button type="button" class="tier-tab" data-squad="second-team">
+          <span class="mono tier-tab-num">02</span>
+          <span class="display tier-tab-name">Second Team</span>
+          <span class="mono tier-tab-meta">Development</span>
+        </button>
+        <button type="button" class="tier-tab" data-squad="fun-first">
+          <span class="mono tier-tab-num">03</span>
+          <span class="display tier-tab-name">Fun First</span>
+          <span class="mono tier-tab-meta">Community</span>
+        </button>
+      </div>
+
+      <!-- Roster list + portrait detail panel -->
+      <div class="roster-shell">
+        <div class="roster-list" id="roster-list"></div>
+        <aside class="roster-detail" id="roster-detail">
+          <div class="ph roster-portrait" id="roster-portrait">PORTRAIT</div>
+          <div class="roster-stats">
+            <div class="roster-stat"><div class="mono roster-stat-key">Position</div><div class="display roster-stat-val" id="rs-pos">—</div></div>
+            <div class="roster-stat"><div class="mono roster-stat-key">Number</div><div class="display roster-stat-val" id="rs-num">—</div></div>
+            <div class="roster-stat"><div class="mono roster-stat-key">Flag</div><div class="display roster-stat-val" id="rs-flag">—</div></div>
+            <div class="roster-stat"><div class="mono roster-stat-key">Joined</div><div class="display roster-stat-val">2026</div></div>
+          </div>
+          <p class="roster-blurb" id="roster-blurb"></p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== 05 / PARTNERS ============== -->
+  <section class="cd-section partners" id="partners">
+    <div class="container">
+      <header class="cd-section-head">
+        <div class="mono cd-section-idx">05 / PARTNERS</div>
+        <div class="cd-section-titles">
+          <div class="eyebrow">Sponsors</div>
+          <h2 class="display cd-section-title">Stand with the <span class="gold">green</span>.</h2>
+        </div>
+        <div class="mono cd-section-kicker">
+          Local businesses, regional partners. Want your name on the shirt? Talk to us.
+        </div>
+      </header>
+
+      <div class="partners-table">
+        <div class="partner-row">
+          <div class="partner-tier mono">PRINCIPAL</div>
+          <div class="partner-cells">
+            <div class="partner-cell display partner-cell--lg">BASILICO</div>
+            <div class="partner-cell display partner-cell--lg partner-cell--empty">Partner slot</div>
+          </div>
+        </div>
+        <div class="partner-row">
+          <div class="partner-tier mono">TECHNICAL</div>
+          <div class="partner-cells">
+            <div class="partner-cell display partner-cell--md partner-cell--empty">Kit slot</div>
+            <div class="partner-cell display partner-cell--md partner-cell--empty">Equipment slot</div>
+          </div>
+        </div>
+        <div class="partner-row">
+          <div class="partner-tier mono">FRIENDS OF THE CLUB</div>
+          <div class="partner-cells partner-cells--four">
+            <div class="partner-cell display partner-cell--sm partner-cell--empty">Partner slot</div>
+            <div class="partner-cell display partner-cell--sm partner-cell--empty">Partner slot</div>
+            <div class="partner-cell display partner-cell--sm partner-cell--empty">Partner slot</div>
+            <div class="partner-cell display partner-cell--sm partner-cell--empty">Partner slot</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="partner-cta">
+        <div>
+          <div class="display partner-cta-title">Become a partner.</div>
+          <div class="mono partner-cta-meta">FROM IDR 5M / SEASON · BADGE · SHIRT · MATCHDAY</div>
+        </div>
+        <a href="mailto:hello@ubudjungleballers.com" class="btn btn--gold">Partnership deck →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== 06 / JOIN (Yellow CTA — WhatsApp) ============== -->
+  <section class="cd-cta" id="join">
+    <div class="container cd-cta-inner">
+      <div class="cd-cta-text">
+        <div class="mono cd-cta-idx">06 / JOIN THE BROTHERHOOD</div>
+        <h2 class="display cd-cta-title">Join the<br/>brotherhood.</h2>
+        <p class="cd-cta-body">
+          The brotherhood already lives in WhatsApp. Sign-ups, venue calls,
+          ride-shares, the daily small talk that keeps a club honest. New
+          members get added to the right group within 24 hours.
+        </p>
+      </div>
+      <div class="cd-cta-card">
+        <div class="mono cd-cta-card-head">REQUEST TO JOIN · FREE</div>
+        <ul class="cd-cta-checklist">
+          <li>Pick a session you want to play.</li>
+          <li>Message us on WhatsApp.</li>
+          <li>Show up. Bring boots.</li>
+        </ul>
+        <a href="https://wa.me/6281234567890?text=I%20want%20to%20join%20Ubud%20Jungle%20Ballers" class="btn btn--gold cd-cta-btn">Open WhatsApp →</a>
+        <div class="mono cd-cta-fineprint">Or email <a href="mailto:hello@ubudjungleballers.com">hello@ubudjungleballers.com</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== 07 / FOOTER ============== -->
+  <footer class="cd-footer" id="contact">
+    <div class="container">
+      <div class="cd-footer-grid">
+        <div class="cd-footer-brand">
+          <img class="cd-footer-badge" src="./assets/badge-logo.png" alt="Ubud Jungle Ballers club badge" />
+          <p class="cd-footer-tagline">
+            A football club from Ubud, Bali. Open to everyone who'll run for the
+            man next to them — competitive at regional level.
+          </p>
+          <ul class="socials cd-footer-socials" aria-label="Follow Ubud Jungle Ballers">
+            <li>
+              <a class="social-btn" href="https://instagram.com/ubudjungleballers" target="_blank" rel="noopener" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/>
+                  <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
+                  <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a class="social-btn" href="https://tiktok.com/@ubudjungleballers" target="_blank" rel="noopener" aria-label="TikTok">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.6 5.82a4.28 4.28 0 0 1-1.18-2.32V3h-3.32v13.27a2.46 2.46 0 0 1-2.5 2.46 2.46 2.46 0 0 1-2.46-2.46 2.46 2.46 0 0 1 2.46-2.46c.18 0 .36.02.53.06v-3.36a5.84 5.84 0 0 0-.54-.03 5.81 5.81 0 1 0 5.81 5.79V9.93a7.62 7.62 0 0 0 4.46 1.43V8.04a4.5 4.5 0 0 1-3.26-2.22z"/></svg>
+              </a>
+            </li>
+            <li>
+              <a class="social-btn" href="https://youtube.com/@ubudjungleballers" target="_blank" rel="noopener" aria-label="YouTube">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg>
+              </a>
+            </li>
+            <li>
+              <a class="social-btn" href="https://wa.me/6281234567890" target="_blank" rel="noopener" aria-label="WhatsApp">
+                <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16 3a13 13 0 0 0-11.04 19.83L3 29l6.34-1.93A13 13 0 1 0 16 3zm0 23.6a10.6 10.6 0 0 1-5.4-1.48l-.39-.23-3.76 1.14 1.16-3.66-.25-.4A10.6 10.6 0 1 1 16 26.6z"/></svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="cd-footer-col">
+          <div class="eyebrow">The Club</div>
+          <a href="#about">Manifesto</a>
+          <a href="#squad">Squad</a>
+          <a href="#community">Sessions</a>
+          <a href="#partners">Partners</a>
+        </div>
+
+        <div class="cd-footer-col">
+          <div class="eyebrow">Get involved</div>
+          <a href="#join">Open trials</a>
+          <a href="#community">Join a session</a>
+          <a href="#partners">Sponsor the club</a>
+          <a href="#join">Volunteer</a>
+        </div>
+
+        <div class="cd-footer-col">
+          <div class="eyebrow">Contact</div>
+          <div class="cd-footer-contact">
+            <div>Ubud, Bali, Indonesia</div>
+            <div>Sessions in central Ubud</div>
+            <div class="cd-footer-link"><a href="mailto:hello@ubudjungleballers.com">hello@ubudjungleballers.com</a></div>
+            <div class="cd-footer-link"><a href="https://wa.me/6281234567890">+62 812 3456 7890</a></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hairline cd-footer-rule"></div>
+
+      <div class="cd-footer-fine">
+        <div class="mono">© 2026 UBUD JUNGLE BALLERS · ALL RIGHTS RESERVED · SALAM HIJAU</div>
+        <div class="mono">PRIVACY · TERMS · COOKIES · SITE BY THE BROTHERHOOD</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============== COUNTRY PANEL ============== -->
+  <aside class="country-panel" id="country-panel" aria-label="Country squad panel">
+    <button class="panel-close" aria-label="Close">×</button>
+    <div class="panel-flag"></div>
+    <h2 class="panel-country"></h2>
+    <div class="panel-meta"></div>
+    <p class="panel-note"></p>
+    <ul class="panel-roster"></ul>
+  </aside>
+
+  <!-- Tooltip for hovered markers -->
+  <div class="globe-tooltip" id="globe-tooltip"></div>
+
+  <!-- App entry point -->
+  <script type="module" src="main.js"></script>
+
+  <!-- Sticky nav — toggles a "scrolled" class once the user scrolls past 20px -->
+  <script>
+    (function() {
+      const nav = document.getElementById('site-nav');
+      const onScroll = () => nav.classList.toggle('is-scrolled', window.scrollY > 20);
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+  </script>
+
+  <!-- Squad picker — tier tabs + hover-list + portrait detail panel -->
+  <script type="module">
+    import { SQUADS } from "./squads.js";
+
+    const tabs       = document.getElementById("tier-tabs");
+    const listEl     = document.getElementById("roster-list");
+    const portraitEl = document.getElementById("roster-portrait");
+    const blurbEl    = document.getElementById("roster-blurb");
+    const rsPos      = document.getElementById("rs-pos");
+    const rsNum      = document.getElementById("rs-num");
+    const rsFlag     = document.getElementById("rs-flag");
+
+    let currentSquad = null;
+    let hoveredIdx = 0;
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, (c) => (
+        { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]
+      ));
+    }
+    function roleLabel(role) {
+      return ({ captain: "(C)", vice: "(VC)", academy: "(A)" })[role] || "";
+    }
+
+    function renderList(key) {
+      const squad = SQUADS[key];
+      if (!squad) return;
+      currentSquad = squad;
+      const rows = squad.players.map((p, i) => `
+        <div class="roster-row" data-idx="${i}">
+          <div class="roster-row-num">${String(p.number).padStart(2, "0")}</div>
+          <div>
+            <div class="roster-row-name">
+              ${escapeHtml(p.name)}
+              ${p.role ? `<span class="role">${roleLabel(p.role)}</span>` : ""}
+            </div>
+            <div class="roster-row-meta">${escapeHtml(p.position)} · ${escapeHtml(p.flag)} ${p.role ? "· " + escapeHtml(p.role.toUpperCase()) : ""}</div>
+          </div>
+          <div class="roster-row-flag">${escapeHtml(p.flag)}</div>
+          <div class="roster-row-arrow">→</div>
+        </div>
+      `).join("");
+      listEl.innerHTML = rows;
+      hoveredIdx = 0;
+      paintHover();
+    }
+
+    function paintHover() {
+      if (!currentSquad) return;
+      const p = currentSquad.players[hoveredIdx];
+      if (!p) return;
+      // Mark active row
+      for (const row of listEl.querySelectorAll(".roster-row")) {
+        row.classList.toggle("is-hover", Number(row.dataset.idx) === hoveredIdx);
+      }
+      // Update detail panel
+      portraitEl.textContent = `PORTRAIT · #${String(p.number).padStart(2, "0")} ${p.name.toUpperCase()}`;
+      rsPos.textContent  = p.position;
+      rsNum.textContent  = String(p.number).padStart(2, "0");
+      rsFlag.textContent = p.flag;
+      blurbEl.textContent = `${p.name} · ${p.position} · ${p.flag}${p.role ? " · " + roleLabel(p.role) : ""}.`;
+    }
+
+    listEl.addEventListener("mouseover", (e) => {
+      const row = e.target.closest(".roster-row");
+      if (!row) return;
+      const idx = Number(row.dataset.idx);
+      if (idx !== hoveredIdx) {
+        hoveredIdx = idx;
+        paintHover();
+      }
+    });
+
+    function selectTier(key) {
+      for (const tab of tabs.querySelectorAll(".tier-tab")) {
+        tab.classList.toggle("is-active", tab.dataset.squad === key);
+      }
+      renderList(key);
+    }
+
+    tabs.addEventListener("click", (e) => {
+      const tab = e.target.closest(".tier-tab");
+      if (!tab) return;
+      selectTier(tab.dataset.squad);
+    });
+
+    // Initial state — first team
+    selectTier("first-team");
+  </script>
+</body>
+</html>
