@@ -937,10 +937,11 @@ function updateHeroProgress() {
   document.documentElement.style.setProperty("--scroll-progress", heroP);
   targetDistance = CAM_DIST_FAR + (CAM_DIST_NEAR - CAM_DIST_FAR) * heroP;
 
-  // -------- Jungle phase: --jungle-progress 0 → 1 STARTS BEFORE the hero
-  //          finishes (overlap zone) so the jungle begins materialising on
-  //          top of the globe.  Maps scrollY 0.85·vh → 2.15·vh into 0 → 1.
-  const jStart = vh * 0.85;
+  // -------- Jungle phase: --jungle-progress 0 → 1 starts AFTER the globe
+  //          has been at max size for ~0.5 viewport of scroll, giving the
+  //          user a moment to settle on the zoomed globe before the canopy
+  //          starts materialising.  Maps scrollY 1.5·vh → 2.8·vh into 0 → 1.
+  const jStart = vh * 1.5;
   const jSpan  = vh * 1.30;
   const jungleP = Math.max(0, Math.min(1, (scrolled - jStart) / jSpan));
   document.documentElement.style.setProperty("--jungle-progress", jungleP);

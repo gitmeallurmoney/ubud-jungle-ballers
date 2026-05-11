@@ -245,14 +245,13 @@ body::before {
 
 section.hero-anchor {
   position: relative;
-  /* One unified cinematic — globe zoom + jungle journey + badge climax all
-     in the same sticky stage:
+  /* One unified cinematic — globe zoom + max-hold + jungle journey + badge:
        100vh visible viewport
-     + 100vh for the globe-zoom phase    (--scroll-progress 0 → 1)
-     + 130vh for the jungle phase, which crossfades on TOP of the globe
-                                        (--jungle-progress 0 → 1)
+     + 100vh for the globe-zoom phase   (--scroll-progress 0 → 1)
+     +  50vh "hold at max" — globe stays full-size before jungle starts
+     + 130vh for the jungle phase       (--jungle-progress 0 → 1)
      +  70vh hold on the climax before sticky releases.                   */
-  height: 400vh;
+  height: 450vh;
 }
 
 .hero {
@@ -458,7 +457,9 @@ section.hero-anchor {
 
 .globe-hint {
   position: absolute;
-  bottom: 12px;
+  /* Sit BELOW the wrap so there's clear gap between the visible sphere
+     and the pill. Negative value pushes it past the wrap's bottom edge. */
+  bottom: -44px;
   left: 50%;
   transform: translateX(-50%);
   font-size: 12px;
@@ -2306,9 +2307,10 @@ footer .marks a:hover { color: var(--ujb-gold); }
     display: none !important;
   }
 
-  /* "Drag to spin" hint — shrink to fit narrow phones without truncating */
+  /* "Drag to spin" hint on mobile — push below the globe wrap with a clear gap,
+     shrink type so it fits narrow phones without truncating. */
   .globe-hint {
-    bottom: 8px;
+    bottom: -34px;
     font-size: 10px;
     letter-spacing: 0.08em;
     padding: 6px 12px;
@@ -2318,6 +2320,9 @@ footer .marks a:hover { color: var(--ujb-gold); }
     overflow: hidden;
     text-overflow: ellipsis;
   }
+  /* Add bottom margin to the globe-wrap on mobile so the hint sitting below it
+     doesn't crash into the stats meta strip that follows. */
+  .globe-wrap { margin-bottom: 48px !important; }
 
   /* === Claude-design sections === */
   .cd-section .container { padding: 64px 20px; }
