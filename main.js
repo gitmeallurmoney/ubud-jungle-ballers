@@ -850,18 +850,30 @@ canvas.addEventListener("pointerleave", () => {
   tooltip.classList.remove("visible");
 });
 
-// ---------- Country panel ----------
-function openCountryPanel(nat) {
-  selectedNat = nat;
-  setLiftedCountry(nat);                            // build + animate the lifted 3D mesh
-  focusCameraOn(nat);                               // animate camera so this country is centered
+// ---------- Country panel / popover / sheet (responsive) ----------
+//
+// Desktop (>960px) → slide-in right panel with the full roster.
+// Mobile  (≤960px) → compact card overlay anchored over the globe + bottom
+//                    sheet that slides up when the card is tapped.
+//
+const isMobileQuery = window.matchMedia("(max-width: 960px)");
 
-  panelFlag.textContent = nat.flag;
-  panelCountry.textContent = nat.name.toUpperCase();
-  panelMeta.textContent = `${nat.players.length} player${nat.players.length === 1 ? "" : "s"} on the squad`;
-  panelNote.textContent = nat.note || "";
+// Mobile popover + sheet refs
+const popover    = document.getElementById("country-popover");
+const popClose   = popover && popover.querySelector("[data-popover-close]");
+const popCard    = popover && popover.querySelector("[data-popover-open]");
+const cpFlag     = document.getElementById("cp-flag");
+const cpName     = document.getElementById("cp-name");
+const cpCount    = document.getElementById("cp-count");
+const sheet      = document.getElementById("country-sheet");
+const csFlag     = document.getElementById("cs-flag");
+const csName     = document.getElementById("cs-name");
+const csMeta     = document.getElementById("cs-meta");
+const csNote     = document.getElementById("cs-note");
+const csRoster   = document.getElementById("cs-roster");
 
-  panelRoster.innerHTML = "";
+function renderRosterRows(nat, container) {
+  container.innerHTML = "";
   nat.players.forEach((p) => {
     const li = document.createElement("li");
     li.className = "player-row";
@@ -870,26 +882,88 @@ function openCountryPanel(nat) {
       <span class="player-name">${escapeHtml(p.name)}</span>
       <span class="player-pos">${p.position}</span>
     `;
-    panelRoster.appendChild(li);
+    container.appendChild(li);
   });
+}
 
-  panel.classList.add("open");
+function openCountryPanel(nat) {
+  selectedNat = nat;
+  setLiftedCountry(nat);                            // build + animate the lifted 3D mesh
+  focusCameraOn(nat);                               // animate camera so this country is centered
+
+  if (isMobileQuery.matches) {
+    // ===== MOBILE: populate compact popover. Roster is in the bottom sheet. =====
+    if (popover) {
+      cpFlag.textContent  = nat.flag;
+      cpName.textContent  = nat.name.toUpperCase();
+      cpCount.textContent = `${nat.players.length} PLAYER${nat.players.length === 1 ? "" : "S"} · TAP TO VIEW`;
+      popover.classList.add("is-open");
+      popover.setAttribute("aria-hidden", "false");
+    }
+    // Make sure the desktop side panel is closed
+    if (panel) panel.classList.remove("open");
+  } else {
+    // ===== DESKTOP: open the side panel as before =====
+    if (popover) {
+      popover.classList.remove("is-open");
+      popover.setAttribute("aria-hidden", "true");
+    }
+    panelFlag.textContent = nat.flag;
+    panelCountry.textContent = nat.name.toUpperCase();
+    panelMeta.textContent = `${nat.players.length} player${nat.players.length === 1 ? "" : "s"} on the squad`;
+    panelNote.textContent = nat.note || "";
+    renderRosterRows(nat, panelRoster);
+    panel.classList.add("open");
+  }
+
   controls.autoRotate = false;
   lastInteractionAt = performance.now();
 }
 
+function openCountrySheet() {
+  // Tap on the compact popover card opens the full bottom sheet
+  if (!selectedNat || !sheet) return;
+  csFlag.textContent  = selectedNat.flag;
+  csName.textContent  = selectedNat.name.toUpperCase();
+  csMeta.textContent  = `${selectedNat.players.length} player${selectedNat.players.length === 1 ? "" : "s"} on the squad`;
+  csNote.textContent  = selectedNat.note || "";
+  renderRosterRows(selectedNat, csRoster);
+  sheet.classList.add("is-open");
+  sheet.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+}
+
+function closeCountrySheet() {
+  if (!sheet) return;
+  sheet.classList.remove("is-open");
+  sheet.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+}
+
 function closeCountryPanel() {
   panel.classList.remove("open");
-  selectedNat = null;
-  // Animate back down before removing — `liftAnimDir = -1` will trigger that
-  if (liftedMesh) {
-    liftAnimDir = -1;                              // tick loop will ease it down
+  if (popover) {
+    popover.classList.remove("is-open");
+    popover.setAttribute("aria-hidden", "true");
   }
+  closeCountrySheet();
+  selectedNat = null;
+  if (liftedMesh) liftAnimDir = -1;
 }
+
 panelClose.addEventListener("click", closeCountryPanel);
 window.addEventListener("keydown", (e) => {
   if (e.key === "Escape") closeCountryPanel();
 });
+
+// Mobile popover + sheet listeners
+if (popCard) popCard.addEventListener("click", openCountrySheet);
+if (popClose) popClose.addEventListener("click", closeCountryPanel);
+if (sheet) {
+  sheet.addEventListener("click", (e) => {
+    if (e.target.matches("[data-sheet-close]")) closeCountrySheet();
+  });
+}
 
 function escapeHtml(s) {
   return s.replace(/[&<>"']/g, (c) => (

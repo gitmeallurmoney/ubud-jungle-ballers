@@ -232,6 +232,144 @@ body::before {
   border-bottom-color: var(--gold-2) !important;
 }
 
+/* ----- Hamburger button (only visible on mobile) ----- */
+.nav-burger {
+  display: none;
+  appearance: none;
+  background: transparent;
+  border: 1px solid var(--line);
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+}
+.nav-burger span {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  height: 1.5px;
+  background: var(--ink);
+  border-radius: 2px;
+  transition: transform 220ms ease, opacity 220ms ease, top 220ms ease;
+}
+.nav-burger span:nth-child(1) { top: 14px; }
+.nav-burger span:nth-child(2) { top: 21px; }
+.nav-burger span:nth-child(3) { top: 28px; }
+/* Animated to X when drawer open (driven by aria-expanded) */
+.nav-burger[aria-expanded="true"] span:nth-child(1) { top: 21px; transform: rotate(45deg); }
+.nav-burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.nav-burger[aria-expanded="true"] span:nth-child(3) { top: 21px; transform: rotate(-45deg); }
+
+/* ----- Mobile drawer ----- */
+.mobile-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  visibility: hidden;
+  transition: visibility 280ms;
+}
+.mobile-drawer.is-open {
+  pointer-events: auto;
+  visibility: visible;
+}
+.mobile-drawer-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 16, 12, 0.7);
+  opacity: 0;
+  transition: opacity 280ms ease;
+}
+.mobile-drawer.is-open .mobile-drawer-backdrop { opacity: 1; }
+
+.mobile-drawer-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(360px, 88vw);
+  background: var(--bg);
+  border-left: 1px solid var(--line);
+  box-shadow: -20px 0 60px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  padding: 24px 24px 32px;
+}
+.mobile-drawer.is-open .mobile-drawer-panel { transform: translateX(0); }
+
+.mobile-drawer-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 20px;
+}
+.mobile-drawer-close {
+  appearance: none;
+  background: transparent;
+  border: 1px solid var(--line);
+  width: 40px;
+  height: 40px;
+  color: var(--ink);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  margin-left: 12px;
+  flex-shrink: 0;
+}
+.mobile-drawer-close:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.mobile-drawer-links {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0;
+}
+.mobile-drawer-links a {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  padding: 18px 4px;
+  font-family: var(--display);
+  font-size: 28px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--ink);
+  border-bottom: 1px solid var(--line);
+  transition: color 160ms ease;
+}
+.mobile-drawer-links a:hover { color: var(--gold); }
+.drawer-idx {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+.mobile-drawer-cta {
+  margin-top: 24px;
+  width: 100%;
+  justify-content: center;
+  font-size: 14px !important;
+}
+
+.mobile-drawer-socials {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-start;
+  gap: 12px;
+}
+
 /* ---------- HERO (scroll-driven cinematic) ----------
    .hero-anchor reserves 200vh of scroll. Inside, .hero is sticky-pinned at the
    top for one extra viewport. As the user scrolls within the anchor, JS sets
@@ -930,6 +1068,223 @@ aside.country-panel.open {
   .frond-bot-l, .frond-bot-r { height: 60vh; }
   .vine-top-l, .vine-top-r { height: 40vh; }
   .jungle-climax img { width: 50vw; }
+}
+
+/* ============================================================
+   MOBILE COUNTRY POPOVER + BOTTOM SHEET (only used on ≤960px)
+   ============================================================ */
+.country-popover {
+  position: fixed;
+  z-index: 60;
+  left: 16px;
+  right: 16px;
+  bottom: 24px;
+  display: none;                /* hidden on desktop entirely (media query enables) */
+  align-items: stretch;
+  gap: 8px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 280ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.country-popover.is-open {
+  pointer-events: auto;
+  opacity: 1;
+  transform: translateY(0);
+}
+.country-popover-card {
+  appearance: none;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  flex: 1;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  background: rgba(15, 45, 36, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--gold);
+  border-radius: 14px;
+  color: var(--ink);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(232, 179, 57, 0.15);
+}
+.country-popover-flag {
+  font-size: 32px;
+  line-height: 1;
+}
+.country-popover-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.country-popover-name {
+  font-family: var(--display);
+  font-size: 18px;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+}
+.country-popover-count {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+.country-popover-chev {
+  font-size: 28px;
+  color: var(--gold);
+  line-height: 1;
+}
+.country-popover-close {
+  appearance: none;
+  background: rgba(15, 45, 36, 0.95);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  width: 44px;
+  height: 56px;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  backdrop-filter: blur(12px);
+}
+
+/* Bottom sheet */
+.country-sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 110;
+  pointer-events: none;
+  visibility: hidden;
+  transition: visibility 320ms;
+}
+.country-sheet.is-open {
+  pointer-events: auto;
+  visibility: visible;
+}
+.country-sheet-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 16, 12, 0.72);
+  opacity: 0;
+  transition: opacity 280ms ease;
+}
+.country-sheet.is-open .country-sheet-backdrop { opacity: 1; }
+
+.country-sheet-panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-height: 86vh;
+  background: linear-gradient(180deg, var(--bg-2) 0%, var(--bg) 100%);
+  border-top: 1px solid var(--gold);
+  border-radius: 18px 18px 0 0;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(100%);
+  transition: transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
+  overflow: hidden;
+}
+.country-sheet.is-open .country-sheet-panel { transform: translateY(0); }
+
+.country-sheet-head {
+  position: relative;
+  padding: 22px 22px 18px;
+  border-bottom: 1px solid var(--line);
+}
+.country-sheet-handle {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 4px;
+  background: var(--line);
+  border-radius: 2px;
+}
+.country-sheet-close {
+  position: absolute;
+  top: 16px;
+  right: 14px;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font-size: 22px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+.country-sheet-close:hover { border-color: var(--gold); color: var(--gold); }
+.country-sheet-flag {
+  font-size: 44px;
+  line-height: 1;
+  margin: 12px 0 12px;
+}
+.country-sheet-name {
+  font-size: 32px;
+  letter-spacing: 0.03em;
+  margin: 0 0 4px;
+}
+.country-sheet-meta {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--gold);
+  margin: 0 0 8px;
+  text-transform: uppercase;
+}
+.country-sheet-note {
+  margin: 0;
+  color: var(--ink-dim);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.country-sheet-roster {
+  list-style: none;
+  margin: 0; padding: 16px 22px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+}
+.country-sheet-roster .player-row {
+  display: grid;
+  grid-template-columns: 36px 1fr auto;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  background: rgba(245, 241, 232, 0.04);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.country-sheet-roster .player-num {
+  font-family: var(--display);
+  font-size: 22px;
+  color: var(--gold);
+  text-align: center;
+  line-height: 1;
+}
+.country-sheet-roster .player-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.country-sheet-roster .player-pos {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  font-weight: 600;
+  color: var(--ink-dim);
+  background: rgba(245, 241, 232, 0.06);
+  padding: 4px 8px;
+  border-radius: 6px;
 }
 
 /* ============================================================
@@ -2231,17 +2586,13 @@ footer .marks a:hover { color: var(--ujb-gold); }
    - Tighten section padding and typography
    ============================================================ */
 @media (max-width: 960px) {
-  /* === NAV === keep brand + CTA, hide menu items (no hamburger yet) */
+  /* === NAV === only brand + hamburger on mobile (nav links + inline CTA hide) */
   .site-nav .nav-inner {
     padding: 0 20px;
     height: 64px;
   }
-  .site-nav .links a:not(.nav-cta) { display: none; }
-  .nav-cta {
-    padding: 10px 14px !important;
-    font-size: 11px !important;
-    letter-spacing: 0.10em !important;
-  }
+  .site-nav .links { display: none; }
+  .nav-burger { display: block; }
   .brand-name { font-size: 14px; }
   .brand-eyebrow { font-size: 8px; }
   .brand-mark .brand-icon { width: 30px; height: 30px; }
@@ -2307,6 +2658,11 @@ footer .marks a:hover { color: var(--ujb-gold); }
     display: none !important;
   }
 
+  /* === Country UX on mobile === */
+  /* Hide the desktop side panel; show the compact popover + bottom sheet instead */
+  .country-panel { display: none !important; }
+  .country-popover { display: flex; }
+
   /* "Drag to spin" hint on mobile — push below the globe wrap with a clear gap,
      shrink type so it fits narrow phones without truncating. */
   .globe-hint {
@@ -2337,13 +2693,40 @@ footer .marks a:hover { color: var(--ujb-gold); }
   }
   .cd-section-title { font-size: clamp(36px, 10vw, 56px); }
 
-  /* Manifesto / Club */
-  .club-body { grid-template-columns: 1fr; gap: 40px; }
-  .club-media-hero { height: 280px; }
-  .club-media-sub { height: 180px; }
-  .club-media-row { grid-template-columns: 1fr; gap: 16px; }
-  .club-pull { font-size: 28px; }
-  .club-quote-body { font-size: 22px; }
+  /* === Manifesto / Club — restructured for natural mobile flow ===
+     Mobile reading order:
+       1. eyebrow + title + kicker (section head, already first)
+       2. Hero image (first visual after the title)
+       3. Pull quote ("We didn't get scouted")
+       4. Body paragraphs
+       5. Three tenets
+       6. Secondary images (kits)
+       7. Captain quote
+  */
+  .club-body {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  /* Inner wrappers become flex too so we can order their children individually */
+  .club-copy { display: contents; }
+  .club-media { display: contents; }
+
+  /* Explicit flex order on mobile */
+  .club-media-hero { order: 1; height: 240px; }
+  .club-pull       { order: 2; font-size: 26px; margin: 0; }
+  .club-para       { order: 3; font-size: 16px; }
+  .tenets          { order: 4; padding-top: 24px; margin-top: 8px; }
+  .club-media-row  { order: 5; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .club-quote      { order: 6; padding: 24px; }
+
+  /* Style refinements */
+  .club-media-sub { height: 160px; }
+  .club-quote-body { font-size: 20px; line-height: 1.15; }
+  .tenet { padding: 16px 0; }
+  .tenet-title { font-size: 20px; }
+  .tenet-body { font-size: 13.5px; }
+  .tenets-head { margin-bottom: 8px; }
 
   /* Community sessions — single column */
   .sessions-grid { grid-template-columns: 1fr; }
@@ -2355,76 +2738,263 @@ footer .marks a:hover { color: var(--ujb-gold); }
   .session-day { font-size: 44px; }
   .session-title { font-size: 20px; }
 
-  /* Squad — tier tabs stack, roster shell collapses */
-  .tier-tabs { grid-template-columns: 1fr; }
+  /* === Squad on mobile ===
+     - Tabs sit horizontally as 3 equal columns (compact)
+     - Roster list shows directly below; no portrait panel on mobile
+     - Tap a player → bottom sheet slides up with full detail (see below) */
+  .tier-tabs {
+    grid-template-columns: repeat(3, 1fr);  /* horizontal row */
+  }
   .tier-tab {
-    border-right: none;
-    border-bottom: 1px solid var(--line);
-    padding: 20px 24px;
+    border-right: 1px solid var(--line);
+    border-bottom: none;
+    padding: 14px 8px;
+    gap: 2px;
+    text-align: center;
+    align-items: center;
   }
-  .tier-tab:last-child { border-bottom: none; }
-  .tier-tab-name { font-size: 22px; }
+  .tier-tab:last-child { border-right: none; }
+  .tier-tab-num  { font-size: 9px; letter-spacing: 0.18em; }
+  .tier-tab-name { font-size: 14px; line-height: 1.05; }
+  .tier-tab-meta { font-size: 8.5px; letter-spacing: 0.14em; }
+
+  /* Hide the desktop portrait detail panel on mobile (sheet takes over) */
   .roster-shell { grid-template-columns: 1fr; }
-  .roster-detail {
-    border-left: none;
-    border-top: 1px solid var(--line);
-    padding: 24px;
-  }
+  .roster-detail { display: none; }
+
   .roster-row {
-    grid-template-columns: 50px 1fr 60px;
-    padding: 18px 16px;
+    grid-template-columns: 50px 1fr auto;
+    padding: 16px 16px;
     gap: 12px;
+    cursor: pointer;
   }
   .roster-row-num { font-size: 28px; }
-  .roster-row-name { font-size: 18px; }
-  .roster-row-arrow { display: none; }
+  .roster-row-name { font-size: 17px; }
+  .roster-row-flag { font-size: 16px; }
+  .roster-row-arrow { display: block; font-size: 16px; }
 
-  /* Partners */
-  .partner-row { grid-template-columns: 1fr; }
+  /* === Partners on mobile — chip-based cards instead of table ===
+     Each row becomes a stack: tier chip on top, partner names below as
+     individual full-width cards.                                            */
+  .partners-table {
+    border: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .partner-row {
+    grid-template-columns: 1fr;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--bg-2);
+  }
   .partner-tier {
     border-right: none;
     border-bottom: 1px solid var(--line);
-    padding: 18px 20px;
+    padding: 12px 16px;
+    background: var(--bg-3);
+    font-size: 10px;
+    letter-spacing: 0.18em;
   }
-  .partner-cells, .partner-cells--four { grid-template-columns: 1fr; }
+  .partner-cells,
+  .partner-cells--four { grid-template-columns: 1fr; }
   .partner-cell {
     border-right: none;
     border-bottom: 1px solid var(--line);
     padding: 18px 20px;
-    font-size: 18px !important;
+    font-size: 20px !important;
   }
   .partner-cell:last-child { border-bottom: none; }
+
   .partner-cta {
     flex-direction: column;
-    align-items: flex-start;
-    padding: 20px;
+    align-items: stretch;
+    padding: 22px;
+    gap: 16px;
+    text-align: left;
+    border-style: solid;
+    border-color: var(--gold);
+    background: rgba(232, 179, 57, 0.05);
   }
-  .partner-cta-title { font-size: 20px; }
+  .partner-cta-title { font-size: 22px; }
+  .partner-cta .btn { width: 100%; justify-content: center; }
 
-  /* Yellow CTA */
+  /* === Yellow CTA — title above the request card === */
   .cd-cta-inner {
     grid-template-columns: 1fr;
-    padding: 64px 20px;
-    gap: 32px;
+    padding: 56px 20px;
+    gap: 28px;
   }
-  .cd-cta-title { font-size: clamp(44px, 12vw, 72px); }
-  .cd-cta-card { padding: 24px; }
+  .cd-cta-title { font-size: clamp(44px, 12vw, 64px); line-height: 0.96; }
+  .cd-cta-body { font-size: 15.5px; line-height: 1.55; }
+  .cd-cta-card { padding: 22px; }
+  .cd-cta-card-head { font-size: 10px; }
+  .cd-cta-checklist li { font-size: 14.5px; }
+  .cd-cta-btn { width: 100%; justify-content: center; }
+  .cd-cta-fineprint { font-size: 9px; letter-spacing: 0.14em; }
 
-  /* Footer */
-  .cd-footer .container { padding: 56px 20px 24px; }
+  /* === Footer on mobile ===
+     - Single column, prominent badge centered at top
+     - Each link group becomes a card-ish block with a mono eyebrow header
+     - Bigger tap targets (44px min) for all links
+     - Contact block with tap-to-call / tap-to-email
+     - Social icons in a centered row
+     - Fine print stacked at the bottom                                     */
+  .cd-footer .container { padding: 48px 20px 24px; }
   .cd-footer-grid {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 28px;
   }
+
+  .cd-footer-brand {
+    text-align: center;
+    align-items: center;
+  }
+  .cd-footer-badge {
+    width: 120px;
+    margin: 0 auto;
+  }
+  .cd-footer-tagline {
+    margin: 18px auto 0;
+    max-width: 320px;
+    text-align: center;
+  }
+  .cd-footer-socials {
+    margin: 24px auto 0;
+    justify-content: center;
+  }
+
+  .cd-footer-col {
+    text-align: center;
+    align-items: center;
+    border-top: 1px solid var(--line);
+    padding-top: 24px;
+  }
+  .cd-footer-col .eyebrow {
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+  .cd-footer-col a {
+    align-self: center;
+    padding: 12px 8px;
+    font-size: 16px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .cd-footer-contact {
+    font-size: 14.5px;
+    line-height: 1.9;
+    text-align: center;
+  }
+  .cd-footer-link a { padding: 6px 0; min-height: 36px; }
+
+  .cd-footer-rule { margin: 28px 0 18px; }
   .cd-footer-fine {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
   }
-  .cd-footer-rule { margin: 36px 0 18px; }
+  .cd-footer-fine .mono { font-size: 9px; letter-spacing: 0.18em; }
 
   /* Buttons full-width */
   .cta-row .btn { flex: 1; justify-content: center; }
+}
+
+/* ============================================================
+   MOBILE: Player detail bottom sheet (squad section)
+   ============================================================ */
+.player-sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 110;
+  pointer-events: none;
+  visibility: hidden;
+  transition: visibility 320ms;
+}
+.player-sheet.is-open { pointer-events: auto; visibility: visible; }
+.player-sheet-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 16, 12, 0.72);
+  opacity: 0;
+  transition: opacity 280ms ease;
+}
+.player-sheet.is-open .player-sheet-backdrop { opacity: 1; }
+
+.player-sheet-panel {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  max-height: 86vh;
+  background: linear-gradient(180deg, var(--bg-2) 0%, var(--bg) 100%);
+  border-top: 1px solid var(--gold);
+  border-radius: 18px 18px 0 0;
+  transform: translateY(100%);
+  transition: transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+}
+.player-sheet.is-open .player-sheet-panel { transform: translateY(0); }
+
+.player-sheet-handle {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 4px;
+  background: var(--line);
+  border-radius: 2px;
+}
+.player-sheet-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font-size: 20px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+.player-sheet-portrait {
+  height: 220px;
+  margin-top: 16px;
+}
+.player-sheet-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.player-sheet-num {
+  font-size: 56px;
+  color: var(--gold);
+  line-height: 0.9;
+}
+.player-sheet-name {
+  font-size: 24px;
+  letter-spacing: 0.02em;
+  margin: 0 0 4px;
+}
+.player-sheet-meta {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--ink-dim);
+  text-transform: uppercase;
+  margin: 0;
+}
+.player-sheet-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
 }
 
 /* Extra-small phones */
