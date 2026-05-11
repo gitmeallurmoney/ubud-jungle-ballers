@@ -282,7 +282,9 @@ section.hero-anchor {
   /* Inset from the left edge — scales with viewport so the text feels
      anchored to a "page width" rather than glued to the chrome edge.       */
   left: clamp(120px, 12vw, 280px);
-  max-width: 540px;
+  /* Hard cap so the text column NEVER reaches the globe — combined with the
+     globe's max width: min(72vh, 42vw), there's always breathing space.    */
+  max-width: min(540px, 42vw);
   /* Always on top of the globe and the jungle canopy / SVG layers           */
   z-index: 20;
   transform:
@@ -416,23 +418,24 @@ section.hero-anchor {
 .globe-wrap {
   /* Sits on top of the hero text. Scroll-progress slides it from the right
      half toward center and *visually* grows it via transform:scale — pure
-     compositor work, no layout, no flicker.  The canvas itself stays at the
+     compositor work, no layout, no flicker. The canvas itself stays at the
      MAX displayed size so internal resolution is always crisp; we scale
      down for the smaller initial state.                                    */
   position: absolute;
   top: 50%;
-  /* Center-X interpolates from 62% (closer to text) to 50% (page center) */
-  left: calc(62% - var(--scroll-progress) * 12%);
-  /* MAX displayed size — full circle fits with margin inside the viewport */
-  width: 80vh;
+  /* Center-X interpolates from 70% (well right of text) to 50% (page center).
+     Wider initial offset keeps the globe clear of the text column at any
+     desktop width.                                                          */
+  left: calc(70% - var(--scroll-progress) * 20%);
+  /* MAX displayed size — capped on both axes so the globe never spills into
+     the text column at wide-but-tall viewports (e.g. 1500×1300).            */
+  width: min(72vh, 42vw);
   aspect-ratio: 1 / 1;
-  max-width: min(80vh, 90vw);
-  /* Visual size: 0.6× at p=0 → 1.0× at p=1.
-     0.6 × 80vh = 48vh meaningful initial state on the right,
-     1.0 × 80vh = 80vh full-bleed centered state.                          */
+  max-width: min(72vh, 42vw);
+  /* Visual size: 0.7× at p=0 → 1.0× at p=1. */
   transform:
     translate(-50%, -50%)
-    scale(calc(0.6 + 0.4 * var(--scroll-progress)));
+    scale(calc(0.7 + 0.3 * var(--scroll-progress)));
   transform-origin: center center;
   display: flex;
   align-items: center;
@@ -2242,28 +2245,37 @@ footer .marks a:hover { color: var(--ujb-gold); }
   .brand-eyebrow { font-size: 8px; }
   .brand-mark .brand-icon { width: 30px; height: 30px; }
 
-  /* === HERO === no sticky, no extra scroll height, stack text + globe */
+  /* === HERO === no sticky, no extra scroll height, stack text + globe.
+     `.hero-text` becomes `display: contents` so its children flow into the
+     flex layout of `.hero`, and we use `order` to slot the globe between the
+     CTAs and the stats strip (per user spec).                              */
   section.hero-anchor {
     height: auto;
     min-height: 100vh;
   }
   .hero {
-    position: relative;          /* no sticky on mobile */
+    position: relative;
     height: auto;
     min-height: 100vh;
     overflow: visible;
     padding: 88px 20px 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
   }
   .hero-topo { display: none; }
   .hero-text {
-    position: relative;
-    top: auto;
-    left: auto;
-    transform: none;             /* never slides out on mobile */
-    opacity: 1;
-    max-width: 100%;
-    margin: 0 auto 32px;
+    display: contents;           /* hero-text's children become flex items of .hero */
   }
+  /* Explicit flex order on mobile: text → CTAs → globe → stats. */
+  .hero-eyebrow  { order: 1; }
+  .hero-headline { order: 2; }
+  .tagline       { order: 3; }
+  .lede          { order: 4; }
+  .cta-row       { order: 5; margin-bottom: 24px; }
+  .globe-wrap    { order: 6; margin: 0 auto 24px; }
+  .hero-meta     { order: 7; }
   .hero-text .hero-headline {
     font-size: clamp(48px, 13vw, 72px);
   }
@@ -2292,6 +2304,19 @@ footer .marks a:hover { color: var(--ujb-gold); }
   .jungle-fg,
   .jungle-climax {
     display: none !important;
+  }
+
+  /* "Drag to spin" hint — shrink to fit narrow phones without truncating */
+  .globe-hint {
+    bottom: 8px;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    padding: 6px 12px;
+    white-space: nowrap;
+    max-width: 92%;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   /* === Claude-design sections === */
