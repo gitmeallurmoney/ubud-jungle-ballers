@@ -512,7 +512,7 @@
           <li>Message us on WhatsApp.</li>
           <li>Show up. Bring boots.</li>
         </ul>
-        <a href="https://wa.me/6281234567890?text=I%20want%20to%20join%20Ubud%20Jungle%20Ballers" class="btn btn--gold cd-cta-btn">Open WhatsApp →</a>
+        <a href="https://chat.whatsapp.com/LutV2MjmrMHEkOTy2IEHtR" class="btn btn--gold cd-cta-btn">Open WhatsApp →</a>
         <div class="mono cd-cta-fineprint">Or email <a href="mailto:hello@ubudjungleballers.com">hello@ubudjungleballers.com</a></div>
       </div>
     </div>
@@ -549,7 +549,7 @@
               </a>
             </li>
             <li>
-              <a class="social-btn" href="https://wa.me/6281234567890" target="_blank" rel="noopener" aria-label="WhatsApp">
+              <a class="social-btn" href="https://chat.whatsapp.com/LutV2MjmrMHEkOTy2IEHtR" target="_blank" rel="noopener" aria-label="WhatsApp">
                 <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16 3a13 13 0 0 0-11.04 19.83L3 29l6.34-1.93A13 13 0 1 0 16 3zm0 23.6a10.6 10.6 0 0 1-5.4-1.48l-.39-.23-3.76 1.14 1.16-3.66-.25-.4A10.6 10.6 0 1 1 16 26.6z"/></svg>
               </a>
             </li>
@@ -578,7 +578,7 @@
             <div>Ubud, Bali, Indonesia</div>
             <div>Sessions in central Ubud</div>
             <div class="cd-footer-link"><a href="mailto:hello@ubudjungleballers.com">hello@ubudjungleballers.com</a></div>
-            <div class="cd-footer-link"><a href="https://wa.me/6281234567890">+62 812 3456 7890</a></div>
+            <div class="cd-footer-link"><a href="https://chat.whatsapp.com/LutV2MjmrMHEkOTy2IEHtR">WhatsApp Community</a></div>
           </div>
         </div>
       </div>
@@ -591,6 +591,163 @@
       </div>
     </div>
   </footer>
+
+  <!-- ============== JOIN-OUR-CLUB ONBOARDING MODAL ============== -->
+  <div class="join-modal" id="join-modal" aria-hidden="true">
+    <div class="join-modal-backdrop" data-join-close></div>
+    <aside class="join-modal-panel" role="dialog" aria-modal="true" aria-labelledby="join-modal-title">
+      <header class="join-modal-head">
+        <div class="join-modal-handle" aria-hidden="true"></div>
+        <div class="mono join-modal-eyebrow" id="join-eyebrow">
+          <span class="join-eyebrow-progress">JOIN OUR CLUB · STEP <span id="join-step-num">1</span> / 5</span>
+          <span class="join-eyebrow-done" hidden>WELCOME TO THE BROTHERHOOD</span>
+        </div>
+        <button class="join-modal-close" type="button" aria-label="Close" data-join-close>×</button>
+        <div class="join-modal-progress" aria-hidden="true">
+          <div class="join-modal-progress-bar" id="join-progress-bar"></div>
+        </div>
+      </header>
+
+      <form class="join-modal-form" id="join-form" novalidate>
+
+        <!-- Step 1 / Name + Age -->
+        <fieldset class="join-step is-active" data-step="1">
+          <legend class="join-step-title display" id="join-modal-title">Who are you?</legend>
+          <p class="join-step-sub">The basics. We'll add you to the right group chat.</p>
+          <div class="join-field">
+            <label class="join-label mono" for="join-name">FULL NAME</label>
+            <input class="join-input" id="join-name" name="name" type="text" autocomplete="name" required />
+          </div>
+          <div class="join-field">
+            <label class="join-label mono" for="join-age">AGE</label>
+            <input class="join-input" id="join-age" name="age" type="number" min="14" max="80" inputmode="numeric" required />
+          </div>
+        </fieldset>
+
+        <!-- Step 2 / Nationality + Bali timeframe -->
+        <fieldset class="join-step" data-step="2" hidden>
+          <legend class="join-step-title display">Where from,<br/>how long?</legend>
+          <p class="join-step-sub">Helps us know who's in the squad and who's around.</p>
+          <div class="join-field">
+            <label class="join-label mono" for="join-nationality">NATIONALITY</label>
+            <input class="join-input" id="join-nationality" name="nationality" type="text" placeholder="e.g. Indonesian, German, Australian" required />
+          </div>
+          <div class="join-field">
+            <span class="join-label mono">HOW LONG IN BALI?</span>
+            <div class="join-choices join-choices--stack" role="radiogroup" aria-label="Bali timeframe">
+              <button type="button" class="join-chip" data-choice="bali" data-value="long">Long-term (6+ months)</button>
+              <button type="button" class="join-chip" data-choice="bali" data-value="short">Short stay (under 6 months)</button>
+              <button type="button" class="join-chip" data-choice="bali" data-value="visiting">Visiting / passing through</button>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Step 3 / Level -->
+        <fieldset class="join-step" data-step="3" hidden>
+          <legend class="join-step-title display">Your level.</legend>
+          <p class="join-step-sub">No wrong answer. This routes you to the right night.</p>
+          <div class="join-choices join-choices--stack" role="radiogroup" aria-label="Level">
+            <button type="button" class="join-chip join-chip--lg" data-choice="level" data-value="fun">
+              <span class="join-chip-title">Just for fun</span>
+              <span class="join-chip-sub">Social sessions, mid-week. Have a kick, get a sweat, drink after.</span>
+            </button>
+            <button type="button" class="join-chip join-chip--lg" data-choice="level" data-value="higher">
+              <span class="join-chip-title">Higher level, regular player</span>
+              <span class="join-chip-sub">Train hard, hold your own in tight games, want a real squad to play with.</span>
+            </button>
+            <button type="button" class="join-chip join-chip--lg" data-choice="level" data-value="compete">
+              <span class="join-chip-title">Want to compete for UJB</span>
+              <span class="join-chip-sub">Selection-based squad. Tournaments, friendlies, regional ambition.</span>
+            </button>
+          </div>
+        </fieldset>
+
+        <!-- Step 4 / Position -->
+        <fieldset class="join-step" data-step="4" hidden>
+          <legend class="join-step-title display">Preferred<br/>position.</legend>
+          <p class="join-step-sub">So we don't end up with eleven strikers.</p>
+          <div class="join-choices join-choices--grid" role="group" aria-label="Position">
+            <button type="button" class="join-chip join-chip--pos" data-choice="position" data-value="GK">
+              <span class="join-chip-pos-label">GK</span>
+              <span class="join-chip-pos-name mono">KEEPER</span>
+            </button>
+            <button type="button" class="join-chip join-chip--pos" data-choice="position" data-value="DEF">
+              <span class="join-chip-pos-label">DEF</span>
+              <span class="join-chip-pos-name mono">DEFENDER</span>
+            </button>
+            <button type="button" class="join-chip join-chip--pos" data-choice="position" data-value="MID">
+              <span class="join-chip-pos-label">MID</span>
+              <span class="join-chip-pos-name mono">MIDFIELDER</span>
+            </button>
+            <button type="button" class="join-chip join-chip--pos" data-choice="position" data-value="FWD">
+              <span class="join-chip-pos-label">FWD</span>
+              <span class="join-chip-pos-name mono">FORWARD</span>
+            </button>
+            <button type="button" class="join-chip join-chip--pos join-chip--pos-wide" data-choice="position" data-value="ANY">
+              <span class="join-chip-pos-label">ANY</span>
+              <span class="join-chip-pos-name mono">PUT ME ANYWHERE</span>
+            </button>
+          </div>
+        </fieldset>
+
+        <!-- Step 5 / Sessions -->
+        <fieldset class="join-step" data-step="5" hidden>
+          <legend class="join-step-title display">Which sessions<br/>can you make?</legend>
+          <p class="join-step-sub">Pick all that work. Pitch is in Ubud, all sessions kick off 7 PM.</p>
+          <div class="join-checks" role="group" aria-label="Sessions">
+            <label class="join-check">
+              <input type="checkbox" name="sessions" value="Mon" />
+              <span class="join-check-day display">MON</span>
+              <span class="join-check-meta mono">HIGH LEVEL</span>
+              <span class="join-check-tick" aria-hidden="true">✓</span>
+            </label>
+            <label class="join-check">
+              <input type="checkbox" name="sessions" value="Wed" />
+              <span class="join-check-day display">WED</span>
+              <span class="join-check-meta mono">SOCIAL + HIGH LEVEL</span>
+              <span class="join-check-tick" aria-hidden="true">✓</span>
+            </label>
+            <label class="join-check">
+              <input type="checkbox" name="sessions" value="Thu" />
+              <span class="join-check-day display">THU</span>
+              <span class="join-check-meta mono">SOCIAL</span>
+              <span class="join-check-tick" aria-hidden="true">✓</span>
+            </label>
+            <label class="join-check">
+              <input type="checkbox" name="sessions" value="Fri" />
+              <span class="join-check-day display">FRI</span>
+              <span class="join-check-meta mono">MID LEVEL</span>
+              <span class="join-check-tick" aria-hidden="true">✓</span>
+            </label>
+            <label class="join-check">
+              <input type="checkbox" name="sessions" value="Sat" />
+              <span class="join-check-day display">SAT</span>
+              <span class="join-check-meta mono">TRAINING · ALL LEVELS</span>
+              <span class="join-check-tick" aria-hidden="true">✓</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- Step 6 / Success -->
+        <div class="join-step join-step--done" data-step="6" hidden>
+          <div class="join-done-badge">
+            <img src="./assets/badge-logo.png" alt="Ubud Jungle Ballers badge" />
+          </div>
+          <h3 class="join-step-title display">You're in.</h3>
+          <p class="join-step-sub">Welcome to the brotherhood<span id="join-done-name-suffix"></span>. Tap below to drop into the WhatsApp community — we'll route you to the right group within 24 hours.</p>
+          <a class="btn btn--gold join-done-cta" id="join-done-wa" href="#" target="_blank" rel="noopener">Open WhatsApp →</a>
+          <div class="join-done-summary" id="join-done-summary" aria-live="polite"></div>
+        </div>
+
+        <div class="join-modal-error mono" id="join-error" hidden></div>
+
+        <footer class="join-modal-foot">
+          <button type="button" class="btn btn--ghost join-back" id="join-back">← Back</button>
+          <button type="button" class="btn btn--gold join-next" id="join-next">Continue →</button>
+        </footer>
+      </form>
+    </aside>
+  </div>
 
   <!-- ============== MOBILE COUNTRY POPOVER (compact card over globe) ============== -->
   <div class="country-popover" id="country-popover" aria-hidden="true">
@@ -801,6 +958,265 @@
 
     // Initial state — first team
     selectTier("first-team");
+  </script>
+
+  <!-- ============== JOIN MODAL — multi-step onboarding flow ============== -->
+  <script>
+    (function() {
+      const modal      = document.getElementById('join-modal');
+      if (!modal) return;
+      const form       = document.getElementById('join-form');
+      const stepNum    = document.getElementById('join-step-num');
+      const progress   = document.getElementById('join-progress-bar');
+      const backBtn    = document.getElementById('join-back');
+      const nextBtn    = document.getElementById('join-next');
+      const errorEl    = document.getElementById('join-error');
+      const doneCta    = document.getElementById('join-done-wa');
+      const doneName   = document.getElementById('join-done-name-suffix');
+      const doneSum    = document.getElementById('join-done-summary');
+      const ebProgress = modal.querySelector('.join-eyebrow-progress');
+      const ebDone     = modal.querySelector('.join-eyebrow-done');
+      const modalFoot  = modal.querySelector('.join-modal-foot');
+
+      const TOTAL_STEPS = 5;
+      // WhatsApp number for the admin/community line. Update if it changes.
+      const WA_COMMUNITY = 'https://chat.whatsapp.com/LutV2MjmrMHEkOTy2IEHtR';
+
+      const state = {
+        step: 1,
+        data: {
+          name: '',
+          age: '',
+          nationality: '',
+          bali: null,
+          level: null,
+          position: [],
+          sessions: []
+        }
+      };
+
+      const baliLabels = {
+        long:     'Long-term (6+ months)',
+        short:    'Short stay (< 6 months)',
+        visiting: 'Visiting / passing through'
+      };
+      const levelLabels = {
+        fun:     'Just for fun',
+        higher:  'Higher level, regular player',
+        compete: 'Want to compete for UJB'
+      };
+      const positionLabels = {
+        GK:  'Goalkeeper',
+        DEF: 'Defender',
+        MID: 'Midfielder',
+        FWD: 'Forward',
+        ANY: 'Anywhere'
+      };
+
+      // === Open / close =====================================================
+      function openModal() {
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        // focus first input of current step shortly after open animation
+        setTimeout(() => {
+          const f = modal.querySelector('.join-step.is-active input, .join-step.is-active button');
+          if (f) f.focus();
+        }, 320);
+      }
+      function closeModal() {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      // Intercept every Join CTA across the site
+      document.querySelectorAll('a[href="#join"]').forEach((a) => {
+        a.addEventListener('click', (e) => {
+          e.preventDefault();
+          openModal();
+        });
+      });
+      // Also intercept the Yellow CTA's "Open WhatsApp" button so it opens the flow
+      const ctaBtn = document.querySelector('.cd-cta-btn');
+      if (ctaBtn) {
+        ctaBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          openModal();
+        });
+      }
+
+      modal.addEventListener('click', (e) => {
+        if (e.target.matches('[data-join-close]')) closeModal();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+      });
+
+      // === Step navigation ==================================================
+      function showStep(n) {
+        state.step = n;
+        for (const step of modal.querySelectorAll('.join-step')) {
+          const isActive = Number(step.dataset.step) === n;
+          step.hidden = !isActive;
+          step.classList.toggle('is-active', isActive);
+        }
+        const isDone = n > TOTAL_STEPS;
+
+        // Eyebrow: swap which span is visible, update the number
+        ebProgress.hidden = isDone;
+        ebDone.hidden     = !isDone;
+        if (!isDone) stepNum.textContent = String(n);
+
+        // Progress bar: 0% on first step → 100% on success
+        const pct = isDone ? 100 : Math.round((n / TOTAL_STEPS) * 100);
+        progress.style.width = pct + '%';
+
+        // Footer: hide entirely on success (the gold WhatsApp CTA inside the
+        // success step is the only action — no Back/Continue needed)
+        modalFoot.hidden = isDone;
+        backBtn.hidden   = n === 1;
+        nextBtn.textContent = n === TOTAL_STEPS ? 'Finish →' : 'Continue →';
+        errorEl.hidden = true;
+        errorEl.textContent = '';
+
+        // Focus first interactive in new step
+        setTimeout(() => {
+          const f = modal.querySelector('.join-step.is-active input, .join-step.is-active button');
+          if (f && typeof f.focus === 'function') f.focus();
+        }, 50);
+      }
+
+      // === Chip click handling (radio-like) =================================
+      modal.addEventListener('click', (e) => {
+        const chip = e.target.closest('.join-chip');
+        if (!chip) return;
+        const group = chip.dataset.choice;
+        const value = chip.dataset.value;
+        if (group === 'position') {
+          const arr = state.data.position;
+          const idx = arr.indexOf(value);
+          if (idx >= 0) { arr.splice(idx, 1); } else { arr.push(value); }
+          for (const c of modal.querySelectorAll('.join-chip[data-choice="position"]')) {
+            const on = arr.includes(c.dataset.value);
+            c.classList.toggle('is-selected', on);
+            c.setAttribute('aria-checked', on ? 'true' : 'false');
+          }
+        } else {
+          state.data[group] = value;
+          for (const c of modal.querySelectorAll('.join-chip[data-choice="' + group + '"]')) {
+            c.classList.toggle('is-selected', c === chip);
+            c.setAttribute('aria-checked', c === chip ? 'true' : 'false');
+          }
+        }
+        errorEl.hidden = true;
+      });
+
+      // Session checkbox sync into state
+      modal.addEventListener('change', (e) => {
+        if (e.target.name === 'sessions') {
+          const checked = Array.from(modal.querySelectorAll('input[name="sessions"]:checked'))
+            .map((c) => c.value);
+          state.data.sessions = checked;
+          errorEl.hidden = true;
+        }
+      });
+
+      // Mirror text inputs into state on input
+      modal.addEventListener('input', (e) => {
+        const t = e.target;
+        if (t.id === 'join-name')        state.data.name = t.value.trim();
+        if (t.id === 'join-age')         state.data.age = t.value.trim();
+        if (t.id === 'join-nationality') state.data.nationality = t.value.trim();
+      });
+
+      // === Validation per step ==============================================
+      function validateStep(n) {
+        const d = state.data;
+        if (n === 1) {
+          if (!d.name)                return 'Pop your name in.';
+          if (!d.age || Number(d.age) < 14 || Number(d.age) > 80) return 'Age between 14 and 80.';
+        }
+        if (n === 2) {
+          if (!d.nationality) return 'Pick a nationality — anything works.';
+          if (!d.bali)        return 'Tell us how long you’re in Bali.';
+        }
+        if (n === 3) {
+          if (!d.level) return 'Pick the level that fits you.';
+        }
+        if (n === 4) {
+          if (!d.position.length) return 'Pick at least one position (or "Anywhere").';
+        }
+        if (n === 5) {
+          if (!d.sessions.length) return 'Pick at least one session.';
+        }
+        return null;
+      }
+
+      backBtn.addEventListener('click', () => {
+        if (state.step > 1) showStep(state.step - 1);
+      });
+
+      nextBtn.addEventListener('click', () => {
+        const err = validateStep(state.step);
+        if (err) {
+          errorEl.textContent = err;
+          errorEl.hidden = false;
+          const activeSub = modal.querySelector('.join-step.is-active .join-step-sub');
+          if (activeSub) activeSub.after(errorEl);
+          return;
+        }
+        if (state.step < TOTAL_STEPS) {
+          showStep(state.step + 1);
+        } else {
+          submit();
+        }
+      });
+
+      // Enter on text input → advance
+      form.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && e.target.tagName === 'INPUT' && e.target.type !== 'checkbox') {
+          e.preventDefault();
+          nextBtn.click();
+        }
+      });
+
+      // === Submit ===========================================================
+      function submit() {
+        const d = state.data;
+        const firstName = (d.name.split(/\s+/)[0] || '').trim();
+        doneName.textContent = firstName ? ', ' + firstName : '';
+
+        doneCta.href = WA_COMMUNITY;
+
+        // Visible summary card (so they can sanity-check before tapping)
+        doneSum.innerHTML =
+          '<div class="join-done-summary-head mono">YOUR SIGNUP</div>' +
+          '<dl class="join-done-summary-list">' +
+            row('Name', d.name) +
+            row('Age', d.age) +
+            row('Nationality', d.nationality) +
+            row('In Bali', baliLabels[d.bali] || d.bali) +
+            row('Level', levelLabels[d.level] || d.level) +
+            row('Position', d.position.map(p => positionLabels[p] || p).join(' · ')) +
+            row('Sessions', d.sessions.join(' · ')) +
+          '</dl>';
+
+        showStep(TOTAL_STEPS + 1); // success
+      }
+
+      function row(k, v) {
+        return '<dt class="mono">' + k + '</dt><dd>' + escapeHtml(String(v)) + '</dd>';
+      }
+      function escapeHtml(s) {
+        return s.replace(/[&<>"']/g, (c) => (
+          { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]
+        ));
+      }
+
+      // === Init =============================================================
+      showStep(1);
+    })();
   </script>
 </body>
 </html>
