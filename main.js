@@ -872,13 +872,21 @@ const csMeta     = document.getElementById("cs-meta");
 const csNote     = document.getElementById("cs-note");
 const csRoster   = document.getElementById("cs-roster");
 
+function rowInitials(name) {
+  const parts = String(name || "").trim().split(/\s+/).slice(0, 2);
+  return parts.map((p) => p[0]?.toUpperCase() ?? "").join("") || "UJB";
+}
+
 function renderRosterRows(nat, container) {
   container.innerHTML = "";
   nat.players.forEach((p) => {
     const li = document.createElement("li");
     li.className = "player-row";
+    const avatar = p.imageUrl
+      ? `<img class="player-avatar-img" loading="lazy" src="${escapeHtml(p.imageUrl)}" alt="" />`
+      : `<span class="player-avatar-fallback">${escapeHtml(rowInitials(p.name))}</span>`;
     li.innerHTML = `
-      <span class="player-num">${p.number}</span>
+      <span class="player-avatar">${avatar}</span>
       <span class="player-name">${escapeHtml(p.name)}</span>
       <span class="player-pos">${p.position}</span>
     `;

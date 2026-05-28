@@ -81,6 +81,7 @@ async function buildNationalities() {
       number: bucket.players.length + 1,
       name: p.name,
       position: p.primaryPosition || "—",
+      imageUrl: p.imageUrl || "",
     });
   }
 
