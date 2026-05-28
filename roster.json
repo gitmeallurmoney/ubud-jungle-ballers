@@ -1,0 +1,1119 @@
+{
+  "generatedAt": "2026-05-28T02:25:55.998Z",
+  "group": {
+    "id": "0J9vUpFhk2QD74HSfe1D",
+    "name": "Ubud jungle ballers",
+    "handle": "ubj",
+    "city": "Gianyar"
+  },
+  "players": [
+    {
+      "userId": "manual_0J9vUpFhk2QD74HSfe1D_mm8svtsm_9lbcsj",
+      "name": "Itong",
+      "username": "",
+      "imageUrl": "https://api.dicebear.com/9.x/avataaars/png?seed=Itong&size=200&top=theCaesar,theCaesarAndSidePart,shortFlat,shortRound,shortWaved,sides,shaggy,shaggyMullet&facialHairProbability=30",
+      "nationality": "Indonesia",
+      "flag": "🇮🇩",
+      "positions": [
+        "CM"
+      ],
+      "primaryPosition": "CM",
+      "role": "member",
+      "joinedAt": "2026-03-02T06:31:05.134Z",
+      "stats": {
+        "games": 14,
+        "wins": 26,
+        "goals": 16,
+        "assists": 26,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "manual_0J9vUpFhk2QD74HSfe1D_mm8suq6w_ap8rg0",
+      "name": "Meran",
+      "username": "",
+      "imageUrl": "https://api.dicebear.com/9.x/avataaars/png?seed=Meran&size=200&top=theCaesar,theCaesarAndSidePart,shortFlat,shortRound,shortWaved,sides,shaggy,shaggyMullet&facialHairProbability=30",
+      "nationality": "Iran",
+      "flag": "🇮🇷",
+      "positions": [
+        "ST",
+        "CM"
+      ],
+      "primaryPosition": "ST",
+      "role": "member",
+      "joinedAt": "2026-03-02T06:30:13.836Z",
+      "stats": {
+        "games": 14,
+        "wins": 28,
+        "goals": 106,
+        "assists": 37,
+        "mvps": 1
+      }
+    },
+    {
+      "userId": "6A8c7ZjSSKeRCb7vLG9An0CqJEo2",
+      "name": "David",
+      "username": "David",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/futto-33fa7.firebasestorage.app/o/users%2F6A8c7ZjSSKeRCb7vLG9An0CqJEo2%2Fprofile-1778590275988.jpg?alt=media&token=bab06ebd-f025-44c5-9658-5c9ef7055751",
+      "nationality": "France",
+      "flag": "🇫🇷",
+      "age": 40,
+      "positions": [
+        "ST"
+      ],
+      "primaryPosition": "ST",
+      "role": "member",
+      "joinedAt": "2026-05-12T12:54:13.332Z",
+      "stats": {
+        "games": 13,
+        "wins": 25,
+        "goals": 68,
+        "assists": 20,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "3YJTI781VffxTQciQKasNUCvgjB3",
+      "name": "Randy Ryes",
+      "username": "Randy Ryes",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/futto-33fa7.firebasestorage.app/o/users%2F3YJTI781VffxTQciQKasNUCvgjB3%2Fprofile-1772943976873.jpg?alt=media&token=5e62d853-5748-414e-9e23-d32442bf5abd",
+      "nationality": "Portugal",
+      "flag": "🇵🇹",
+      "age": 28,
+      "positions": [
+        "LB",
+        "DM",
+        "AM"
+      ],
+      "primaryPosition": "LB",
+      "role": "admin",
+      "joinedAt": "2026-03-09T05:09:55.374Z",
+      "stats": {
+        "games": 12,
+        "wins": 19,
+        "goals": 26,
+        "assists": 18,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "cVhv1UXWI8ahM2uV50Sugvt7Ngb2",
+      "name": "Vidi",
+      "username": "Vidi",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/futto-33fa7.firebasestorage.app/o/users%2FcVhv1UXWI8ahM2uV50Sugvt7Ngb2%2Fprofile-1777431507190.jpg?alt=media&token=0a3000ad-ca8a-4154-8548-ca366ae429b0",
+      "nationality": "Russia",
+      "flag": "🇷🇺",
+      "age": 35,
+      "positions": [
+        "CB"
+      ],
+      "primaryPosition": "CB",
+      "role": "member",
+      "joinedAt": "2026-04-30T13:05:32.786Z",
+      "stats": {
+        "games": 12,
+        "wins": 18,
+        "goals": 20,
+        "assists": 14,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "4OnVysvO3beP412CtyuoWR94Ynh1",
+      "name": "balifranz",
+      "username": "balifranz",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/futto-33fa7.firebasestorage.app/o/users%2F4OnVysvO3beP412CtyuoWR94Ynh1%2Fprofile-1773202320795.jpg?alt=media&token=527c23c7-3904-4d29-8b59-239bf6991c47",
+      "nationality": "Germany",
+      "flag": "🇩🇪",
+      "age": 65,
+      "positions": [
+        "DM"
+      ],
+      "primaryPosition": "DM",
+      "role": "member",
+      "joinedAt": "2026-03-11T04:27:48.307Z",
+      "stats": {
+        "games": 11,
+        "wins": 20,
+        "goals": 7,
+        "assists": 7,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "LGy9CThZAwfqySMEE1qtEGc5Hqx2",
+      "name": "Darius",
+      "username": "darius",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/futto-33fa7.firebasestorage.app/o/users%2FLGy9CThZAwfqySMEE1qtEGc5Hqx2%2Fprofile-1773101780504.jpg?alt=media&token=7479ae29-aea7-41b0-8a9e-0a9158e93769",
+      "nationality": "United Kingdom",
+      "flag": "🇬🇧",
+      "age": 32,
+      "positions": [
+        "DM",
+        "CM",
+        "AM"
+      ],
+      "primaryPosition": "DM",
+      "role": "admin",
+      "joinedAt": "2026-03-09T05:10:06.992Z",
+      "stats": {
+        "games": 11,
+        "wins": 15,
+        "goals": 36,
+        "assists": 25,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "manual_0J9vUpFhk2QD74HSfe1D_mm8sw33q_2t54ut",
+      "name": "Dek",
+      "username": "",
+      "imageUrl": "https://api.dicebear.com/9.x/avataaars/png?seed=Dek&size=200&top=theCaesar,theCaesarAndSidePart,shortFlat,shortRound,shortWaved,sides,shaggy,shaggyMullet&facialHairProbability=30",
+      "nationality": "Indonesia",
+      "flag": "🇮🇩",
+      "positions": [
+        "CB"
+      ],
+      "primaryPosition": "CB",
+      "role": "member",
+      "joinedAt": "2026-03-02T06:31:17.195Z",
+      "stats": {
+        "games": 11,
+        "wins": 15,
+        "goals": 23,
+        "assists": 14,
+        "mvps": 1
+      }
+    },
+    {
+      "userId": "manual_0J9vUpFhk2QD74HSfe1D_mm8svkwx_8xm736",
+      "name": "Koming",
+      "username": "",
+      "imageUrl": "https://api.dicebear.com/9.x/avataaars/png?seed=Koming&size=200&top=theCaesar,theCaesarAndSidePart,shortFlat,shortRound,shortWaved,sides,shaggy,shaggyMullet&facialHairProbability=30",
+      "nationality": "Indonesia",
+      "flag": "🇮🇩",
+      "positions": [
+        "ST"
+      ],
+      "primaryPosition": "ST",
+      "role": "member",
+      "joinedAt": "2026-03-02T06:30:53.625Z",
+      "stats": {
+        "games": 11,
+        "wins": 23,
+        "goals": 30,
+        "assists": 17,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "manual_0J9vUpFhk2QD74HSfe1D_mm8sxm05_7l708b",
+      "name": "Ed",
+      "username": "",
+      "imageUrl": "https://api.dicebear.com/9.x/avataaars/png?seed=Ed&size=200&top=theCaesar,theCaesarAndSidePart,shortFlat,shortRound,shortWaved,sides,shaggy,shaggyMullet&facialHairProbability=30",
+      "nationality": "Wales",
+      "flag": "🇬🇧",
+      "positions": [
+        "ST"
+      ],
+      "primaryPosition": "ST",
+      "role": "member",
+      "joinedAt": "2026-03-02T06:32:28.341Z",
+      "stats": {
+        "games": 10,
+        "wins": 15,
+        "goals": 34,
+        "assists": 14,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "uRsLLuo9IPZLkxWk5hor6gdNSwn1",
+      "name": "Generale 🌟",
+      "username": "Generale 🌟",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/futto-33fa7.firebasestorage.app/o/users%2FuRsLLuo9IPZLkxWk5hor6gdNSwn1%2Fprofile-1773194605505.jpg?alt=media&token=4c191276-d88b-429c-b37f-092ba472d830",
+      "nationality": "Germany",
+      "flag": "🇩🇪",
+      "age": 44,
+      "positions": [
+        "CB",
+        "DM"
+      ],
+      "primaryPosition": "CB",
+      "role": "member",
+      "joinedAt": "2026-03-11T02:37:54.076Z",
+      "stats": {
+        "games": 10,
+        "wins": 14,
+        "goals": 17,
+        "assists": 11,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "jcgMX4t9SBgnraU9mWES5UgbbBC3",
+      "name": "Joshua Sting",
+      "username": "Joshua Sting",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/futto-33fa7.firebasestorage.app/o/users%2FjcgMX4t9SBgnraU9mWES5UgbbBC3%2Fprofile-1776242567725.jpg?alt=media&token=e985f5bb-b1b3-4485-bb79-51dd75d20f33",
+      "nationality": "Germany",
+      "flag": "🇩🇪",
+      "age": 30,
+      "positions": [
+        "AM",
+        "RW",
+        "ST"
+      ],
+      "primaryPosition": "AM",
+      "role": "member",
+      "joinedAt": "2026-04-28T11:49:39.768Z",
+      "stats": {
+        "games": 10,
+        "wins": 13,
+        "goals": 28,
+        "assists": 19,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "q3QzpqaOeHTkyJ9A0Zk4WcGgtrD3",
+      "name": "HenzoRaid",
+      "username": "HenzoRaid",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/futto-33fa7.firebasestorage.app/o/users%2Fq3QzpqaOeHTkyJ9A0Zk4WcGgtrD3%2Fprofile-1779731291997.jpg?alt=media&token=cfe0ad58-6c16-4f49-8105-0229933f7fe1",
+      "nationality": "Egypt",
+      "flag": "🇪🇬",
+      "age": 38,
+      "positions": [
+        "RB",
+        "CB"
+      ],
+      "primaryPosition": "RB",
+      "role": "member",
+      "joinedAt": "2026-03-09T05:10:24.509Z",
+      "stats": {
+        "games": 9,
+        "wins": 13,
+        "goals": 11,
+        "assists": 7,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "manual_0J9vUpFhk2QD74HSfe1D_mm8swrmm_bkcwws",
+      "name": "Aimo",
+      "username": "",
+      "imageUrl": "https://api.dicebear.com/9.x/avataaars/png?seed=Aimo&size=200&top=theCaesar,theCaesarAndSidePart,shortFlat,shortRound,shortWaved,sides,shaggy,shaggyMullet&facialHairProbability=30",
+      "nationality": "Italy",
+      "flag": "🇮🇹",
+      "positions": [
+        "ST"
+      ],
+      "primaryPosition": "ST",
+      "role": "member",
+      "joinedAt": "2026-03-02T06:31:48.982Z",
+      "stats": {
+        "games": 8,
+        "wins": 8,
+        "goals": 22,
+        "assists": 10,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "manual_0J9vUpFhk2QD74HSfe1D_mnwopmft_hw2tfg",
+      "name": "Eduardo",
+      "username": "",
+      "imageUrl": "https://api.dicebear.com/9.x/avataaars/png?seed=Eduardo&size=200&top=theCaesar,theCaesarAndSidePart,shortFlat,shortRound,shortWaved,sides,shaggy,shaggyMullet&facialHairProbability=30",
+      "nationality": "Spain",
+      "flag": "🇪🇸",
+      "positions": [],
+      "role": "member",
+      "joinedAt": "2026-04-13T04:20:27.902Z",
+      "stats": {
+        "games": 7,
+        "wins": 22,
+        "goals": 74,
+        "assists": 22,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "kRZ2Uv7WnGRVhISkAUtPbR23ehI2",
+      "name": "elpassdealer",
+      "username": "elpassdealer",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/futto-33fa7.firebasestorage.app/o/users%2FkRZ2Uv7WnGRVhISkAUtPbR23ehI2%2Fprofile-1773070468201.jpg?alt=media&token=6a9b7bf3-f88a-4c55-a3bd-5cc348525bbb",
+      "nationality": "Colombia",
+      "flag": "🇨🇴",
+      "age": 30,
+      "positions": [
+        "CM",
+        "AM",
+        "LW",
+        "RW"
+      ],
+      "primaryPosition": "CM",
+      "role": "member",
+      "joinedAt": "2026-03-09T15:41:35.795Z",
+      "stats": {
+        "games": 7,
+        "wins": 11,
+        "goals": 14,
+        "assists": 22,
+        "mvps": 1
+      }
+    },
+    {
+      "userId": "zPCNgSz0CBaXbiQA1SWuwnANSWN2",
+      "name": "Ghazi",
+      "username": "Ghazi",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/futto-33fa7.firebasestorage.app/o/users%2FzPCNgSz0CBaXbiQA1SWuwnANSWN2%2Fprofile-1773281306365.jpg?alt=media&token=67f3edcb-2a28-41e5-b9d4-c026122c9d7d",
+      "nationality": "Indonesia",
+      "flag": "🇮🇩",
+      "age": 31,
+      "positions": [
+        "GK"
+      ],
+      "primaryPosition": "GK",
+      "role": "member",
+      "joinedAt": "2026-03-12T02:20:33.976Z",
+      "stats": {
+        "games": 5,
+        "wins": 7,
+        "goals": 3,
+        "assists": 2,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "manual_0J9vUpFhk2QD74HSfe1D_mm8sydap_oaval6",
+      "name": "Alex",
+      "username": "",
+      "imageUrl": "https://api.dicebear.com/9.x/avataaars/png?seed=Alex&size=200&top=theCaesar,theCaesarAndSidePart,shortFlat,shortRound,shortWaved,sides,shaggy,shaggyMullet&facialHairProbability=30",
+      "nationality": "Russia",
+      "flag": "🇷🇺",
+      "positions": [
+        "CM"
+      ],
+      "primaryPosition": "CM",
+      "role": "member",
+      "joinedAt": "2026-03-02T06:33:03.719Z",
+      "stats": {
+        "games": 4,
+        "wins": 4,
+        "goals": 3,
+        "assists": 3,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "3KV6PlnBjGhL5hDmBeVD3iXYgv83",
+      "name": "can",
+      "username": "can",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/futto-33fa7.firebasestorage.app/o/users%2F3KV6PlnBjGhL5hDmBeVD3iXYgv83%2Fprofile-1772502822644.jpg?alt=media&token=b4556d27-aaf0-41a3-8bea-e20d237431b2",
+      "nationality": "Germany",
+      "flag": "🇩🇪",
+      "age": 32,
+      "positions": [
+        "LB",
+        "RB",
+        "DM",
+        "CB"
+      ],
+      "primaryPosition": "LB",
+      "role": "admin",
+      "joinedAt": "2026-03-31T14:15:34.796Z",
+      "stats": {
+        "games": 4,
+        "wins": 9,
+        "goals": 3,
+        "assists": 7,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "dY9GKfh0oMVZMnTSbIe5PfsHhDn1",
+      "name": "cipi",
+      "username": "cipi",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/futto-33fa7.firebasestorage.app/o/users%2FdY9GKfh0oMVZMnTSbIe5PfsHhDn1%2Fprofile-1779172993383.jpg?alt=media&token=aadf51dc-85c3-43d6-a4e5-9fc6f2da7eed",
+      "nationality": "Romania",
+      "flag": "🇷🇴",
+      "age": 26,
+      "positions": [
+        "RW"
+      ],
+      "primaryPosition": "RW",
+      "role": "member",
+      "joinedAt": "2026-05-19T07:22:04.399Z",
+      "stats": {
+        "games": 4,
+        "wins": 12,
+        "goals": 11,
+        "assists": 5,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "manual_0J9vUpFhk2QD74HSfe1D_mogpwiwp_ew2116",
+      "name": "Mads",
+      "username": "",
+      "imageUrl": "https://api.dicebear.com/9.x/avataaars/png?seed=Mads&size=200&top=theCaesar,theCaesarAndSidePart,shortFlat,shortRound,shortWaved,sides,shaggy,shaggyMullet&facialHairProbability=30",
+      "nationality": "Denmark",
+      "flag": "🇩🇰",
+      "positions": [
+        "ST",
+        "RW",
+        "LW"
+      ],
+      "primaryPosition": "ST",
+      "role": "member",
+      "joinedAt": "2026-04-27T04:49:13.114Z",
+      "stats": {
+        "games": 4,
+        "wins": 13,
+        "goals": 11,
+        "assists": 11,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "Ld0es9NzzPbdwuW1XadQyi2B1Q52",
+      "name": "one touch hero",
+      "username": "one touch hero",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/futto-33fa7.firebasestorage.app/o/users%2FLd0es9NzzPbdwuW1XadQyi2B1Q52%2Fprofile-1773020087970.jpg?alt=media&token=a55a51f7-fcb0-480a-890e-05d51f78663a",
+      "nationality": "Bangladesh",
+      "flag": "🇧🇩",
+      "age": 43,
+      "positions": [
+        "CB",
+        "LB",
+        "RB",
+        "GK"
+      ],
+      "primaryPosition": "CB",
+      "role": "member",
+      "joinedAt": "2026-03-09T05:10:10.590Z",
+      "stats": {
+        "games": 4,
+        "wins": 9,
+        "goals": 1,
+        "assists": 2,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "manual_0J9vUpFhk2QD74HSfe1D_mo6qkk87_3yxn8w",
+      "name": "Rick",
+      "username": "",
+      "imageUrl": "https://api.dicebear.com/9.x/avataaars/png?seed=Rick&size=200&top=theCaesar,theCaesarAndSidePart,shortFlat,shortRound,shortWaved,sides,shaggy,shaggyMullet&facialHairProbability=30",
+      "nationality": "Netherlands",
+      "flag": "🇳🇱",
+      "positions": [
+        "ST",
+        "CM",
+        "RW",
+        "LW"
+      ],
+      "primaryPosition": "ST",
+      "role": "member",
+      "joinedAt": "2026-04-20T05:10:12.765Z",
+      "stats": {
+        "games": 4,
+        "wins": 5,
+        "goals": 19,
+        "assists": 7,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "manual_0J9vUpFhk2QD74HSfe1D_mmiq6wrv_22y5b5",
+      "name": "Mikel",
+      "username": "",
+      "imageUrl": "https://api.dicebear.com/9.x/avataaars/png?seed=Mikel&size=200&top=theCaesar,theCaesarAndSidePart,shortFlat,shortRound,shortWaved,sides,shaggy,shaggyMullet&facialHairProbability=30",
+      "nationality": "Germany",
+      "flag": "🇩🇪",
+      "positions": [
+        "CM"
+      ],
+      "primaryPosition": "CM",
+      "role": "member",
+      "joinedAt": "2026-03-09T05:13:25.146Z",
+      "stats": {
+        "games": 3,
+        "wins": 3,
+        "goals": 21,
+        "assists": 11,
+        "mvps": 1
+      }
+    },
+    {
+      "userId": "manual_0J9vUpFhk2QD74HSfe1D_mm8sznz9_fp01fd",
+      "name": "Tude",
+      "username": "",
+      "imageUrl": "https://api.dicebear.com/9.x/avataaars/png?seed=Tude&size=200&top=theCaesar,theCaesarAndSidePart,shortFlat,shortRound,shortWaved,sides,shaggy,shaggyMullet&facialHairProbability=30",
+      "nationality": "Indonesia",
+      "flag": "🇮🇩",
+      "positions": [
+        "GK"
+      ],
+      "primaryPosition": "GK",
+      "role": "member",
+      "joinedAt": "2026-03-02T06:34:04.218Z",
+      "stats": {
+        "games": 3,
+        "wins": 4,
+        "goals": 0,
+        "assists": 1,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "manual_0J9vUpFhk2QD74HSfe1D_mm8t02q3_tbys2g",
+      "name": "Cedrick",
+      "username": "",
+      "imageUrl": "https://api.dicebear.com/9.x/avataaars/png?seed=Cedrick&size=200&top=theCaesar,theCaesarAndSidePart,shortFlat,shortRound,shortWaved,sides,shaggy,shaggyMullet&facialHairProbability=30",
+      "nationality": "United Kingdom",
+      "flag": "🇬🇧",
+      "positions": [
+        "GK"
+      ],
+      "primaryPosition": "GK",
+      "role": "member",
+      "joinedAt": "2026-03-02T06:34:23.332Z",
+      "stats": {
+        "games": 2,
+        "wins": 2,
+        "goals": 0,
+        "assists": 0,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "manual_0J9vUpFhk2QD74HSfe1D_mn2ry4kt_1n4gn8",
+      "name": "Gary",
+      "username": "",
+      "imageUrl": "https://api.dicebear.com/9.x/avataaars/png?seed=Gary&size=200&top=theCaesar,theCaesarAndSidePart,shortFlat,shortRound,shortWaved,sides,shaggy,shaggyMullet&facialHairProbability=30",
+      "nationality": "Australia",
+      "flag": "🇦🇺",
+      "positions": [
+        "GK",
+        "ST"
+      ],
+      "primaryPosition": "GK",
+      "role": "member",
+      "joinedAt": "2026-03-23T05:57:58.258Z",
+      "stats": {
+        "games": 2,
+        "wins": 2,
+        "goals": 0,
+        "assists": 1,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "nFBm4YbxgMPe01xHxfbRgjEtd3u1",
+      "name": "Thelegend",
+      "username": "thelegend",
+      "imageUrl": "file:///var/mobile/Containers/Data/Application/D89B1B31-0BC3-47FB-941E-F6EFCBEA9412/Library/Caches/ImagePicker/C4EDC40F-9E97-4379-9332-0EC1927370BD.jpg",
+      "nationality": "Turkey",
+      "flag": "🇹🇷",
+      "age": 46,
+      "positions": [
+        "ST"
+      ],
+      "primaryPosition": "ST",
+      "role": "member",
+      "joinedAt": "2026-03-09T05:10:19.151Z",
+      "stats": {
+        "games": 2,
+        "wins": 7,
+        "goals": 4,
+        "assists": 0,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "manual_0J9vUpFhk2QD74HSfe1D_mp0vjs8i_2dpsm5",
+      "name": "Dan",
+      "username": "",
+      "imageUrl": "https://api.dicebear.com/9.x/avataaars/png?seed=Dan&size=200&top=theCaesar,theCaesarAndSidePart,shortFlat,shortRound,shortWaved,sides,shaggy,shaggyMullet&facialHairProbability=30",
+      "nationality": "United Kingdom",
+      "flag": "🇬🇧",
+      "positions": [
+        "CM"
+      ],
+      "primaryPosition": "CM",
+      "role": "member",
+      "joinedAt": "2026-05-11T07:22:39.873Z",
+      "stats": {
+        "games": 1,
+        "wins": 2,
+        "goals": 4,
+        "assists": 3,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "manual_0J9vUpFhk2QD74HSfe1D_mpkjndnz_wnozyd",
+      "name": "Diva",
+      "username": "",
+      "imageUrl": "https://api.dicebear.com/9.x/avataaars/png?seed=Diva&size=200&top=theCaesar,theCaesarAndSidePart,shortFlat,shortRound,shortWaved,sides,shaggy,shaggyMullet&facialHairProbability=30",
+      "nationality": "Indonesia",
+      "flag": "🇮🇩",
+      "positions": [
+        "CM",
+        "AM"
+      ],
+      "primaryPosition": "CM",
+      "role": "member",
+      "joinedAt": "2026-05-25T01:44:55.723Z",
+      "stats": {
+        "games": 1,
+        "wins": 2,
+        "goals": 2,
+        "assists": 0,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "manual_0J9vUpFhk2QD74HSfe1D_mp0vjkf7_ju3fwl",
+      "name": "Etai",
+      "username": "",
+      "imageUrl": "https://api.dicebear.com/9.x/avataaars/png?seed=Etai&size=200&top=theCaesar,theCaesarAndSidePart,shortFlat,shortRound,shortWaved,sides,shaggy,shaggyMullet&facialHairProbability=30",
+      "nationality": "Indonesia",
+      "flag": "🇮🇩",
+      "positions": [
+        "CM"
+      ],
+      "primaryPosition": "CM",
+      "role": "member",
+      "joinedAt": "2026-05-11T07:22:29.706Z",
+      "stats": {
+        "games": 1,
+        "wins": 6,
+        "goals": 3,
+        "assists": 2,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "P9OKCDpbqcg535HHBxoaCeamBLf1",
+      "name": "Etkin",
+      "username": "Etkin",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/futto-33fa7.firebasestorage.app/o/users%2FP9OKCDpbqcg535HHBxoaCeamBLf1%2Fprofile-1773070696406.jpg?alt=media&token=babb2fc5-5670-440f-a730-ef9d1a3132e6",
+      "nationality": "Turkey",
+      "flag": "🇹🇷",
+      "age": 39,
+      "positions": [
+        "AM",
+        "ST",
+        "CM"
+      ],
+      "primaryPosition": "AM",
+      "role": "member",
+      "joinedAt": "2026-03-09T15:50:28.126Z",
+      "stats": {
+        "games": 1,
+        "wins": 1,
+        "goals": 1,
+        "assists": 3,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "manual_0J9vUpFhk2QD74HSfe1D_mpkqdpm6_ywursy",
+      "name": "Frances",
+      "username": "",
+      "imageUrl": "https://api.dicebear.com/9.x/avataaars/png?seed=Frances&size=200&top=theCaesar,theCaesarAndSidePart,shortFlat,shortRound,shortWaved,sides,shaggy,shaggyMullet&facialHairProbability=30",
+      "nationality": "Indonesia",
+      "flag": "🇮🇩",
+      "positions": [
+        "CM"
+      ],
+      "primaryPosition": "CM",
+      "role": "member",
+      "joinedAt": "2026-05-25T04:53:21.990Z",
+      "stats": {
+        "games": 1,
+        "wins": 1,
+        "goals": 2,
+        "assists": 3,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "manual_0J9vUpFhk2QD74HSfe1D_mpkqi3qx_16714u",
+      "name": "Jack",
+      "username": "",
+      "imageUrl": "https://api.dicebear.com/9.x/avataaars/png?seed=Jack&size=200&top=theCaesar,theCaesarAndSidePart,shortFlat,shortRound,shortWaved,sides,shaggy,shaggyMullet&facialHairProbability=30",
+      "nationality": "Sweden",
+      "flag": "🇸🇪",
+      "positions": [
+        "CM"
+      ],
+      "primaryPosition": "CM",
+      "role": "member",
+      "joinedAt": "2026-05-25T04:56:46.778Z",
+      "stats": {
+        "games": 1,
+        "wins": 2,
+        "goals": 3,
+        "assists": 0,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "manual_0J9vUpFhk2QD74HSfe1D_mpaynmxu_5eanyb",
+      "name": "Kris",
+      "username": "",
+      "imageUrl": "https://api.dicebear.com/9.x/avataaars/png?seed=Kris&size=200&top=theCaesar,theCaesarAndSidePart,shortFlat,shortRound,shortWaved,sides,shaggy,shaggyMullet&facialHairProbability=30",
+      "nationality": "Indonesia",
+      "flag": "🇮🇩",
+      "positions": [
+        "GK"
+      ],
+      "primaryPosition": "GK",
+      "role": "member",
+      "joinedAt": "2026-05-18T08:47:20.205Z",
+      "stats": {
+        "games": 1,
+        "wins": 1,
+        "goals": 0,
+        "assists": 0,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "manual_0J9vUpFhk2QD74HSfe1D_mnmtw0qz_x8ayzp",
+      "name": "Leo",
+      "username": "",
+      "imageUrl": "https://api.dicebear.com/9.x/avataaars/png?seed=Leo&size=200&top=theCaesar,theCaesarAndSidePart,shortFlat,shortRound,shortWaved,sides,shaggy,shaggyMullet&facialHairProbability=30",
+      "nationality": "United Kingdom",
+      "flag": "🇬🇧",
+      "positions": [
+        "GK"
+      ],
+      "primaryPosition": "GK",
+      "role": "member",
+      "joinedAt": "2026-04-06T06:47:42.734Z",
+      "stats": {
+        "games": 1,
+        "wins": 1,
+        "goals": 0,
+        "assists": 0,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "manual_0J9vUpFhk2QD74HSfe1D_mo6sctxu_m7vlya",
+      "name": "Marc",
+      "username": "",
+      "imageUrl": "https://api.dicebear.com/9.x/avataaars/png?seed=Marc&size=200&top=theCaesar,theCaesarAndSidePart,shortFlat,shortRound,shortWaved,sides,shaggy,shaggyMullet&facialHairProbability=30",
+      "nationality": "United Kingdom",
+      "flag": "🇬🇧",
+      "positions": [
+        "CM"
+      ],
+      "primaryPosition": "CM",
+      "role": "member",
+      "joinedAt": "2026-04-20T06:00:11.339Z",
+      "stats": {
+        "games": 1,
+        "wins": 1,
+        "goals": 0,
+        "assists": 0,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "manual_0J9vUpFhk2QD74HSfe1D_mmiq6dc7_thydp6",
+      "name": "Marvin",
+      "username": "",
+      "imageUrl": "https://api.dicebear.com/9.x/avataaars/png?seed=Marvin&size=200&top=theCaesar,theCaesarAndSidePart,shortFlat,shortRound,shortWaved,sides,shaggy,shaggyMullet&facialHairProbability=30",
+      "nationality": "United Kingdom",
+      "flag": "🇬🇧",
+      "positions": [
+        "DM"
+      ],
+      "primaryPosition": "DM",
+      "role": "member",
+      "joinedAt": "2026-03-09T05:12:59.967Z",
+      "stats": {
+        "games": 1,
+        "wins": 1,
+        "goals": 1,
+        "assists": 2,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "manual_0J9vUpFhk2QD74HSfe1D_mpkqek4g_ta2dkh",
+      "name": "Matt",
+      "username": "",
+      "imageUrl": "https://api.dicebear.com/9.x/avataaars/png?seed=Matt&size=200&top=theCaesar,theCaesarAndSidePart,shortFlat,shortRound,shortWaved,sides,shaggy,shaggyMullet&facialHairProbability=30",
+      "nationality": "United Kingdom",
+      "flag": "🇬🇧",
+      "positions": [
+        "GK",
+        "ST"
+      ],
+      "primaryPosition": "GK",
+      "role": "member",
+      "joinedAt": "2026-05-25T04:54:01.363Z",
+      "stats": {
+        "games": 1,
+        "wins": 5,
+        "goals": 0,
+        "assists": 0,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "manual_0J9vUpFhk2QD74HSfe1D_mncj4av9_4vhlpn",
+      "name": "Michel",
+      "username": "",
+      "imageUrl": "https://api.dicebear.com/9.x/avataaars/png?seed=Michel&size=200&top=theCaesar,theCaesarAndSidePart,shortFlat,shortRound,shortWaved,sides,shaggy,shaggyMullet&facialHairProbability=30",
+      "nationality": "Germany",
+      "flag": "🇩🇪",
+      "positions": [
+        "GK"
+      ],
+      "primaryPosition": "GK",
+      "role": "member",
+      "joinedAt": "2026-03-30T01:48:31.579Z",
+      "stats": {
+        "games": 1,
+        "wins": 1,
+        "goals": 2,
+        "assists": 1,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "manual_0J9vUpFhk2QD74HSfe1D_mpkqd2wr_1d6vcx",
+      "name": "Rytam",
+      "username": "",
+      "imageUrl": "https://api.dicebear.com/9.x/avataaars/png?seed=Rytam&size=200&top=theCaesar,theCaesarAndSidePart,shortFlat,shortRound,shortWaved,sides,shaggy,shaggyMullet&facialHairProbability=30",
+      "nationality": "Indonesia",
+      "flag": "🇮🇩",
+      "positions": [
+        "CM"
+      ],
+      "primaryPosition": "CM",
+      "role": "member",
+      "joinedAt": "2026-05-25T04:52:52.530Z",
+      "stats": {
+        "games": 1,
+        "wins": 2,
+        "goals": 0,
+        "assists": 1,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "y6Ms4hNolMYGNXo3ogjFIksm5K62",
+      "name": "simon",
+      "username": "simon",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/futto-33fa7.firebasestorage.app/o/users%2Fy6Ms4hNolMYGNXo3ogjFIksm5K62%2Fprofile-1773189263756.jpg?alt=media&token=1837615e-f23a-4a7a-b542-1325adccba04",
+      "nationality": "Scotland",
+      "flag": "🇬🇧",
+      "age": 45,
+      "positions": [
+        "CM",
+        "AM",
+        "LW",
+        "DM"
+      ],
+      "primaryPosition": "CM",
+      "role": "member",
+      "joinedAt": "2026-03-09T05:10:31.588Z",
+      "stats": {
+        "games": 1,
+        "wins": 1,
+        "goals": 1,
+        "assists": 0,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "manual_0J9vUpFhk2QD74HSfe1D_mogum2bl_69n1et",
+      "name": "Andika",
+      "username": "",
+      "imageUrl": "https://api.dicebear.com/9.x/avataaars/png?seed=Andika&size=200&top=theCaesar,theCaesarAndSidePart,shortFlat,shortRound,shortWaved,sides,shaggy,shaggyMullet&facialHairProbability=30",
+      "nationality": "Indonesia",
+      "flag": "🇮🇩",
+      "positions": [
+        "GK"
+      ],
+      "primaryPosition": "GK",
+      "role": "member",
+      "joinedAt": "2026-04-27T07:01:02.949Z",
+      "stats": {
+        "games": 0,
+        "wins": 0,
+        "goals": 0,
+        "assists": 0,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "9ytccwyrpCc5zaJ9J40VwNrBNsO2",
+      "name": "Dylan Wells-McNair",
+      "username": "Dylan Wells-McNair",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/futto-33fa7.firebasestorage.app/o/users%2F9ytccwyrpCc5zaJ9J40VwNrBNsO2%2Fprofile-1772934089458.jpg?alt=media&token=6c72ff00-96eb-4ee6-9cf5-2461e355db06",
+      "nationality": "Australia",
+      "flag": "🇦🇺",
+      "age": 19,
+      "positions": [
+        "CB",
+        "LB",
+        "CM",
+        "RW"
+      ],
+      "primaryPosition": "CB",
+      "role": "member",
+      "joinedAt": "2026-03-09T05:10:00.192Z",
+      "stats": {
+        "games": 0,
+        "wins": 0,
+        "goals": 0,
+        "assists": 0,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "manual_0J9vUpFhk2QD74HSfe1D_mogul0hf_bnvti4",
+      "name": "Joshua P.",
+      "username": "",
+      "imageUrl": "https://api.dicebear.com/9.x/avataaars/png?seed=Joshua%20P.&size=200&top=theCaesar,theCaesarAndSidePart,shortFlat,shortRound,shortWaved,sides,shaggy,shaggyMullet&facialHairProbability=30",
+      "nationality": "United Kingdom",
+      "flag": "🇬🇧",
+      "positions": [
+        "GK"
+      ],
+      "primaryPosition": "GK",
+      "role": "member",
+      "joinedAt": "2026-04-27T07:00:14.063Z",
+      "stats": {
+        "games": 0,
+        "wins": 0,
+        "goals": 0,
+        "assists": 0,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "XvRkepXHnETvF5JwZXwTaUJccmA2",
+      "name": "sebastianflow",
+      "username": "sebastianflow",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/futto-33fa7.firebasestorage.app/o/users%2FXvRkepXHnETvF5JwZXwTaUJccmA2%2Fprofile-1772764209365.jpg?alt=media&token=7d9e7b0f-c1f7-4124-a5ef-369fa779f365",
+      "nationality": "Germany",
+      "flag": "🇩🇪",
+      "age": 41,
+      "positions": [
+        "CM",
+        "AM"
+      ],
+      "primaryPosition": "CM",
+      "role": "member",
+      "joinedAt": "2026-03-10T02:18:55.175Z",
+      "stats": {
+        "games": 0,
+        "wins": 0,
+        "goals": 0,
+        "assists": 0,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "IuzXHyNahqNEsI7nd9C8Yw4kNHE3",
+      "name": "test2",
+      "username": "test2",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/futto-33fa7.firebasestorage.app/o/users%2FIuzXHyNahqNEsI7nd9C8Yw4kNHE3%2Fprofile-1772243998849.jpg?alt=media&token=ece1e94f-c2d9-42a2-98d5-eca5abe4f2f0",
+      "nationality": "Algeria",
+      "flag": "🇩🇿",
+      "age": 17,
+      "positions": [
+        "DM",
+        "CM",
+        "LW"
+      ],
+      "primaryPosition": "DM",
+      "role": "member",
+      "joinedAt": "2026-03-27T09:05:48.978Z",
+      "stats": {
+        "games": 0,
+        "wins": 0,
+        "goals": 0,
+        "assists": 0,
+        "mvps": 0
+      },
+      "topBadge": {
+        "type": "engine",
+        "label": "Engine",
+        "tier": "bronze"
+      }
+    },
+    {
+      "userId": "rJm1NFY30XYXUJX3NiWplockjSF2",
+      "name": "toni",
+      "username": "toni",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/futto-33fa7.firebasestorage.app/o/users%2FrJm1NFY30XYXUJX3NiWplockjSF2%2Fprofile-1773041332871.jpg?alt=media&token=3456568e-0abf-4278-84ce-ddfa2b9696ff",
+      "nationality": "Antigua and Barbuda",
+      "flag": "🇦🇬",
+      "age": 17,
+      "positions": [
+        "CM",
+        "DM"
+      ],
+      "primaryPosition": "CM",
+      "role": "member",
+      "joinedAt": "2026-03-27T13:15:01.970Z",
+      "stats": {
+        "games": 0,
+        "wins": 0,
+        "goals": 0,
+        "assists": 0,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "manual_0J9vUpFhk2QD74HSfe1D_mnx2kzbw_ze8xwi",
+      "name": "Tude",
+      "username": "",
+      "imageUrl": "https://api.dicebear.com/9.x/avataaars/png?seed=Tude&size=200&top=theCaesar,theCaesarAndSidePart,shortFlat,shortRound,shortWaved,sides,shaggy,shaggyMullet&facialHairProbability=30",
+      "positions": [
+        "RW"
+      ],
+      "primaryPosition": "RW",
+      "role": "member",
+      "joinedAt": "2026-04-13T10:48:45.947Z",
+      "stats": {
+        "games": 0,
+        "wins": 0,
+        "goals": 0,
+        "assists": 0,
+        "mvps": 0
+      }
+    },
+    {
+      "userId": "manual_0J9vUpFhk2QD74HSfe1D_mogullzu_ori2yv",
+      "name": "Yoga",
+      "username": "",
+      "imageUrl": "https://api.dicebear.com/9.x/avataaars/png?seed=Yoga&size=200&top=theCaesar,theCaesarAndSidePart,shortFlat,shortRound,shortWaved,sides,shaggy,shaggyMullet&facialHairProbability=30",
+      "nationality": "Indonesia",
+      "flag": "🇮🇩",
+      "positions": [
+        "GK"
+      ],
+      "primaryPosition": "GK",
+      "role": "member",
+      "joinedAt": "2026-04-27T07:00:41.970Z",
+      "stats": {
+        "games": 0,
+        "wins": 0,
+        "goals": 0,
+        "assists": 0,
+        "mvps": 0
+      }
+    }
+  ]
+}

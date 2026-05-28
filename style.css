@@ -1588,17 +1588,34 @@ aside.country-panel.open {
   grid-template-columns: 1fr 1fr;
   border: 1px solid var(--line);
   border-top: none;
+  /* Cap to viewport so the player list scrolls internally while the
+     detail panel stays in view. Reserve room for the section heading
+     and tier tabs above. */
+  height: min(720px, calc(100vh - 220px));
+  min-height: 480px;
 }
 
 .roster-list {
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  /* Subtle scrollbar in dark theme */
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
 }
+.roster-list::-webkit-scrollbar { width: 8px; }
+.roster-list::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
+.roster-list::-webkit-scrollbar-track { background: transparent; }
+
 .roster-row {
   display: grid;
-  grid-template-columns: 70px 1fr 60px 60px;
+  /* avatar | name+meta | G | ⚽ | A | arrow — fixed stat columns for
+     vertical alignment across all rows. */
+  grid-template-columns: 72px minmax(0, 1fr) 48px 56px 48px 20px;
   align-items: center;
-  padding: 22px 24px;
+  gap: 18px;
+  padding: 18px 22px;
   border-bottom: 1px solid var(--line);
   cursor: pointer;
   transition: background 150ms ease, color 150ms ease;
@@ -1607,41 +1624,110 @@ aside.country-panel.open {
 .roster-row:hover, .roster-row.is-hover {
   background: var(--bg-3);
 }
-.roster-row.is-hover .roster-row-num { color: var(--gold); }
 .roster-row.is-hover .roster-row-arrow { color: var(--gold); }
+.roster-row.is-hover .roster-row-avatar { border-color: var(--gold); }
 
-.roster-row-num {
-  font-family: var(--display);
-  font-size: 36px;
-  color: var(--ink);
-  letter-spacing: 0.02em;
+/* Persistent selection — sticks to the top of the scrolling list so the
+   player you clicked stays in view while you browse, until you click
+   another row. Borders use inset box-shadows so they don't shift the
+   row's grid metrics. */
+.roster-row.is-selected {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--bg-2);
+  box-shadow:
+    inset 3px 0 0 var(--gold),
+    inset -3px 0 0 var(--gold),
+    inset 0 3px 0 var(--gold),
+    inset 0 -3px 0 var(--gold),
+    0 6px 12px -8px rgba(0, 0, 0, 0.5);
 }
+.roster-row.is-selected .roster-row-avatar { border-color: var(--gold); }
+.roster-row.is-selected .roster-row-arrow { color: var(--gold); }
+.roster-row.is-selected .roster-row-name { color: var(--gold-2); }
+/* When the selected row is also hovered, keep the selection treatment. */
+.roster-row.is-selected:hover, .roster-row.is-selected.is-hover { background: var(--bg-2); }
+
+.roster-row-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--bg-3);
+  border: 2px solid var(--line);
+  display: grid;
+  place-items: center;
+  transition: border-color 150ms ease;
+}
+.roster-row-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.roster-row-avatar-fallback {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--ink-dim);
+}
+
+.roster-row-body { min-width: 0; }
 .roster-row-name {
   font-family: var(--display);
   font-size: 22px;
   letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .roster-row-name .role {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 9px;
   color: var(--gold);
-  margin-left: 8px;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.22em;
+  border: 1px solid var(--gold);
+  padding: 2px 6px;
+  line-height: 1;
 }
 .roster-row-meta {
   font-family: var(--mono);
   font-size: 11px;
   color: var(--ink-dim);
-  letter-spacing: 0.18em;
-  margin-top: 4px;
+  letter-spacing: 0.14em;
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
 }
-.roster-row-flag {
+.roster-row-meta .dot { color: var(--line); }
+.roster-row-meta .dim { color: var(--ink-dim); opacity: 0.7; }
+.roster-row-flag { font-size: 14px; line-height: 1; }
+
+/* Each stat cell occupies its own grid column for perfect vertical
+   alignment across rows. Numbers are tabular so column widths stay
+   stable regardless of digit count. */
+.roster-row-stat {
   font-family: var(--mono);
-  font-size: 11px;
-  color: var(--ink-dim);
+  font-variant-numeric: tabular-nums;
+  font-size: 12px;
+  color: var(--ink);
+  letter-spacing: 0.04em;
   text-align: right;
+  white-space: nowrap;
+}
+.roster-row-stat .label {
+  color: var(--ink-dim);
+  margin-right: 5px;
+  font-size: 10px;
   letter-spacing: 0.18em;
 }
+
 .roster-row-arrow {
   text-align: right;
   color: var(--ink-dim);
@@ -1649,41 +1735,172 @@ aside.country-panel.open {
   font-size: 18px;
 }
 
+.roster-empty {
+  padding: 40px 24px;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: var(--ink-dim);
+}
+
+/* ----- Detail panel ----- */
 .roster-detail {
   border-left: 1px solid var(--line);
-  padding: 32px;
+  padding: 28px;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  min-height: 0;
+  overflow-y: auto;
 }
 .roster-portrait {
-  height: 300px;
+  position: relative;
+  /* Fill all remaining vertical space in the detail panel above the two
+     stat rows. min-height:0 lets it shrink past content size inside flex. */
+  flex: 1 1 0;
+  min-height: 0;
+  width: 100%;
+  border: 2px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--bg-3);
+  display: grid;
+  place-items: center;
 }
+.roster-portrait-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.roster-portrait-fallback {
+  font-family: var(--display);
+  font-size: 64px;
+  color: var(--ink-dim);
+  letter-spacing: 0.04em;
+}
+.roster-portrait-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+.roster-portrait-name {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 28px 18px 16px;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  color: var(--ink);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.78), rgba(0, 0, 0, 0));
+  pointer-events: none;
+}
+.roster-portrait-name-text {
+  font-size: clamp(20px, 3vw, 30px);
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: #fff;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+.roster-portrait-name-role {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  padding: 3px 6px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
 .roster-stats {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 12px;
+}
+.roster-stats--quad {
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
 }
 .roster-stat {
   border: 1px solid var(--line);
-  padding: 16px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 .roster-stat-key {
-  font-size: 10px;
+  font-size: 9px;
   letter-spacing: 0.22em;
   color: var(--ink-dim);
   text-transform: uppercase;
 }
 .roster-stat-val {
-  font-size: 28px;
-  margin-top: 6px;
+  font-size: 24px;
+  margin-top: 0;
 }
-.roster-blurb {
-  font-size: 14px;
-  color: var(--ink-dim);
-  line-height: 1.7;
-  margin: 0;
+.roster-stat-num {
+  font-family: var(--mono);
+  font-size: 22px;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+  /* Truncate long values (e.g. position lists) without breaking the cell. */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+/* Flag emoji needs more room than monospace digits. */
+.roster-stat-num--lg {
+  font-family: inherit;
+  font-size: 26px;
+  line-height: 1;
+}
+
+/* ----- Playstyle badge chip (bronze / silver / gold / diamond) ----- */
+.badge-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border: 1px solid var(--line);
+  background: var(--bg-3);
+  border-radius: 999px;
+  line-height: 1;
+}
+.badge-chip-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ink-dim);
+  box-shadow: 0 0 6px currentColor;
+}
+.badge-chip-label {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.badge-chip--bronze { border-color: #b07a3a; color: #d4986a; }
+.badge-chip--bronze .badge-chip-dot { background: #d4986a; }
+.badge-chip--silver { border-color: #a8a8a8; color: #d1d5db; }
+.badge-chip--silver .badge-chip-dot { background: #d1d5db; }
+.badge-chip--gold   { border-color: var(--gold); color: var(--gold-2); }
+.badge-chip--gold   .badge-chip-dot { background: var(--gold); }
+.badge-chip--diamond {
+  border-color: #7dd3fc;
+  color: #bae6fd;
+  background: linear-gradient(135deg, var(--bg-3), rgba(125, 211, 252, 0.12));
+}
+.badge-chip--diamond .badge-chip-dot { background: #7dd3fc; }
+.badge-chip--compact { padding: 2px 6px; }
+.badge-chip--compact .badge-chip-dot { width: 6px; height: 6px; }
 
 /* ----- 05 / Partners / Sponsors table ----- */
 .partners-table {
@@ -2762,15 +2979,18 @@ footer .marks a:hover { color: var(--ujb-gold); }
   .roster-shell { grid-template-columns: 1fr; }
   .roster-detail { display: none; }
 
+  /* Mobile: drop the inline stat columns; the bottom sheet has the full stat strip. */
+  .roster-shell { height: auto; min-height: 0; }
+  .roster-list { overflow-y: visible; max-height: none; }
   .roster-row {
-    grid-template-columns: 50px 1fr auto;
-    padding: 16px 16px;
-    gap: 12px;
+    grid-template-columns: 56px 1fr auto;
+    padding: 14px 16px;
+    gap: 14px;
     cursor: pointer;
   }
-  .roster-row-num { font-size: 28px; }
+  .roster-row-avatar { width: 52px; height: 52px; border-width: 1.5px; }
   .roster-row-name { font-size: 17px; }
-  .roster-row-flag { font-size: 16px; }
+  .roster-row-stat { display: none; }
   .roster-row-arrow { display: block; font-size: 16px; }
 
   /* === Partners on mobile — chip-based cards instead of table ===
@@ -2966,23 +3186,56 @@ footer .marks a:hover { color: var(--ujb-gold); }
   place-items: center;
 }
 .player-sheet-portrait {
-  height: 220px;
-  margin-top: 16px;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  max-height: 280px;
+  margin-top: 12px;
+  border: 2px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--bg-3);
+  display: grid;
+  place-items: center;
+}
+.player-sheet-portrait-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.player-sheet-portrait-fallback {
+  font-family: var(--display);
+  font-size: 56px;
+  color: var(--ink-dim);
+  letter-spacing: 0.04em;
+}
+.player-sheet-portrait-badge {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
 }
 .player-sheet-head {
   display: flex;
   align-items: center;
   gap: 16px;
 }
-.player-sheet-num {
-  font-size: 56px;
-  color: var(--gold);
-  line-height: 0.9;
-}
 .player-sheet-name {
   font-size: 24px;
   letter-spacing: 0.02em;
   margin: 0 0 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.player-sheet-name .role {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--gold);
+  letter-spacing: 0.22em;
+  border: 1px solid var(--gold);
+  padding: 2px 6px;
+  line-height: 1;
 }
 .player-sheet-meta {
   font-size: 10px;
@@ -2993,8 +3246,8 @@ footer .marks a:hover { color: var(--ujb-gold); }
 }
 .player-sheet-stats {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
 }
 
 /* Extra-small phones */

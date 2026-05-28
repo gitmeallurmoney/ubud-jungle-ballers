@@ -384,22 +384,22 @@
         </div>
       </header>
 
-      <!-- Tier selector tabs -->
+      <!-- Roster filter tabs (driven by Futtos roster.json) -->
       <div class="tier-tabs" id="tier-tabs">
-        <button type="button" class="tier-tab is-active" data-squad="first-team">
+        <button type="button" class="tier-tab is-active" data-squad="all">
           <span class="mono tier-tab-num">01</span>
-          <span class="display tier-tab-name">First Team</span>
-          <span class="mono tier-tab-meta">Competitive</span>
+          <span class="display tier-tab-name">Full Squad</span>
+          <span class="mono tier-tab-meta" data-squad-count="all">—</span>
         </button>
-        <button type="button" class="tier-tab" data-squad="second-team">
+        <button type="button" class="tier-tab" data-squad="admins">
           <span class="mono tier-tab-num">02</span>
-          <span class="display tier-tab-name">Second Team</span>
-          <span class="mono tier-tab-meta">Development</span>
+          <span class="display tier-tab-name">Captains</span>
+          <span class="mono tier-tab-meta" data-squad-count="admins">—</span>
         </button>
-        <button type="button" class="tier-tab" data-squad="fun-first">
+        <button type="button" class="tier-tab" data-squad="members">
           <span class="mono tier-tab-num">03</span>
-          <span class="display tier-tab-name">Fun First</span>
-          <span class="mono tier-tab-meta">Community</span>
+          <span class="display tier-tab-name">Members</span>
+          <span class="mono tier-tab-meta" data-squad-count="members">—</span>
         </button>
       </div>
 
@@ -407,14 +407,27 @@
       <div class="roster-shell">
         <div class="roster-list" id="roster-list"></div>
         <aside class="roster-detail" id="roster-detail">
-          <div class="ph roster-portrait" id="roster-portrait">PORTRAIT</div>
-          <div class="roster-stats">
-            <div class="roster-stat"><div class="mono roster-stat-key">Position</div><div class="display roster-stat-val" id="rs-pos">—</div></div>
-            <div class="roster-stat"><div class="mono roster-stat-key">Number</div><div class="display roster-stat-val" id="rs-num">—</div></div>
-            <div class="roster-stat"><div class="mono roster-stat-key">Flag</div><div class="display roster-stat-val" id="rs-flag">—</div></div>
-            <div class="roster-stat"><div class="mono roster-stat-key">Joined</div><div class="display roster-stat-val">2026</div></div>
+          <div class="roster-portrait" id="roster-portrait">
+            <img class="roster-portrait-img" id="rs-img" alt="" hidden />
+            <div class="roster-portrait-fallback" id="rs-fallback">UJB</div>
+            <div class="roster-portrait-badge" id="rs-badge" hidden></div>
+            <div class="roster-portrait-name" id="rs-name">
+              <span class="display roster-portrait-name-text" id="rs-name-text">—</span>
+              <span class="roster-portrait-name-role" id="rs-name-role" hidden></span>
+            </div>
           </div>
-          <p class="roster-blurb" id="roster-blurb"></p>
+          <div class="roster-stats roster-stats--quad">
+            <div class="roster-stat"><div class="mono roster-stat-key">Nationality</div><div class="roster-stat-num roster-stat-num--lg" id="rs-flag">—</div></div>
+            <div class="roster-stat"><div class="mono roster-stat-key">Age</div><div class="mono roster-stat-num" id="rs-age">—</div></div>
+            <div class="roster-stat"><div class="mono roster-stat-key">Position</div><div class="mono roster-stat-num" id="rs-pos">—</div></div>
+            <div class="roster-stat"><div class="mono roster-stat-key">Joined</div><div class="mono roster-stat-num" id="rs-joined">—</div></div>
+          </div>
+          <div class="roster-stats roster-stats--quad">
+            <div class="roster-stat"><div class="mono roster-stat-key">Games</div><div class="mono roster-stat-num" id="rs-games">0</div></div>
+            <div class="roster-stat"><div class="mono roster-stat-key">Goals</div><div class="mono roster-stat-num" id="rs-goals">0</div></div>
+            <div class="roster-stat"><div class="mono roster-stat-key">Assists</div><div class="mono roster-stat-num" id="rs-assists">0</div></div>
+            <div class="roster-stat"><div class="mono roster-stat-key">MVPs</div><div class="mono roster-stat-num" id="rs-mvps">0</div></div>
+          </div>
         </aside>
       </div>
     </div>
@@ -425,19 +438,22 @@
       <aside class="player-sheet-panel" role="dialog" aria-label="Player detail">
         <div class="player-sheet-handle"></div>
         <button class="player-sheet-close" aria-label="Close" data-player-sheet-close>×</button>
-        <div class="ph player-sheet-portrait" id="ps-portrait">PORTRAIT</div>
+        <div class="player-sheet-portrait" id="ps-portrait">
+          <img class="player-sheet-portrait-img" id="ps-img" alt="" hidden />
+          <div class="player-sheet-portrait-fallback" id="ps-fallback">UJB</div>
+          <div class="player-sheet-portrait-badge" id="ps-badge" hidden></div>
+        </div>
         <div class="player-sheet-head">
-          <span class="player-sheet-num display" id="ps-num">00</span>
           <div>
             <h3 class="player-sheet-name display" id="ps-name">—</h3>
             <p class="player-sheet-meta mono" id="ps-meta">—</p>
           </div>
         </div>
-        <div class="player-sheet-stats">
-          <div class="roster-stat"><div class="mono roster-stat-key">Position</div><div class="display roster-stat-val" id="ps-pos">—</div></div>
-          <div class="roster-stat"><div class="mono roster-stat-key">Number</div><div class="display roster-stat-val" id="ps-rn">—</div></div>
-          <div class="roster-stat"><div class="mono roster-stat-key">Flag</div><div class="display roster-stat-val" id="ps-flag">—</div></div>
-          <div class="roster-stat"><div class="mono roster-stat-key">Joined</div><div class="display roster-stat-val">2026</div></div>
+        <div class="player-sheet-stats roster-stats--quad">
+          <div class="roster-stat"><div class="mono roster-stat-key">Games</div><div class="mono roster-stat-num" id="ps-games">0</div></div>
+          <div class="roster-stat"><div class="mono roster-stat-key">Goals</div><div class="mono roster-stat-num" id="ps-goals">0</div></div>
+          <div class="roster-stat"><div class="mono roster-stat-key">Assists</div><div class="mono roster-stat-num" id="ps-assists">0</div></div>
+          <div class="roster-stat"><div class="mono roster-stat-key">MVPs</div><div class="mono roster-stat-num" id="ps-mvps">0</div></div>
         </div>
       </aside>
     </div>
@@ -828,67 +844,163 @@
     })();
   </script>
 
-  <!-- Squad picker — tier tabs + hover-list + portrait detail panel -->
+  <!-- Squad picker — driven by roster.json (dumped from Futtos) -->
   <script type="module">
-    import { SQUADS } from "./squads.js";
+    import { buildSquads } from "./squads.js?v=2";
 
     const tabs       = document.getElementById("tier-tabs");
     const listEl     = document.getElementById("roster-list");
-    const portraitEl = document.getElementById("roster-portrait");
-    const blurbEl    = document.getElementById("roster-blurb");
+    const rsImg      = document.getElementById("rs-img");
+    const rsFallback = document.getElementById("rs-fallback");
+    const rsBadge    = document.getElementById("rs-badge");
+    const rsNameText = document.getElementById("rs-name-text");
+    const rsNameRole = document.getElementById("rs-name-role");
     const rsPos      = document.getElementById("rs-pos");
-    const rsNum      = document.getElementById("rs-num");
     const rsFlag     = document.getElementById("rs-flag");
+    const rsAge      = document.getElementById("rs-age");
+    const rsJoined   = document.getElementById("rs-joined");
+    const rsStats    = {
+      games:   document.getElementById("rs-games"),
+      goals:   document.getElementById("rs-goals"),
+      assists: document.getElementById("rs-assists"),
+      mvps:    document.getElementById("rs-mvps"),
+    };
 
+    let squads = null;
     let currentSquad = null;
     let hoveredIdx = 0;
+    let selectedIdx = 0;
 
     function escapeHtml(s) {
-      return String(s).replace(/[&<>"']/g, (c) => (
+      return String(s ?? "").replace(/[&<>"']/g, (c) => (
         { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]
       ));
     }
-    function roleLabel(role) {
-      return ({ captain: "(C)", vice: "(VC)", academy: "(A)" })[role] || "";
+    function initials(name) {
+      const parts = String(name || "").trim().split(/\s+/).slice(0, 2);
+      return parts.map((p) => p[0]?.toUpperCase() ?? "").join("") || "UJB";
+    }
+    function roleTag(role) {
+      if (role === "owner") return '<span class="role">OWNER</span>';
+      if (role === "admin") return '<span class="role">ADMIN</span>';
+      return "";
+    }
+    function joinedYear(iso) {
+      if (!iso) return "—";
+      const d = new Date(iso);
+      return Number.isFinite(d.getTime()) ? String(d.getFullYear()) : "—";
+    }
+    function statText(n) {
+      const v = Number(n);
+      return Number.isFinite(v) ? String(v) : "0";
+    }
+    function badgeChip(b, { compact = false } = {}) {
+      if (!b) return "";
+      const cls = `badge-chip badge-chip--${b.tier}${compact ? " badge-chip--compact" : ""}`;
+      return `<span class="${cls}" title="${escapeHtml(b.label)} · ${escapeHtml(b.tier)}">
+        <span class="badge-chip-dot"></span>
+        <span class="mono badge-chip-label">${escapeHtml(b.label)}</span>
+      </span>`;
     }
 
     function renderList(key) {
-      const squad = SQUADS[key];
+      const squad = squads?.[key];
       if (!squad) return;
       currentSquad = squad;
       const rows = squad.players.map((p, i) => `
         <div class="roster-row" data-idx="${i}">
-          <div class="roster-row-num">${String(p.number).padStart(2, "0")}</div>
-          <div>
+          <div class="roster-row-avatar">
+            ${p.imageUrl
+              ? `<img loading="lazy" src="${escapeHtml(p.imageUrl)}" alt="" />`
+              : `<span class="roster-row-avatar-fallback">${escapeHtml(initials(p.name))}</span>`}
+          </div>
+          <div class="roster-row-body">
             <div class="roster-row-name">
               ${escapeHtml(p.name)}
-              ${p.role ? `<span class="role">${roleLabel(p.role)}</span>` : ""}
+              ${roleTag(p.role)}
             </div>
-            <div class="roster-row-meta">${escapeHtml(p.position)} · ${escapeHtml(p.flag)} ${p.role ? "· " + escapeHtml(p.role.toUpperCase()) : ""}</div>
+            <div class="roster-row-meta">
+              ${p.primaryPosition ? `<span>${escapeHtml(p.primaryPosition)}</span><span class="dot">·</span>` : ""}
+              <span class="roster-row-flag">${escapeHtml(p.flag || "")}</span>
+              ${p.nationality ? `<span class="dim">${escapeHtml(p.nationality)}</span>` : ""}
+              ${p.topBadge ? '<span class="dot">·</span>' + badgeChip(p.topBadge, { compact: true }) : ""}
+            </div>
           </div>
-          <div class="roster-row-flag">${escapeHtml(p.flag)}</div>
+          <div class="roster-row-stat"><span class="label">G</span>${statText(p.stats?.games)}</div>
+          <div class="roster-row-stat"><span class="label">⚽</span>${statText(p.stats?.goals)}</div>
+          <div class="roster-row-stat"><span class="label">A</span>${statText(p.stats?.assists)}</div>
           <div class="roster-row-arrow">→</div>
         </div>
       `).join("");
-      listEl.innerHTML = rows;
+      listEl.innerHTML = rows || `<div class="roster-empty mono">No players in this view.</div>`;
       hoveredIdx = 0;
-      paintHover();
+      selectedIdx = 0;
+      listEl.scrollTop = 0;
+      paintSelected();
+      paintDetail(selectedIdx);
+    }
+
+    function paintSelected() {
+      for (const row of listEl.querySelectorAll(".roster-row")) {
+        row.classList.toggle("is-selected", Number(row.dataset.idx) === selectedIdx);
+      }
+    }
+
+    function setSelected(idx) {
+      if (!currentSquad || !currentSquad.players[idx]) return;
+      selectedIdx = idx;
+      paintSelected();
+      paintDetail(selectedIdx);
     }
 
     function paintHover() {
-      if (!currentSquad) return;
-      const p = currentSquad.players[hoveredIdx];
-      if (!p) return;
-      // Mark active row
       for (const row of listEl.querySelectorAll(".roster-row")) {
         row.classList.toggle("is-hover", Number(row.dataset.idx) === hoveredIdx);
       }
-      // Update detail panel
-      portraitEl.textContent = `PORTRAIT · #${String(p.number).padStart(2, "0")} ${p.name.toUpperCase()}`;
-      rsPos.textContent  = p.position;
-      rsNum.textContent  = String(p.number).padStart(2, "0");
-      rsFlag.textContent = p.flag;
-      blurbEl.textContent = `${p.name} · ${p.position} · ${p.flag}${p.role ? " · " + roleLabel(p.role) : ""}.`;
+      /* Hover is a row highlight only — the detail panel is locked to the
+         clicked selection so it doesn't churn while the cursor moves. */
+    }
+
+    function paintDetail(idx) {
+      if (!currentSquad) return;
+      const p = currentSquad.players[idx];
+      if (!p) return;
+      // Portrait
+      if (p.imageUrl) {
+        rsImg.src = p.imageUrl;
+        rsImg.hidden = false;
+        rsFallback.hidden = true;
+      } else {
+        rsImg.hidden = true;
+        rsFallback.hidden = false;
+        rsFallback.textContent = initials(p.name);
+      }
+      // Badge overlay
+      if (p.topBadge) {
+        rsBadge.hidden = false;
+        rsBadge.className = `roster-portrait-badge badge-chip badge-chip--${p.topBadge.tier}`;
+        rsBadge.innerHTML = `<span class="badge-chip-dot"></span><span class="mono badge-chip-label">${escapeHtml(p.topBadge.label)}</span>`;
+      } else {
+        rsBadge.hidden = true;
+      }
+      // Name overlay (bottom strip)
+      rsNameText.textContent = p.name;
+      if (p.role === "owner" || p.role === "admin") {
+        rsNameRole.hidden = false;
+        rsNameRole.textContent = p.role.toUpperCase();
+      } else {
+        rsNameRole.hidden = true;
+      }
+      // Performance stats
+      rsStats.games.textContent   = statText(p.stats?.games);
+      rsStats.goals.textContent   = statText(p.stats?.goals);
+      rsStats.assists.textContent = statText(p.stats?.assists);
+      rsStats.mvps.textContent    = statText(p.stats?.mvps);
+      // Identity cells
+      rsPos.textContent    = p.primaryPosition || "—";
+      rsFlag.textContent   = p.flag || "—";
+      rsAge.textContent    = Number.isFinite(p.age) ? String(p.age) : "—";
+      rsJoined.textContent = joinedYear(p.joinedAt);
     }
 
     listEl.addEventListener("mouseover", (e) => {
@@ -900,30 +1012,57 @@
         paintHover();
       }
     });
+    listEl.addEventListener("mouseleave", () => {
+      for (const row of listEl.querySelectorAll(".roster-row")) {
+        row.classList.remove("is-hover");
+      }
+      hoveredIdx = -1;
+    });
 
     // === Mobile-only: tap a player → open the bottom sheet with full detail ===
     const isMobile = () => window.matchMedia("(max-width: 960px)").matches;
     const playerSheet = document.getElementById("player-sheet");
     const ps = {
-      portrait: document.getElementById("ps-portrait"),
-      num:      document.getElementById("ps-num"),
+      img:      document.getElementById("ps-img"),
+      fallback: document.getElementById("ps-fallback"),
+      badge:    document.getElementById("ps-badge"),
       name:     document.getElementById("ps-name"),
       meta:     document.getElementById("ps-meta"),
-      pos:      document.getElementById("ps-pos"),
-      rn:       document.getElementById("ps-rn"),
-      flag:     document.getElementById("ps-flag"),
+      games:    document.getElementById("ps-games"),
+      goals:    document.getElementById("ps-goals"),
+      assists:  document.getElementById("ps-assists"),
+      mvps:     document.getElementById("ps-mvps"),
     };
 
     function openPlayerSheet(idx) {
       if (!currentSquad || !currentSquad.players[idx]) return;
       const p = currentSquad.players[idx];
-      ps.portrait.textContent = `PORTRAIT · #${String(p.number).padStart(2, "0")} ${p.name.toUpperCase()}`;
-      ps.num.textContent  = String(p.number).padStart(2, "0");
-      ps.name.textContent = p.name + (p.role ? ` ${roleLabel(p.role)}` : "");
-      ps.meta.textContent = `${p.position} · ${p.flag}${p.role ? " · " + p.role.toUpperCase() : ""}`;
-      ps.pos.textContent  = p.position;
-      ps.rn.textContent   = String(p.number).padStart(2, "0");
-      ps.flag.textContent = p.flag;
+      if (p.imageUrl) {
+        ps.img.src = p.imageUrl;
+        ps.img.hidden = false;
+        ps.fallback.hidden = true;
+      } else {
+        ps.img.hidden = true;
+        ps.fallback.hidden = false;
+        ps.fallback.textContent = initials(p.name);
+      }
+      if (p.topBadge) {
+        ps.badge.hidden = false;
+        ps.badge.className = `player-sheet-portrait-badge badge-chip badge-chip--${p.topBadge.tier}`;
+        ps.badge.innerHTML = `<span class="badge-chip-dot"></span><span class="mono badge-chip-label">${escapeHtml(p.topBadge.label)}</span>`;
+      } else {
+        ps.badge.hidden = true;
+      }
+      ps.name.innerHTML = `${escapeHtml(p.name)} ${roleTag(p.role)}`;
+      const metaParts = [];
+      if (p.primaryPosition) metaParts.push(p.primaryPosition);
+      if (p.flag || p.nationality) metaParts.push(`${p.flag || ""} ${p.nationality || ""}`.trim());
+      metaParts.push(`Joined ${joinedYear(p.joinedAt)}`);
+      ps.meta.textContent = metaParts.join(" · ");
+      ps.games.textContent   = statText(p.stats?.games);
+      ps.goals.textContent   = statText(p.stats?.goals);
+      ps.assists.textContent = statText(p.stats?.assists);
+      ps.mvps.textContent    = statText(p.stats?.mvps);
       playerSheet.classList.add("is-open");
       playerSheet.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden";
@@ -934,10 +1073,14 @@
       document.body.style.overflow = "";
     }
     listEl.addEventListener("click", (e) => {
-      if (!isMobile()) return;       // desktop: hover already shows detail
       const row = e.target.closest(".roster-row");
       if (!row) return;
-      openPlayerSheet(Number(row.dataset.idx));
+      const idx = Number(row.dataset.idx);
+      if (isMobile()) {
+        openPlayerSheet(idx);
+      } else {
+        setSelected(idx);
+      }
     });
     playerSheet.addEventListener("click", (e) => {
       if (e.target.matches("[data-player-sheet-close]")) closePlayerSheet();
@@ -956,8 +1099,25 @@
       selectTier(tab.dataset.squad);
     });
 
-    // Initial state — first team
-    selectTier("first-team");
+    listEl.innerHTML = `<div class="roster-empty mono">Loading roster…</div>`;
+    buildSquads()
+      .then((s) => {
+        squads = s;
+        for (const [key, squad] of Object.entries(s)) {
+          const el = tabs.querySelector(`[data-squad-count="${key}"]`);
+          if (el) el.textContent = String(squad.players.length).padStart(2, "0");
+        }
+        try {
+          selectTier("all");
+        } catch (err) {
+          console.error("renderList failed", err);
+          listEl.innerHTML = `<div class="roster-empty mono">Render error: ${String(err && err.message || err)}</div>`;
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        listEl.innerHTML = `<div class="roster-empty mono">Roster failed to load: ${String(err && err.message || err)}</div>`;
+      });
   </script>
 
   <!-- ============== JOIN MODAL — multi-step onboarding flow ============== -->
