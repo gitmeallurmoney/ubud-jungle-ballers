@@ -3,26 +3,106 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ubud Jungle Ballers — Community. Brotherhood. Football.</title>
-  <meta name="description" content="A football brotherhood rooted in Ubud, Bali. Locals and internationals — one squad, many flags." />
+
+  <!-- ============== i18n: first-visit language routing (zero-flash) ============== -->
+  <!-- Runs before paint. Saved choice wins; otherwise navigator.language.
+       Symmetric across both locales and guarded so it never loops. -->
+  <script>
+    window.__I18N_ALT = { en: '/', id: '/id/' };
+    (function () {
+      try {
+        var cur = (document.documentElement.getAttribute('lang') || 'en').slice(0, 2).toLowerCase();
+        var saved = localStorage.getItem('ubj.lang');
+        var want = (saved === 'en' || saved === 'id') ? saved
+          : (/^id\b/i.test(navigator.language || '') ? 'id' : 'en');
+        if (want !== cur) {
+          var target = want === 'id' ? window.__I18N_ALT.id : window.__I18N_ALT.en;
+          if (target) location.replace(target + (location.hash || ''));
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <title data-i18n="hmeta.title">Ubud Jungle Ballers — Community. Brotherhood. Football.</title>
+  <meta name="description" data-i18n-attr="content:hmeta.desc" content="A football brotherhood rooted in Ubud, Bali. Locals and internationals — one squad, many flags." />
+
+  <!-- SEO: canonical + locale alternates (fully-qualified for production).
+       The build (scripts/build-i18n.mjs) rewrites canonical + og:url to the
+       /id/ URL when generating the Bahasa page. -->
+  <link rel="canonical" href="https://ubudjungleballers.com/" />
+  <link rel="alternate" hreflang="en" href="https://ubudjungleballers.com/" />
+  <link rel="alternate" hreflang="id" href="https://ubudjungleballers.com/id/" />
+  <link rel="alternate" hreflang="x-default" href="https://ubudjungleballers.com/" />
+
+  <!-- Open Graph — link preview on WhatsApp, Instagram, Facebook, LinkedIn -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Ubud Jungle Ballers" />
+  <meta property="og:title" data-i18n-attr="content:hmeta.title" content="Ubud Jungle Ballers — Community. Brotherhood. Football." />
+  <meta property="og:description" data-i18n-attr="content:hmeta.desc" content="A football brotherhood rooted in Ubud, Bali. Locals and internationals — one squad, many flags." />
+  <meta property="og:url" content="https://ubudjungleballers.com/" />
+  <meta property="og:image" content="https://ubudjungleballers.com/assets/og/og-home.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" data-i18n-attr="content:hmeta.ogImageAlt" content="Ubud Jungle Ballers — football brotherhood in Ubud, Bali" />
+  <meta property="og:locale" data-i18n-attr="content:hmeta.ogLocale" content="en_US" />
+  <meta property="og:locale:alternate" content="id_ID" />
+
+  <!-- Twitter / X card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" data-i18n-attr="content:hmeta.title" content="Ubud Jungle Ballers — Community. Brotherhood. Football." />
+  <meta name="twitter:description" data-i18n-attr="content:hmeta.desc" content="A football brotherhood rooted in Ubud, Bali. Locals and internationals — one squad, many flags." />
+  <meta name="twitter:image" content="https://ubudjungleballers.com/assets/og/og-home.jpg" />
+
+  <!-- Structured data: the club -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsOrganization",
+    "name": "Ubud Jungle Ballers",
+    "sport": "Football",
+    "url": "https://ubudjungleballers.com",
+    "logo": "https://ubudjungleballers.com/assets/badge-logo.png",
+    "image": "https://ubudjungleballers.com/assets/og/og-home.jpg",
+    "foundingDate": "2026",
+    "location": {
+      "@type": "Place",
+      "name": "Ubud, Bali",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Ubud",
+        "addressRegion": "Bali",
+        "addressCountry": "ID"
+      }
+    },
+    "sameAs": [
+      "https://instagram.com/ubudjungleballers",
+      "https://tiktok.com/@ubudjungleballers",
+      "https://youtube.com/@ubudjungleballers"
+    ]
+  }
+  </script>
 
   <!-- Google Fonts: see ../BRAND.md -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800;900&family=Bebas+Neue&family=Bricolage+Grotesque:wght@400;500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="/style.css" />
 
   <!-- Real chameleon-icon favicon -->
-  <link rel="icon" type="image/png" href="./assets/favicon.png" />
-  <link rel="apple-touch-icon" href="./assets/icon-logo.png" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <link rel="apple-touch-icon" href="/assets/icon-logo.png" />
+
+  <!-- i18n runtime: generated catalog + translator / Intl formatters / toggle -->
+  <script src="/i18n/strings.js"></script>
+  <script src="/i18n/i18n.js"></script>
 
   <!-- Three.js via importmap — vendored locally, no CDN required -->
   <script type="importmap">
   {
     "imports": {
-      "three": "./vendor/three.module.js",
-      "three/addons/": "./vendor/addons/"
+      "three": "/vendor/three.module.js",
+      "three/addons/": "/vendor/addons/"
     }
   }
   </script>
@@ -33,22 +113,27 @@
   <header class="site-nav" id="site-nav">
     <div class="container nav-inner">
       <a class="brand-mark" href="#">
-        <img class="brand-icon" src="./assets/icon-logo-bone.png" alt="" aria-hidden="true" />
+        <img class="brand-icon" src="/assets/icon-logo-bone.png" alt="" aria-hidden="true" />
         <div class="brand-wordmark">
           <div class="brand-name">Ubud Jungle <span class="gold">Ballers</span></div>
           <div class="brand-eyebrow mono">EST. 2026 · UBUD · BALI</div>
         </div>
       </a>
       <nav class="links">
-        <a href="#about">The Club</a>
-        <a href="#community">Community</a>
-        <a href="#squad">Squad</a>
-        <a href="#partners">Partners</a>
-        <a href="#contact">Contact</a>
-        <a href="#join" class="nav-cta">Join our Club →</a>
+        <a href="#about" data-i18n="nav.club">The Club</a>
+        <a href="#community" data-i18n="nav.community">Community</a>
+        <a href="#squad" data-i18n="nav.squad">Squad</a>
+        <a href="#partners" data-i18n="nav.partners">Partners</a>
+        <a href="#contact" data-i18n="nav.contact">Contact</a>
+        <a href="events.html" data-i18n="nav.events">Events</a>
+        <a href="#join" class="nav-cta" data-i18n="nav.join">Join our Club →</a>
+        <span class="lang-toggle" role="group" aria-label="Language" data-i18n-attr="aria-label:lang.switch">
+          <button type="button" class="lang-btn" data-lang-set="en">EN</button>
+          <button type="button" class="lang-btn" data-lang-set="id">ID</button>
+        </span>
       </nav>
       <!-- Hamburger — visible only on mobile -->
-      <button class="nav-burger" id="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-drawer">
+      <button class="nav-burger" id="nav-burger" aria-label="Open menu" data-i18n-attr="aria-label:common.openMenu" aria-expanded="false" aria-controls="mobile-drawer">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -57,22 +142,27 @@
   <!-- ============== MOBILE DRAWER (only used on ≤960px) ============== -->
   <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
     <div class="mobile-drawer-backdrop" data-drawer-close></div>
-    <aside class="mobile-drawer-panel" role="dialog" aria-label="Menu">
+    <aside class="mobile-drawer-panel" role="dialog" aria-label="Menu" data-i18n-attr="aria-label:common.menu">
       <header class="mobile-drawer-head">
         <div class="brand-wordmark">
           <div class="brand-name">Ubud Jungle <span class="gold">Ballers</span></div>
           <div class="brand-eyebrow mono">EST. 2026 · UBUD · BALI</div>
         </div>
-        <button class="mobile-drawer-close" aria-label="Close menu" data-drawer-close>×</button>
+        <button class="mobile-drawer-close" aria-label="Close menu" data-i18n-attr="aria-label:common.closeMenu" data-drawer-close>×</button>
       </header>
       <nav class="mobile-drawer-links">
-        <a href="#about"     data-drawer-close><span class="mono drawer-idx">02</span>The Club</a>
-        <a href="#community" data-drawer-close><span class="mono drawer-idx">03</span>Community</a>
-        <a href="#squad"     data-drawer-close><span class="mono drawer-idx">04</span>Squad</a>
-        <a href="#partners"  data-drawer-close><span class="mono drawer-idx">05</span>Partners</a>
-        <a href="#contact"   data-drawer-close><span class="mono drawer-idx">07</span>Contact</a>
+        <a href="#about"     data-drawer-close><span class="mono drawer-idx">02</span><span data-i18n="nav.club">The Club</span></a>
+        <a href="#community" data-drawer-close><span class="mono drawer-idx">03</span><span data-i18n="nav.community">Community</span></a>
+        <a href="#squad"     data-drawer-close><span class="mono drawer-idx">04</span><span data-i18n="nav.squad">Squad</span></a>
+        <a href="#partners"  data-drawer-close><span class="mono drawer-idx">05</span><span data-i18n="nav.partners">Partners</span></a>
+        <a href="#contact"   data-drawer-close><span class="mono drawer-idx">07</span><span data-i18n="nav.contact">Contact</span></a>
+        <a href="events.html" data-drawer-close><span class="mono drawer-idx">08</span><span data-i18n="nav.events">Events</span></a>
       </nav>
-      <a href="#join" class="btn btn--gold mobile-drawer-cta" data-drawer-close>Join our Club →</a>
+      <a href="#join" class="btn btn--gold mobile-drawer-cta" data-drawer-close data-i18n="nav.join">Join our Club →</a>
+      <div class="lang-toggle lang-toggle--drawer" role="group" aria-label="Language" data-i18n-attr="aria-label:lang.switch">
+        <button type="button" class="lang-btn" data-lang-set="en">EN</button>
+        <button type="button" class="lang-btn" data-lang-set="id">ID</button>
+      </div>
       <div class="mobile-drawer-socials">
         <a href="https://instagram.com/ubudjungleballers" class="social-btn" aria-label="Instagram">
           <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>
@@ -120,37 +210,37 @@
           <span class="mono">EST. 2026 · UBUD · BALI · ID</span>
         </div>
         <h1 class="display hero-headline">
-          <span class="hero-line">One ball.</span>
-          <span class="hero-line">One <span class="gold">jungle</span>.</span>
-          <span class="hero-line">Many flags.</span>
+          <span class="hero-line" data-i18n="hero.line1">One ball.</span>
+          <span class="hero-line" data-i18n="hero.line2">One <span class="gold">jungle</span>.</span>
+          <span class="hero-line" data-i18n="hero.line3">Many flags.</span>
         </h1>
-        <p class="tagline">Community. Brotherhood. Football.</p>
-        <p class="lede">
+        <p class="tagline" data-i18n="hero.tagline">Community. Brotherhood. Football.</p>
+        <p class="lede" data-i18n="hero.lede">
           A Bali football club competing at regional level — built by Balinese
           and international men who travelled here to wear the green.
           Spin the ball. Find the squad.
         </p>
         <div class="cta-row">
-          <a class="btn btn--gold" href="#join">Join our Club →</a>
-          <a class="btn btn--ghost" href="#about">Read the story</a>
+          <a class="btn btn--gold" href="#join" data-i18n="nav.join">Join our Club →</a>
+          <a class="btn btn--ghost" href="#about" data-i18n="hero.ctaStory">Read the story</a>
         </div>
 
         <!-- Meta strip (4 quick stats) -->
         <div class="hero-meta">
           <div class="hero-meta-cell">
-            <div class="mono hero-meta-key">Founded</div>
+            <div class="mono hero-meta-key" data-i18n="hero.metaFounded">Founded</div>
             <div class="display hero-meta-val">2026</div>
           </div>
           <div class="hero-meta-cell">
-            <div class="mono hero-meta-key">Squad</div>
+            <div class="mono hero-meta-key" data-i18n="hero.metaSquad">Squad</div>
             <div class="display hero-meta-val">45</div>
           </div>
           <div class="hero-meta-cell">
-            <div class="mono hero-meta-key">Nations</div>
+            <div class="mono hero-meta-key" data-i18n="hero.metaNations">Nations</div>
             <div class="display hero-meta-val">12</div>
           </div>
           <div class="hero-meta-cell">
-            <div class="mono hero-meta-key">League</div>
+            <div class="mono hero-meta-key" data-i18n="hero.metaLeague">League</div>
             <div class="display hero-meta-val">Bali</div>
           </div>
         </div>
@@ -159,8 +249,8 @@
       <!-- ============== GLOBE ============== -->
       <div class="globe-wrap">
         <canvas id="globe-canvas"></canvas>
-        <div class="globe-loader" id="globe-loader">Loading the ball…</div>
-        <div class="globe-hint">Drag to spin · click a country to meet the players</div>
+        <div class="globe-loader" id="globe-loader" data-i18n="hero.globeLoading">Loading the ball…</div>
+        <div class="globe-hint" data-i18n="hero.globeHint">Drag to spin · click a country to meet the players</div>
       </div>
 
       <!-- ============== JUNGLE LAYERS (overlap on the globe) ============== -->
@@ -171,32 +261,32 @@
       <div class="jungle-canopy" aria-hidden="true"></div>
 
       <!-- Tall background palms — anchored below viewport so trunks are never visible -->
-      <img class="jungle-tree tree-palm-far-l"  src="./assets/jungle/palm-tree.svg"   alt="" aria-hidden="true" />
-      <img class="jungle-tree tree-palm-far-r"  src="./assets/jungle/palm-tree.svg"   alt="" aria-hidden="true" />
+      <img class="jungle-tree tree-palm-far-l"  src="/assets/jungle/palm-tree.svg"   alt="" aria-hidden="true" />
+      <img class="jungle-tree tree-palm-far-r"  src="/assets/jungle/palm-tree.svg"   alt="" aria-hidden="true" />
 
       <!-- Mid-back banana cluster -->
-      <img class="jungle-tree tree-banana-l"    src="./assets/jungle/banana-tree.svg" alt="" aria-hidden="true" />
-      <img class="jungle-tree tree-banana-mid"  src="./assets/jungle/banana-tree.svg" alt="" aria-hidden="true" />
-      <img class="jungle-tree tree-banana-r"    src="./assets/jungle/banana-tree.svg" alt="" aria-hidden="true" />
+      <img class="jungle-tree tree-banana-l"    src="/assets/jungle/banana-tree.svg" alt="" aria-hidden="true" />
+      <img class="jungle-tree tree-banana-mid"  src="/assets/jungle/banana-tree.svg" alt="" aria-hidden="true" />
+      <img class="jungle-tree tree-banana-r"    src="/assets/jungle/banana-tree.svg" alt="" aria-hidden="true" />
 
       <!-- Big foreground palms on the edges (very tall, only crown visible) -->
-      <img class="jungle-tree tree-palm-l"      src="./assets/jungle/palm-tree.svg"   alt="" aria-hidden="true" />
-      <img class="jungle-tree tree-palm-r"      src="./assets/jungle/palm-tree.svg"   alt="" aria-hidden="true" />
+      <img class="jungle-tree tree-palm-l"      src="/assets/jungle/palm-tree.svg"   alt="" aria-hidden="true" />
+      <img class="jungle-tree tree-palm-r"      src="/assets/jungle/palm-tree.svg"   alt="" aria-hidden="true" />
 
       <!-- Inner foreground palms framing the badge climax -->
-      <img class="jungle-tree tree-palm-frame-l" src="./assets/jungle/palm-tree.svg"  alt="" aria-hidden="true" />
-      <img class="jungle-tree tree-palm-frame-r" src="./assets/jungle/palm-tree.svg"  alt="" aria-hidden="true" />
+      <img class="jungle-tree tree-palm-frame-l" src="/assets/jungle/palm-tree.svg"  alt="" aria-hidden="true" />
+      <img class="jungle-tree tree-palm-frame-r" src="/assets/jungle/palm-tree.svg"  alt="" aria-hidden="true" />
 
       <!-- (vines and foreground leaves removed — canopy is built from palms + bananas only) -->
 
       <div class="jungle-climax" aria-hidden="true">
         <div class="jungle-climax-glow"></div>
-        <img src="./assets/badge-logo.png" alt="Ubud Jungle Ballers" />
+        <img src="/assets/badge-logo.png" alt="Ubud Jungle Ballers" />
       </div>
 
       <!-- Scroll affordance — fades out as the animation progresses -->
       <div class="scroll-cue" aria-hidden="true">
-        <span>Scroll to enter the jungle</span>
+        <span data-i18n="hero.scrollCue">Scroll to enter the jungle</span>
         <span class="scroll-cue-arrow">↓</span>
       </div>
     </div>
@@ -206,56 +296,56 @@
   <section class="cd-section" id="about">
     <div class="container">
       <header class="cd-section-head">
-        <div class="mono cd-section-idx">02 / THE CLUB</div>
+        <div class="mono cd-section-idx" data-i18n="club.idx">02 / THE CLUB</div>
         <div class="cd-section-titles">
-          <div class="eyebrow">Manifesto</div>
-          <h2 class="display cd-section-title">Brotherhood,<br/>built to compete.</h2>
+          <div class="eyebrow" data-i18n="club.eyebrow">Manifesto</div>
+          <h2 class="display cd-section-title" data-i18n="club.title">Brotherhood,<br/>built to compete.</h2>
         </div>
-        <div class="mono cd-section-kicker">
+        <div class="mono cd-section-kicker" data-i18n="club.kicker">
           A football club with regional ambition. Brotherhood as foundation. Standards as the gate.
         </div>
       </header>
 
       <div class="club-body">
         <div class="club-copy">
-          <p class="display club-pull">
+          <p class="display club-pull" data-i18n="club.pull">
             We didn't get scouted.<br/>
             We got <span class="gold">here</span>.
           </p>
-          <p class="club-para">
+          <p class="club-para" data-i18n="club.para1">
             Ubud Jungle Ballers is a football club with a clear ambition:
             to become Ubud's largest club and one of the most respected
             amateur sides in Bali. We're building a world-class amateur
             ecosystem — competitive at regional level, professionally
             structured, and deeply Balinese.
           </p>
-          <p class="club-para">
+          <p class="club-para" data-i18n="club.para2">
             Some of us were born five minutes from the pitch. Some flew
             sixteen hours and never went back. The green doesn't ask where
             you're from — only if you'll run for the man next to you.
           </p>
 
           <div class="tenets">
-            <div class="eyebrow tenets-head">Three tenets</div>
+            <div class="eyebrow tenets-head" data-i18n="club.tenetsHead">Three tenets</div>
             <div class="tenet">
               <div class="mono tenet-num">01</div>
               <div>
-                <div class="display tenet-title">The Chameleon.</div>
-                <div class="tenet-body">Adapt. Watch. Arrive grounded — the jungle teaches you how to play.</div>
+                <div class="display tenet-title" data-i18n="club.tenet1Title">The Chameleon.</div>
+                <div class="tenet-body" data-i18n="club.tenet1Body">Adapt. Watch. Arrive grounded — the jungle teaches you how to play.</div>
               </div>
             </div>
             <div class="tenet">
               <div class="mono tenet-num">02</div>
               <div>
-                <div class="display tenet-title">Local + Global.</div>
-                <div class="tenet-body">Equal seats, one shirt. Balinese leadership. Open doors.</div>
+                <div class="display tenet-title" data-i18n="club.tenet2Title">Local + Global.</div>
+                <div class="tenet-body" data-i18n="club.tenet2Body">Equal seats, one shirt. Balinese leadership. Open doors.</div>
               </div>
             </div>
             <div class="tenet">
               <div class="mono tenet-num">03</div>
               <div>
-                <div class="display tenet-title">Standards earn brotherhood.</div>
-                <div class="tenet-body">Brotherhood without structure stagnates. Show up. Train honestly. Earn the green.</div>
+                <div class="display tenet-title" data-i18n="club.tenet3Title">Standards earn brotherhood.</div>
+                <div class="tenet-body" data-i18n="club.tenet3Body">Brotherhood without structure stagnates. Show up. Train honestly. Earn the green.</div>
               </div>
             </div>
           </div>
@@ -267,8 +357,8 @@
             <img
               src="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=1600&q=80&auto=format&fit=crop"
               onerror="this.onerror=null;this.src='https://picsum.photos/seed/ujb-pitch-sunset/1400/900';"
-              alt="A floodlit football pitch at dusk" loading="lazy" />
-            <figcaption class="mono club-media-cap">TRAINING NIGHT · UBUD</figcaption>
+              data-i18n-attr="alt:club.alt1" alt="A floodlit football pitch at dusk" loading="lazy" />
+            <figcaption class="mono club-media-cap" data-i18n="club.cap1">TRAINING NIGHT · UBUD</figcaption>
           </figure>
 
           <div class="club-media-row">
@@ -277,8 +367,8 @@
               <img
                 src="https://images.unsplash.com/photo-1577471488278-16eec37ffcc2?w=900&q=80&auto=format&fit=crop"
                 onerror="this.onerror=null;this.src='https://picsum.photos/seed/ujb-boots/900/600';"
-                alt="Football boots on muddy grass" loading="lazy" />
-              <figcaption class="mono club-media-cap">MATCHDAY · BOOTS</figcaption>
+                data-i18n-attr="alt:club.alt2" alt="Football boots on muddy grass" loading="lazy" />
+              <figcaption class="mono club-media-cap" data-i18n="club.cap2">MATCHDAY · BOOTS</figcaption>
             </figure>
 
             <!-- Bottom-right: action / pass / tropical pitch -->
@@ -286,16 +376,16 @@
               <img
                 src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=900&q=80&auto=format&fit=crop"
                 onerror="this.onerror=null;this.src='https://picsum.photos/seed/ujb-pitch/900/600';"
-                alt="Player about to strike a ball on a green pitch" loading="lazy" />
-              <figcaption class="mono club-media-cap">SESSION · TIER 01</figcaption>
+                data-i18n-attr="alt:club.alt3" alt="Player about to strike a ball on a green pitch" loading="lazy" />
+              <figcaption class="mono club-media-cap" data-i18n="club.cap3">SESSION · TIER 01</figcaption>
             </figure>
           </div>
           <blockquote class="club-quote">
-            <div class="eyebrow club-quote-head">Quote · Captain</div>
-            <p class="display club-quote-body">
+            <div class="eyebrow club-quote-head" data-i18n="club.quoteHead">Quote · Captain</div>
+            <p class="display club-quote-body" data-i18n="club.quoteBody">
               "If you can run, you can play.<br/>If you can listen, you can lead."
             </p>
-            <div class="mono club-quote-attrib">— MADE PUTRA, #08 · CAPTAIN</div>
+            <div class="mono club-quote-attrib" data-i18n="club.quoteAttrib">— MADE PUTRA, #08 · CAPTAIN</div>
           </blockquote>
         </div>
       </div>
@@ -308,64 +398,64 @@
   <section class="cd-section community" id="community">
     <div class="container">
       <header class="cd-section-head">
-        <div class="mono cd-section-idx">03 / COMMUNITY</div>
+        <div class="mono cd-section-idx" data-i18n="community.idx">03 / COMMUNITY</div>
         <div class="cd-section-titles">
-          <div class="eyebrow">Open Sessions</div>
-          <h2 class="display cd-section-title">The pitch is<br/><span class="gold">open</span>.</h2>
+          <div class="eyebrow" data-i18n="community.eyebrow">Open Sessions</div>
+          <h2 class="display cd-section-title" data-i18n="community.title">The pitch is<br/><span class="gold">open</span>.</h2>
         </div>
-        <div class="mono cd-section-kicker">
+        <div class="mono cd-section-kicker" data-i18n="community.kicker">
           The non-negotiable rhythm. Show up to one. Show up to all four. Bring boots.
         </div>
       </header>
 
       <div class="sessions-grid">
         <div class="session-card">
-          <div class="session-tag mono">FIRST TEAM</div>
-          <div class="display session-day">MON</div>
-          <div class="mono session-time">19:00 — late</div>
-          <div class="display session-title">First Team training</div>
-          <div class="session-body">Tactical work, set pieces, match prep for the regional league.</div>
+          <div class="session-tag mono" data-i18n="community.sessions.0.tag">FIRST TEAM</div>
+          <div class="display session-day" data-i18n="community.sessions.0.day">MON</div>
+          <div class="mono session-time" data-i18n="community.sessions.0.time">19:00 — late</div>
+          <div class="display session-title" data-i18n="community.sessions.0.title">First Team training</div>
+          <div class="session-body" data-i18n="community.sessions.0.body">Tactical work, set pieces, match prep for the regional league.</div>
         </div>
         <div class="session-card">
-          <div class="session-tag mono">SECOND TEAM</div>
-          <div class="display session-day">WED</div>
-          <div class="mono session-time">19:00 — late</div>
-          <div class="display session-title">Second Team training</div>
-          <div class="session-body">Skills, game scenarios, conditioning. The bridge to Tier 01.</div>
+          <div class="session-tag mono" data-i18n="community.sessions.1.tag">SECOND TEAM</div>
+          <div class="display session-day" data-i18n="community.sessions.1.day">WED</div>
+          <div class="mono session-time" data-i18n="community.sessions.1.time">19:00 — late</div>
+          <div class="display session-title" data-i18n="community.sessions.1.title">Second Team training</div>
+          <div class="session-body" data-i18n="community.sessions.1.body">Skills, game scenarios, conditioning. The bridge to Tier 01.</div>
         </div>
         <div class="session-card">
-          <div class="session-tag mono">OPEN</div>
-          <div class="display session-day">THU</div>
-          <div class="mono session-time">19:00 — late</div>
-          <div class="display session-title">Fun First — community</div>
-          <div class="session-body">Open to all members. Mixed levels, mixed pace, futsal/mini-soccer.</div>
+          <div class="session-tag mono" data-i18n="community.sessions.2.tag">OPEN</div>
+          <div class="display session-day" data-i18n="community.sessions.2.day">THU</div>
+          <div class="mono session-time" data-i18n="community.sessions.2.time">19:00 — late</div>
+          <div class="display session-title" data-i18n="community.sessions.2.title">Fun First — community</div>
+          <div class="session-body" data-i18n="community.sessions.2.body">Open to all members. Mixed levels, mixed pace, futsal/mini-soccer.</div>
         </div>
         <div class="session-card">
-          <div class="session-tag mono">MANDATORY</div>
-          <div class="display session-day">FRI</div>
-          <div class="mono session-time">19:00 — late</div>
-          <div class="display session-title">First Team — mandatory</div>
-          <div class="session-body">Sharper. Faster. Where match-day selection is decided.</div>
+          <div class="session-tag mono" data-i18n="community.sessions.3.tag">MANDATORY</div>
+          <div class="display session-day" data-i18n="community.sessions.3.day">FRI</div>
+          <div class="mono session-time" data-i18n="community.sessions.3.time">19:00 — late</div>
+          <div class="display session-title" data-i18n="community.sessions.3.title">First Team — mandatory</div>
+          <div class="session-body" data-i18n="community.sessions.3.body">Sharper. Faster. Where match-day selection is decided.</div>
         </div>
         <div class="session-card">
-          <div class="session-tag mono">CHAT</div>
-          <div class="display session-day">DAILY</div>
-          <div class="mono session-time">always on</div>
-          <div class="display session-title">WhatsApp main channel</div>
-          <div class="session-body">Sign-ups, venue calls, match selection, ride-shares, banter.</div>
+          <div class="session-tag mono" data-i18n="community.sessions.4.tag">CHAT</div>
+          <div class="display session-day" data-i18n="community.sessions.4.day">DAILY</div>
+          <div class="mono session-time" data-i18n="community.sessions.4.time">always on</div>
+          <div class="display session-title" data-i18n="community.sessions.4.title">WhatsApp main channel</div>
+          <div class="session-body" data-i18n="community.sessions.4.body">Sign-ups, venue calls, match selection, ride-shares, banter.</div>
         </div>
         <div class="session-card">
-          <div class="session-tag mono">MATCH-DAY</div>
-          <div class="display session-day">SAT</div>
-          <div class="mono session-time">posted weekly</div>
-          <div class="display session-title">Regional fixtures</div>
-          <div class="session-body">League and cup. Announced in WhatsApp 48 hours ahead.</div>
+          <div class="session-tag mono" data-i18n="community.sessions.5.tag">MATCH-DAY</div>
+          <div class="display session-day" data-i18n="community.sessions.5.day">SAT</div>
+          <div class="mono session-time" data-i18n="community.sessions.5.time">posted weekly</div>
+          <div class="display session-title" data-i18n="community.sessions.5.title">Regional fixtures</div>
+          <div class="session-body" data-i18n="community.sessions.5.body">League and cup. Announced in WhatsApp 48 hours ahead.</div>
         </div>
       </div>
 
       <div class="community-foot">
-        <div class="mono community-foot-loc">📍 Ubud, Bali · GPS 8°30′24″S 115°15′45″E · Venues posted weekly</div>
-        <a href="#join" class="btn btn--ghost">Request to join →</a>
+        <div class="mono community-foot-loc" data-i18n="community.footLoc">📍 Ubud, Bali · GPS 8°30′24″S 115°15′45″E · Venues posted weekly</div>
+        <a href="#join" class="btn btn--ghost" data-i18n="community.footCta">Request to join →</a>
       </div>
     </div>
   </section>
@@ -374,12 +464,12 @@
   <section class="cd-section squad" id="squad">
     <div class="container">
       <header class="cd-section-head">
-        <div class="mono cd-section-idx">04 / SQUAD</div>
+        <div class="mono cd-section-idx" data-i18n="squad.idx">04 / SQUAD</div>
         <div class="cd-section-titles">
-          <div class="eyebrow">The Brotherhood</div>
-          <h2 class="display cd-section-title">Three teams.<br/><span class="gold">One standard.</span></h2>
+          <div class="eyebrow" data-i18n="squad.eyebrow">The Brotherhood</div>
+          <h2 class="display cd-section-title" data-i18n="squad.title">Three teams.<br/><span class="gold">One standard.</span></h2>
         </div>
-        <div class="mono cd-section-kicker">
+        <div class="mono cd-section-kicker" data-i18n="squad.kicker">
           From open community sessions to a competitive first team chasing Bali regional honours.
         </div>
       </header>
@@ -388,17 +478,17 @@
       <div class="tier-tabs" id="tier-tabs">
         <button type="button" class="tier-tab is-active" data-squad="all">
           <span class="mono tier-tab-num">01</span>
-          <span class="display tier-tab-name">Full Squad</span>
+          <span class="display tier-tab-name" data-i18n="squad.tabAll">Full Squad</span>
           <span class="mono tier-tab-meta" data-squad-count="all">—</span>
         </button>
         <button type="button" class="tier-tab" data-squad="admins">
           <span class="mono tier-tab-num">02</span>
-          <span class="display tier-tab-name">Captains</span>
+          <span class="display tier-tab-name" data-i18n="squad.tabAdmins">Captains</span>
           <span class="mono tier-tab-meta" data-squad-count="admins">—</span>
         </button>
         <button type="button" class="tier-tab" data-squad="members">
           <span class="mono tier-tab-num">03</span>
-          <span class="display tier-tab-name">Members</span>
+          <span class="display tier-tab-name" data-i18n="squad.tabMembers">Members</span>
           <span class="mono tier-tab-meta" data-squad-count="members">—</span>
         </button>
       </div>
@@ -417,16 +507,16 @@
             </div>
           </div>
           <div class="roster-stats roster-stats--quad">
-            <div class="roster-stat"><div class="mono roster-stat-key">Nationality</div><div class="roster-stat-num roster-stat-num--lg" id="rs-flag">—</div></div>
-            <div class="roster-stat"><div class="mono roster-stat-key">Age</div><div class="mono roster-stat-num" id="rs-age">—</div></div>
-            <div class="roster-stat"><div class="mono roster-stat-key">Position</div><div class="mono roster-stat-num" id="rs-pos">—</div></div>
-            <div class="roster-stat"><div class="mono roster-stat-key">Joined</div><div class="mono roster-stat-num" id="rs-joined">—</div></div>
+            <div class="roster-stat"><div class="mono roster-stat-key" data-i18n="squad.kNationality">Nationality</div><div class="roster-stat-num roster-stat-num--lg" id="rs-flag">—</div></div>
+            <div class="roster-stat"><div class="mono roster-stat-key" data-i18n="squad.kAge">Age</div><div class="mono roster-stat-num" id="rs-age">—</div></div>
+            <div class="roster-stat"><div class="mono roster-stat-key" data-i18n="squad.kPosition">Position</div><div class="mono roster-stat-num" id="rs-pos">—</div></div>
+            <div class="roster-stat"><div class="mono roster-stat-key" data-i18n="squad.kJoined">Joined</div><div class="mono roster-stat-num" id="rs-joined">—</div></div>
           </div>
           <div class="roster-stats roster-stats--quad">
-            <div class="roster-stat"><div class="mono roster-stat-key">Games</div><div class="mono roster-stat-num" id="rs-games">0</div></div>
-            <div class="roster-stat"><div class="mono roster-stat-key">Goals</div><div class="mono roster-stat-num" id="rs-goals">0</div></div>
-            <div class="roster-stat"><div class="mono roster-stat-key">Assists</div><div class="mono roster-stat-num" id="rs-assists">0</div></div>
-            <div class="roster-stat"><div class="mono roster-stat-key">MVPs</div><div class="mono roster-stat-num" id="rs-mvps">0</div></div>
+            <div class="roster-stat"><div class="mono roster-stat-key" data-i18n="squad.kGames">Games</div><div class="mono roster-stat-num" id="rs-games">0</div></div>
+            <div class="roster-stat"><div class="mono roster-stat-key" data-i18n="squad.kGoals">Goals</div><div class="mono roster-stat-num" id="rs-goals">0</div></div>
+            <div class="roster-stat"><div class="mono roster-stat-key" data-i18n="squad.kAssists">Assists</div><div class="mono roster-stat-num" id="rs-assists">0</div></div>
+            <div class="roster-stat"><div class="mono roster-stat-key" data-i18n="squad.kMvps">MVPs</div><div class="mono roster-stat-num" id="rs-mvps">0</div></div>
           </div>
         </aside>
       </div>
@@ -435,9 +525,9 @@
     <!-- Mobile-only bottom sheet shown when a player row is tapped -->
     <div class="player-sheet" id="player-sheet" aria-hidden="true">
       <div class="player-sheet-backdrop" data-player-sheet-close></div>
-      <aside class="player-sheet-panel" role="dialog" aria-label="Player detail">
+      <aside class="player-sheet-panel" role="dialog" aria-label="Player detail" data-i18n-attr="aria-label:squad.playerDetailAria">
         <div class="player-sheet-handle"></div>
-        <button class="player-sheet-close" aria-label="Close" data-player-sheet-close>×</button>
+        <button class="player-sheet-close" aria-label="Close" data-i18n-attr="aria-label:common.close" data-player-sheet-close>×</button>
         <div class="player-sheet-portrait" id="ps-portrait">
           <img class="player-sheet-portrait-img" id="ps-img" alt="" hidden />
           <div class="player-sheet-portrait-fallback" id="ps-fallback">UJB</div>
@@ -450,10 +540,10 @@
           </div>
         </div>
         <div class="player-sheet-stats roster-stats--quad">
-          <div class="roster-stat"><div class="mono roster-stat-key">Games</div><div class="mono roster-stat-num" id="ps-games">0</div></div>
-          <div class="roster-stat"><div class="mono roster-stat-key">Goals</div><div class="mono roster-stat-num" id="ps-goals">0</div></div>
-          <div class="roster-stat"><div class="mono roster-stat-key">Assists</div><div class="mono roster-stat-num" id="ps-assists">0</div></div>
-          <div class="roster-stat"><div class="mono roster-stat-key">MVPs</div><div class="mono roster-stat-num" id="ps-mvps">0</div></div>
+          <div class="roster-stat"><div class="mono roster-stat-key" data-i18n="squad.kGames">Games</div><div class="mono roster-stat-num" id="ps-games">0</div></div>
+          <div class="roster-stat"><div class="mono roster-stat-key" data-i18n="squad.kGoals">Goals</div><div class="mono roster-stat-num" id="ps-goals">0</div></div>
+          <div class="roster-stat"><div class="mono roster-stat-key" data-i18n="squad.kAssists">Assists</div><div class="mono roster-stat-num" id="ps-assists">0</div></div>
+          <div class="roster-stat"><div class="mono roster-stat-key" data-i18n="squad.kMvps">MVPs</div><div class="mono roster-stat-num" id="ps-mvps">0</div></div>
         </div>
       </aside>
     </div>
@@ -463,48 +553,34 @@
   <section class="cd-section partners" id="partners">
     <div class="container">
       <header class="cd-section-head">
-        <div class="mono cd-section-idx">05 / PARTNERS</div>
+        <div class="mono cd-section-idx" data-i18n="partners.idx">05 / PARTNERS</div>
         <div class="cd-section-titles">
-          <div class="eyebrow">Sponsors</div>
-          <h2 class="display cd-section-title">Stand with the <span class="gold">green</span>.</h2>
+          <div class="eyebrow" data-i18n="partners.eyebrow">Sponsors</div>
+          <h2 class="display cd-section-title" data-i18n="partners.title">Stand with the <span class="gold">green</span>.</h2>
         </div>
-        <div class="mono cd-section-kicker">
+        <div class="mono cd-section-kicker" data-i18n="partners.kicker">
           Local businesses, regional partners. Want your name on the shirt? Talk to us.
         </div>
       </header>
 
-      <div class="partners-table">
-        <div class="partner-row">
-          <div class="partner-tier mono">PRINCIPAL</div>
-          <div class="partner-cells">
-            <div class="partner-cell display partner-cell--lg">BASILICO</div>
-            <div class="partner-cell display partner-cell--lg partner-cell--empty">Partner slot</div>
-          </div>
+      <div class="sponsor-logos">
+        <div class="sponsor-card">
+          <img src="/assets/partners/Common%20Sense%20Trading_FA.png" alt="Common Sense" loading="lazy" />
         </div>
-        <div class="partner-row">
-          <div class="partner-tier mono">TECHNICAL</div>
-          <div class="partner-cells">
-            <div class="partner-cell display partner-cell--md partner-cell--empty">Kit slot</div>
-            <div class="partner-cell display partner-cell--md partner-cell--empty">Equipment slot</div>
-          </div>
+        <div class="sponsor-card">
+          <img src="/assets/partners/Futtos.png" alt="Futtos" loading="lazy" />
         </div>
-        <div class="partner-row">
-          <div class="partner-tier mono">FRIENDS OF THE CLUB</div>
-          <div class="partner-cells partner-cells--four">
-            <div class="partner-cell display partner-cell--sm partner-cell--empty">Partner slot</div>
-            <div class="partner-cell display partner-cell--sm partner-cell--empty">Partner slot</div>
-            <div class="partner-cell display partner-cell--sm partner-cell--empty">Partner slot</div>
-            <div class="partner-cell display partner-cell--sm partner-cell--empty">Partner slot</div>
-          </div>
+        <div class="sponsor-card">
+          <img src="/assets/partners/Logo%20Vaniglia.png" alt="Vaniglia" loading="lazy" />
         </div>
       </div>
 
       <div class="partner-cta">
         <div>
-          <div class="display partner-cta-title">Become a partner.</div>
-          <div class="mono partner-cta-meta">FROM IDR 5M / SEASON · BADGE · SHIRT · MATCHDAY</div>
+          <div class="display partner-cta-title" data-i18n="partners.ctaTitle">Become a partner.</div>
+          <div class="mono partner-cta-meta" data-i18n="partners.ctaMeta">FROM IDR 5M / SEASON · BADGE · SHIRT · MATCHDAY</div>
         </div>
-        <a href="mailto:hello@ubudjungleballers.com" class="btn btn--gold">Partnership deck →</a>
+        <a href="mailto:hello@ubudjungleballers.com" class="btn btn--gold" data-i18n="partners.ctaBtn">Partnership deck →</a>
       </div>
     </div>
   </section>
@@ -513,23 +589,23 @@
   <section class="cd-cta" id="join">
     <div class="container cd-cta-inner">
       <div class="cd-cta-text">
-        <div class="mono cd-cta-idx">06 / JOIN OUR CLUB</div>
-        <h2 class="display cd-cta-title">Join our<br/>club.</h2>
-        <p class="cd-cta-body">
+        <div class="mono cd-cta-idx" data-i18n="joinCta.idx">06 / JOIN OUR CLUB</div>
+        <h2 class="display cd-cta-title" data-i18n="joinCta.title">Join our<br/>club.</h2>
+        <p class="cd-cta-body" data-i18n="joinCta.body">
           The brotherhood already lives in WhatsApp. Sign-ups, venue calls,
           ride-shares, the daily small talk that keeps a club honest. New
           members get added to the right group within 24 hours.
         </p>
       </div>
       <div class="cd-cta-card">
-        <div class="mono cd-cta-card-head">REQUEST TO JOIN · FREE</div>
+        <div class="mono cd-cta-card-head" data-i18n="joinCta.cardHead">REQUEST TO JOIN · FREE</div>
         <ul class="cd-cta-checklist">
-          <li>Pick a session you want to play.</li>
-          <li>Message us on WhatsApp.</li>
-          <li>Show up. Bring boots.</li>
+          <li data-i18n="joinCta.check1">Pick a session you want to play.</li>
+          <li data-i18n="joinCta.check2">Message us on WhatsApp.</li>
+          <li data-i18n="joinCta.check3">Show up. Bring boots.</li>
         </ul>
-        <a href="https://chat.whatsapp.com/LutV2MjmrMHEkOTy2IEHtR" class="btn btn--gold cd-cta-btn">Open WhatsApp →</a>
-        <div class="mono cd-cta-fineprint">Or email <a href="mailto:hello@ubudjungleballers.com">hello@ubudjungleballers.com</a></div>
+        <a href="https://chat.whatsapp.com/LutV2MjmrMHEkOTy2IEHtR" class="btn btn--gold cd-cta-btn" data-i18n="joinCta.btn">Open WhatsApp →</a>
+        <div class="mono cd-cta-fineprint" data-i18n="joinCta.fineprint">Or email <a href="mailto:hello@ubudjungleballers.com">hello@ubudjungleballers.com</a></div>
       </div>
     </div>
   </section>
@@ -539,12 +615,12 @@
     <div class="container">
       <div class="cd-footer-grid">
         <div class="cd-footer-brand">
-          <img class="cd-footer-badge" src="./assets/badge-logo.png" alt="Ubud Jungle Ballers club badge" />
-          <p class="cd-footer-tagline">
+          <img class="cd-footer-badge" src="/assets/badge-logo.png" alt="Ubud Jungle Ballers club badge" />
+          <p class="cd-footer-tagline" data-i18n="footer.tagline">
             A football club from Ubud, Bali. Open to everyone who'll run for the
             man next to them — competitive at regional level.
           </p>
-          <ul class="socials cd-footer-socials" aria-label="Follow Ubud Jungle Ballers">
+          <ul class="socials cd-footer-socials" aria-label="Follow Ubud Jungle Ballers" data-i18n-attr="aria-label:footer.socialsAria">
             <li>
               <a class="social-btn" href="https://instagram.com/ubudjungleballers" target="_blank" rel="noopener" aria-label="Instagram">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -573,28 +649,28 @@
         </div>
 
         <div class="cd-footer-col">
-          <div class="eyebrow">The Club</div>
-          <a href="#about">Manifesto</a>
-          <a href="#squad">Squad</a>
-          <a href="#community">Sessions</a>
-          <a href="#partners">Partners</a>
+          <div class="eyebrow" data-i18n="footer.colClub">The Club</div>
+          <a href="#about" data-i18n="footer.linkManifesto">Manifesto</a>
+          <a href="#squad" data-i18n="footer.linkSquad">Squad</a>
+          <a href="#community" data-i18n="footer.linkSessions">Sessions</a>
+          <a href="#partners" data-i18n="footer.linkPartners">Partners</a>
         </div>
 
         <div class="cd-footer-col">
-          <div class="eyebrow">Get involved</div>
-          <a href="#join">Open trials</a>
-          <a href="#community">Join a session</a>
-          <a href="#partners">Sponsor the club</a>
-          <a href="#join">Volunteer</a>
+          <div class="eyebrow" data-i18n="footer.colInvolved">Get involved</div>
+          <a href="#join" data-i18n="footer.linkTrials">Open trials</a>
+          <a href="#community" data-i18n="footer.linkJoinSession">Join a session</a>
+          <a href="#partners" data-i18n="footer.linkSponsor">Sponsor the club</a>
+          <a href="#join" data-i18n="footer.linkVolunteer">Volunteer</a>
         </div>
 
         <div class="cd-footer-col">
-          <div class="eyebrow">Contact</div>
+          <div class="eyebrow" data-i18n="footer.colContact">Contact</div>
           <div class="cd-footer-contact">
-            <div>Ubud, Bali, Indonesia</div>
-            <div>Sessions in central Ubud</div>
+            <div data-i18n="footer.contactLocation">Ubud, Bali, Indonesia</div>
+            <div data-i18n="footer.contactSessions">Sessions in central Ubud</div>
             <div class="cd-footer-link"><a href="mailto:hello@ubudjungleballers.com">hello@ubudjungleballers.com</a></div>
-            <div class="cd-footer-link"><a href="https://chat.whatsapp.com/LutV2MjmrMHEkOTy2IEHtR">WhatsApp Community</a></div>
+            <div class="cd-footer-link"><a href="https://chat.whatsapp.com/LutV2MjmrMHEkOTy2IEHtR" data-i18n="footer.contactWhatsApp">WhatsApp Community</a></div>
           </div>
         </div>
       </div>
@@ -602,8 +678,8 @@
       <div class="hairline cd-footer-rule"></div>
 
       <div class="cd-footer-fine">
-        <div class="mono">© 2026 UBUD JUNGLE BALLERS · ALL RIGHTS RESERVED · SALAM HIJAU</div>
-        <div class="mono">PRIVACY · TERMS · COOKIES · SITE BY THE BROTHERHOOD</div>
+        <div class="mono" data-i18n="footer.fineLeft">© 2026 UBUD JUNGLE BALLERS · ALL RIGHTS RESERVED · SALAM HIJAU</div>
+        <div class="mono" data-i18n="footer.fineRight">PRIVACY · TERMS · COOKIES · SITE BY THE BROTHERHOOD</div>
       </div>
     </div>
   </footer>
@@ -615,10 +691,10 @@
       <header class="join-modal-head">
         <div class="join-modal-handle" aria-hidden="true"></div>
         <div class="mono join-modal-eyebrow" id="join-eyebrow">
-          <span class="join-eyebrow-progress">JOIN OUR CLUB · STEP <span id="join-step-num">1</span> / 5</span>
-          <span class="join-eyebrow-done" hidden>WELCOME TO THE BROTHERHOOD</span>
+          <span class="join-eyebrow-progress" data-i18n="join.eyebrowProgress">JOIN OUR CLUB · STEP <span id="join-step-num">1</span> / 5</span>
+          <span class="join-eyebrow-done" hidden data-i18n="join.eyebrowDone">WELCOME TO THE BROTHERHOOD</span>
         </div>
-        <button class="join-modal-close" type="button" aria-label="Close" data-join-close>×</button>
+        <button class="join-modal-close" type="button" aria-label="Close" data-i18n-attr="aria-label:common.close" data-join-close>×</button>
         <div class="join-modal-progress" aria-hidden="true">
           <div class="join-modal-progress-bar" id="join-progress-bar"></div>
         </div>
@@ -628,117 +704,117 @@
 
         <!-- Step 1 / Name + Age -->
         <fieldset class="join-step is-active" data-step="1">
-          <legend class="join-step-title display" id="join-modal-title">Who are you?</legend>
-          <p class="join-step-sub">The basics. We'll add you to the right group chat.</p>
+          <legend class="join-step-title display" id="join-modal-title" data-i18n="join.s1Title">Who are you?</legend>
+          <p class="join-step-sub" data-i18n="join.s1Sub">The basics. We'll add you to the right group chat.</p>
           <div class="join-field">
-            <label class="join-label mono" for="join-name">FULL NAME</label>
+            <label class="join-label mono" for="join-name" data-i18n="join.lblName">FULL NAME</label>
             <input class="join-input" id="join-name" name="name" type="text" autocomplete="name" required />
           </div>
           <div class="join-field">
-            <label class="join-label mono" for="join-age">AGE</label>
+            <label class="join-label mono" for="join-age" data-i18n="join.lblAge">AGE</label>
             <input class="join-input" id="join-age" name="age" type="number" min="14" max="80" inputmode="numeric" required />
           </div>
         </fieldset>
 
         <!-- Step 2 / Nationality + Bali timeframe -->
         <fieldset class="join-step" data-step="2" hidden>
-          <legend class="join-step-title display">Where from,<br/>how long?</legend>
-          <p class="join-step-sub">Helps us know who's in the squad and who's around.</p>
+          <legend class="join-step-title display" data-i18n="join.s2Title">Where from,<br/>how long?</legend>
+          <p class="join-step-sub" data-i18n="join.s2Sub">Helps us know who's in the squad and who's around.</p>
           <div class="join-field">
-            <label class="join-label mono" for="join-nationality">NATIONALITY</label>
-            <input class="join-input" id="join-nationality" name="nationality" type="text" placeholder="e.g. Indonesian, German, Australian" required />
+            <label class="join-label mono" for="join-nationality" data-i18n="join.lblNationality">NATIONALITY</label>
+            <input class="join-input" id="join-nationality" name="nationality" type="text" placeholder="e.g. Indonesian, German, Australian" data-i18n-attr="placeholder:join.phNationality" required />
           </div>
           <div class="join-field">
-            <span class="join-label mono">HOW LONG IN BALI?</span>
-            <div class="join-choices join-choices--stack" role="radiogroup" aria-label="Bali timeframe">
-              <button type="button" class="join-chip" data-choice="bali" data-value="long">Long-term (6+ months)</button>
-              <button type="button" class="join-chip" data-choice="bali" data-value="short">Short stay (under 6 months)</button>
-              <button type="button" class="join-chip" data-choice="bali" data-value="visiting">Visiting / passing through</button>
+            <span class="join-label mono" data-i18n="join.lblBali">HOW LONG IN BALI?</span>
+            <div class="join-choices join-choices--stack" role="radiogroup" aria-label="Bali timeframe" data-i18n-attr="aria-label:join.ariaBali">
+              <button type="button" class="join-chip" data-choice="bali" data-value="long" data-i18n="join.baliLong">Long-term (6+ months)</button>
+              <button type="button" class="join-chip" data-choice="bali" data-value="short" data-i18n="join.baliShort">Short stay (under 6 months)</button>
+              <button type="button" class="join-chip" data-choice="bali" data-value="visiting" data-i18n="join.baliVisiting">Visiting / passing through</button>
             </div>
           </div>
         </fieldset>
 
         <!-- Step 3 / Level -->
         <fieldset class="join-step" data-step="3" hidden>
-          <legend class="join-step-title display">Your level.</legend>
-          <p class="join-step-sub">No wrong answer. This routes you to the right night.</p>
-          <div class="join-choices join-choices--stack" role="radiogroup" aria-label="Level">
+          <legend class="join-step-title display" data-i18n="join.s3Title">Your level.</legend>
+          <p class="join-step-sub" data-i18n="join.s3Sub">No wrong answer. This routes you to the right night.</p>
+          <div class="join-choices join-choices--stack" role="radiogroup" aria-label="Level" data-i18n-attr="aria-label:join.ariaLevel">
             <button type="button" class="join-chip join-chip--lg" data-choice="level" data-value="fun">
-              <span class="join-chip-title">Just for fun</span>
-              <span class="join-chip-sub">Social sessions, mid-week. Have a kick, get a sweat, drink after.</span>
+              <span class="join-chip-title" data-i18n="join.levelFunTitle">Just for fun</span>
+              <span class="join-chip-sub" data-i18n="join.levelFunSub">Social sessions, mid-week. Have a kick, get a sweat, drink after.</span>
             </button>
             <button type="button" class="join-chip join-chip--lg" data-choice="level" data-value="higher">
-              <span class="join-chip-title">Higher level, regular player</span>
-              <span class="join-chip-sub">Train hard, hold your own in tight games, want a real squad to play with.</span>
+              <span class="join-chip-title" data-i18n="join.levelHigherTitle">Higher level, regular player</span>
+              <span class="join-chip-sub" data-i18n="join.levelHigherSub">Train hard, hold your own in tight games, want a real squad to play with.</span>
             </button>
             <button type="button" class="join-chip join-chip--lg" data-choice="level" data-value="compete">
-              <span class="join-chip-title">Want to compete for UJB</span>
-              <span class="join-chip-sub">Selection-based squad. Tournaments, friendlies, regional ambition.</span>
+              <span class="join-chip-title" data-i18n="join.levelCompeteTitle">Want to compete for UJB</span>
+              <span class="join-chip-sub" data-i18n="join.levelCompeteSub">Selection-based squad. Tournaments, friendlies, regional ambition.</span>
             </button>
           </div>
         </fieldset>
 
         <!-- Step 4 / Position -->
         <fieldset class="join-step" data-step="4" hidden>
-          <legend class="join-step-title display">Preferred<br/>position.</legend>
-          <p class="join-step-sub">So we don't end up with eleven strikers.</p>
-          <div class="join-choices join-choices--grid" role="group" aria-label="Position">
+          <legend class="join-step-title display" data-i18n="join.s4Title">Preferred<br/>position.</legend>
+          <p class="join-step-sub" data-i18n="join.s4Sub">So we don't end up with eleven strikers.</p>
+          <div class="join-choices join-choices--grid" role="group" aria-label="Position" data-i18n-attr="aria-label:join.ariaPosition">
             <button type="button" class="join-chip join-chip--pos" data-choice="position" data-value="GK">
               <span class="join-chip-pos-label">GK</span>
-              <span class="join-chip-pos-name mono">KEEPER</span>
+              <span class="join-chip-pos-name mono" data-i18n="join.posKeeper">KEEPER</span>
             </button>
             <button type="button" class="join-chip join-chip--pos" data-choice="position" data-value="DEF">
               <span class="join-chip-pos-label">DEF</span>
-              <span class="join-chip-pos-name mono">DEFENDER</span>
+              <span class="join-chip-pos-name mono" data-i18n="join.posDefender">DEFENDER</span>
             </button>
             <button type="button" class="join-chip join-chip--pos" data-choice="position" data-value="MID">
               <span class="join-chip-pos-label">MID</span>
-              <span class="join-chip-pos-name mono">MIDFIELDER</span>
+              <span class="join-chip-pos-name mono" data-i18n="join.posMidfielder">MIDFIELDER</span>
             </button>
             <button type="button" class="join-chip join-chip--pos" data-choice="position" data-value="FWD">
               <span class="join-chip-pos-label">FWD</span>
-              <span class="join-chip-pos-name mono">FORWARD</span>
+              <span class="join-chip-pos-name mono" data-i18n="join.posForward">FORWARD</span>
             </button>
             <button type="button" class="join-chip join-chip--pos join-chip--pos-wide" data-choice="position" data-value="ANY">
               <span class="join-chip-pos-label">ANY</span>
-              <span class="join-chip-pos-name mono">PUT ME ANYWHERE</span>
+              <span class="join-chip-pos-name mono" data-i18n="join.posAnywhere">PUT ME ANYWHERE</span>
             </button>
           </div>
         </fieldset>
 
         <!-- Step 5 / Sessions -->
         <fieldset class="join-step" data-step="5" hidden>
-          <legend class="join-step-title display">Which sessions<br/>can you make?</legend>
-          <p class="join-step-sub">Pick all that work. Pitch is in Ubud, all sessions kick off 7 PM.</p>
-          <div class="join-checks" role="group" aria-label="Sessions">
+          <legend class="join-step-title display" data-i18n="join.s5Title">Which sessions<br/>can you make?</legend>
+          <p class="join-step-sub" data-i18n="join.s5Sub">Pick all that work. Pitch is in Ubud, all sessions kick off 7 PM.</p>
+          <div class="join-checks" role="group" aria-label="Sessions" data-i18n-attr="aria-label:join.ariaSessions">
             <label class="join-check">
               <input type="checkbox" name="sessions" value="Mon" />
-              <span class="join-check-day display">MON</span>
-              <span class="join-check-meta mono">HIGH LEVEL</span>
+              <span class="join-check-day display" data-i18n="join.dayMon">MON</span>
+              <span class="join-check-meta mono" data-i18n="join.metaMon">HIGH LEVEL</span>
               <span class="join-check-tick" aria-hidden="true">✓</span>
             </label>
             <label class="join-check">
               <input type="checkbox" name="sessions" value="Wed" />
-              <span class="join-check-day display">WED</span>
-              <span class="join-check-meta mono">SOCIAL + HIGH LEVEL</span>
+              <span class="join-check-day display" data-i18n="join.dayWed">WED</span>
+              <span class="join-check-meta mono" data-i18n="join.metaWed">SOCIAL + HIGH LEVEL</span>
               <span class="join-check-tick" aria-hidden="true">✓</span>
             </label>
             <label class="join-check">
               <input type="checkbox" name="sessions" value="Thu" />
-              <span class="join-check-day display">THU</span>
-              <span class="join-check-meta mono">SOCIAL</span>
+              <span class="join-check-day display" data-i18n="join.dayThu">THU</span>
+              <span class="join-check-meta mono" data-i18n="join.metaThu">SOCIAL</span>
               <span class="join-check-tick" aria-hidden="true">✓</span>
             </label>
             <label class="join-check">
               <input type="checkbox" name="sessions" value="Fri" />
-              <span class="join-check-day display">FRI</span>
-              <span class="join-check-meta mono">MID LEVEL</span>
+              <span class="join-check-day display" data-i18n="join.dayFri">FRI</span>
+              <span class="join-check-meta mono" data-i18n="join.metaFri">MID LEVEL</span>
               <span class="join-check-tick" aria-hidden="true">✓</span>
             </label>
             <label class="join-check">
               <input type="checkbox" name="sessions" value="Sat" />
-              <span class="join-check-day display">SAT</span>
-              <span class="join-check-meta mono">TRAINING · ALL LEVELS</span>
+              <span class="join-check-day display" data-i18n="join.daySat">SAT</span>
+              <span class="join-check-meta mono" data-i18n="join.metaSat">TRAINING · ALL LEVELS</span>
               <span class="join-check-tick" aria-hidden="true">✓</span>
             </label>
           </div>
@@ -747,19 +823,19 @@
         <!-- Step 6 / Success -->
         <div class="join-step join-step--done" data-step="6" hidden>
           <div class="join-done-badge">
-            <img src="./assets/badge-logo.png" alt="Ubud Jungle Ballers badge" />
+            <img src="/assets/badge-logo.png" alt="Ubud Jungle Ballers badge" />
           </div>
-          <h3 class="join-step-title display">You're in.</h3>
-          <p class="join-step-sub">Welcome to the brotherhood<span id="join-done-name-suffix"></span>. Tap below to drop into the WhatsApp community — we'll route you to the right group within 24 hours.</p>
-          <a class="btn btn--gold join-done-cta" id="join-done-wa" href="#" target="_blank" rel="noopener">Open WhatsApp →</a>
+          <h3 class="join-step-title display" data-i18n="join.doneTitle">You're in.</h3>
+          <p class="join-step-sub" data-i18n="join.doneSub">Welcome to the brotherhood<span id="join-done-name-suffix"></span>. Tap below to drop into the WhatsApp community — we'll route you to the right group within 24 hours.</p>
+          <a class="btn btn--gold join-done-cta" id="join-done-wa" href="#" target="_blank" rel="noopener" data-i18n="join.doneCta">Open WhatsApp →</a>
           <div class="join-done-summary" id="join-done-summary" aria-live="polite"></div>
         </div>
 
         <div class="join-modal-error mono" id="join-error" hidden></div>
 
         <footer class="join-modal-foot">
-          <button type="button" class="btn btn--ghost join-back" id="join-back">← Back</button>
-          <button type="button" class="btn btn--gold join-next" id="join-next">Continue →</button>
+          <button type="button" class="btn btn--ghost join-back" id="join-back" data-i18n="join.back">← Back</button>
+          <button type="button" class="btn btn--gold join-next" id="join-next" data-i18n="join.continue">Continue →</button>
         </footer>
       </form>
     </aside>
@@ -775,16 +851,16 @@
       </span>
       <span class="country-popover-chev">›</span>
     </button>
-    <button class="country-popover-close" aria-label="Close" data-popover-close>×</button>
+    <button class="country-popover-close" aria-label="Close" data-i18n-attr="aria-label:common.close" data-popover-close>×</button>
   </div>
 
   <!-- ============== MOBILE BOTTOM SHEET (full roster) ============== -->
   <div class="country-sheet" id="country-sheet" aria-hidden="true">
     <div class="country-sheet-backdrop" data-sheet-close></div>
-    <aside class="country-sheet-panel" role="dialog" aria-label="Country squad">
+    <aside class="country-sheet-panel" role="dialog" aria-label="Country squad" data-i18n-attr="aria-label:common.countrySquad">
       <header class="country-sheet-head">
         <div class="country-sheet-handle"></div>
-        <button class="country-sheet-close" aria-label="Close" data-sheet-close>×</button>
+        <button class="country-sheet-close" aria-label="Close" data-i18n-attr="aria-label:common.close" data-sheet-close>×</button>
         <div class="country-sheet-flag" id="cs-flag"></div>
         <h2 class="country-sheet-name display" id="cs-name"></h2>
         <p class="country-sheet-meta mono" id="cs-meta"></p>
@@ -795,8 +871,8 @@
   </div>
 
   <!-- ============== DESKTOP COUNTRY PANEL ============== -->
-  <aside class="country-panel" id="country-panel" aria-label="Country squad panel">
-    <button class="panel-close" aria-label="Close">×</button>
+  <aside class="country-panel" id="country-panel" aria-label="Country squad panel" data-i18n-attr="aria-label:common.countrySquadPanel">
+    <button class="panel-close" aria-label="Close" data-i18n-attr="aria-label:common.close">×</button>
     <div class="panel-flag"></div>
     <h2 class="panel-country"></h2>
     <div class="panel-meta"></div>
@@ -808,7 +884,7 @@
   <div class="globe-tooltip" id="globe-tooltip"></div>
 
   <!-- App entry point -->
-  <script type="module" src="main.js"></script>
+  <script type="module" src="/main.js"></script>
 
   <!-- Sticky nav — toggles a "scrolled" class once the user scrolls past 20px -->
   <script>
@@ -846,7 +922,7 @@
 
   <!-- Squad picker — driven by roster.json (dumped from Futtos) -->
   <script type="module">
-    import { buildSquads } from "./squads.js?v=2";
+    import { buildSquads } from "/squads.js?v=3";
 
     const tabs       = document.getElementById("tier-tabs");
     const listEl     = document.getElementById("roster-list");
@@ -881,8 +957,8 @@
       return parts.map((p) => p[0]?.toUpperCase() ?? "").join("") || "UJB";
     }
     function roleTag(role) {
-      if (role === "owner") return '<span class="role">OWNER</span>';
-      if (role === "admin") return '<span class="role">ADMIN</span>';
+      if (role === "owner") return '<span class="role">' + t("squad.roleOwner") + '</span>';
+      if (role === "admin") return '<span class="role">' + t("squad.roleAdmin") + '</span>';
       return "";
     }
     function joinedYear(iso) {
@@ -932,7 +1008,7 @@
           <div class="roster-row-arrow">→</div>
         </div>
       `).join("");
-      listEl.innerHTML = rows || `<div class="roster-empty mono">No players in this view.</div>`;
+      listEl.innerHTML = rows || `<div class="roster-empty mono">${t("squad.empty")}</div>`;
       hoveredIdx = 0;
       selectedIdx = 0;
       listEl.scrollTop = 0;
@@ -1057,7 +1133,7 @@
       const metaParts = [];
       if (p.primaryPosition) metaParts.push(p.primaryPosition);
       if (p.flag || p.nationality) metaParts.push(`${p.flag || ""} ${p.nationality || ""}`.trim());
-      metaParts.push(`Joined ${joinedYear(p.joinedAt)}`);
+      metaParts.push(t("squad.joinedMeta", { year: joinedYear(p.joinedAt) }));
       ps.meta.textContent = metaParts.join(" · ");
       ps.games.textContent   = statText(p.stats?.games);
       ps.goals.textContent   = statText(p.stats?.goals);
@@ -1099,7 +1175,15 @@
       selectTier(tab.dataset.squad);
     });
 
-    listEl.innerHTML = `<div class="roster-empty mono">Loading roster…</div>`;
+    // Language toggled in place → re-render the current tier so the JS-rendered
+    // rows (role chips, "Joined …") switch language too.
+    document.addEventListener("i18n:changed", () => {
+      if (!squads || !currentSquad) return;
+      const active = tabs.querySelector(".tier-tab.is-active");
+      renderList(active ? active.dataset.squad : "all");
+    });
+
+    listEl.innerHTML = `<div class="roster-empty mono">${t("squad.loading")}</div>`;
     buildSquads()
       .then((s) => {
         squads = s;
@@ -1111,12 +1195,12 @@
           selectTier("all");
         } catch (err) {
           console.error("renderList failed", err);
-          listEl.innerHTML = `<div class="roster-empty mono">Render error: ${String(err && err.message || err)}</div>`;
+          listEl.innerHTML = `<div class="roster-empty mono">${t("squad.renderError", { msg: String(err && err.message || err) })}</div>`;
         }
       })
       .catch((err) => {
         console.error(err);
-        listEl.innerHTML = `<div class="roster-empty mono">Roster failed to load: ${String(err && err.message || err)}</div>`;
+        listEl.innerHTML = `<div class="roster-empty mono">${t("squad.loadError", { msg: String(err && err.message || err) })}</div>`;
       });
   </script>
 
@@ -1126,7 +1210,7 @@
       const modal      = document.getElementById('join-modal');
       if (!modal) return;
       const form       = document.getElementById('join-form');
-      const stepNum    = document.getElementById('join-step-num');
+      let   stepNum    = document.getElementById('join-step-num');
       const progress   = document.getElementById('join-progress-bar');
       const backBtn    = document.getElementById('join-back');
       const nextBtn    = document.getElementById('join-next');
@@ -1155,23 +1239,33 @@
         }
       };
 
-      const baliLabels = {
-        long:     'Long-term (6+ months)',
-        short:    'Short stay (< 6 months)',
-        visiting: 'Visiting / passing through'
-      };
-      const levelLabels = {
-        fun:     'Just for fun',
-        higher:  'Higher level, regular player',
-        compete: 'Want to compete for UJB'
-      };
-      const positionLabels = {
-        GK:  'Goalkeeper',
-        DEF: 'Defender',
-        MID: 'Midfielder',
-        FWD: 'Forward',
-        ANY: 'Anywhere'
-      };
+      // Display labels for the summary card — rebuilt from the active-language
+      // catalog so an in-place language toggle updates them too.
+      let baliLabels, levelLabels, positionLabels, sessionLabels;
+      function buildLabels() {
+        baliLabels = {
+          long:     t('join.baliLong'),
+          short:    t('join.baliShort'),
+          visiting: t('join.baliVisiting')
+        };
+        levelLabels = {
+          fun:     t('join.levelFunTitle'),
+          higher:  t('join.levelHigherTitle'),
+          compete: t('join.levelCompeteTitle')
+        };
+        positionLabels = {
+          GK:  t('join.posLabelKeeper'),
+          DEF: t('join.posLabelDefender'),
+          MID: t('join.posLabelMidfielder'),
+          FWD: t('join.posLabelForward'),
+          ANY: t('join.posLabelAnywhere')
+        };
+        sessionLabels = {
+          Mon: t('join.dayMon'), Wed: t('join.dayWed'), Thu: t('join.dayThu'),
+          Fri: t('join.dayFri'), Sat: t('join.daySat')
+        };
+      }
+      buildLabels();
 
       // === Open / close =====================================================
       function openModal() {
@@ -1236,7 +1330,7 @@
         // success step is the only action — no Back/Continue needed)
         modalFoot.hidden = isDone;
         backBtn.hidden   = n === 1;
-        nextBtn.textContent = n === TOTAL_STEPS ? 'Finish →' : 'Continue →';
+        nextBtn.textContent = t(n === TOTAL_STEPS ? 'join.finish' : 'join.continue');
         errorEl.hidden = true;
         errorEl.textContent = '';
 
@@ -1294,21 +1388,21 @@
       function validateStep(n) {
         const d = state.data;
         if (n === 1) {
-          if (!d.name)                return 'Pop your name in.';
-          if (!d.age || Number(d.age) < 14 || Number(d.age) > 80) return 'Age between 14 and 80.';
+          if (!d.name)                return t('join.errName');
+          if (!d.age || Number(d.age) < 14 || Number(d.age) > 80) return t('join.errAge');
         }
         if (n === 2) {
-          if (!d.nationality) return 'Pick a nationality — anything works.';
-          if (!d.bali)        return 'Tell us how long you’re in Bali.';
+          if (!d.nationality) return t('join.errNationality');
+          if (!d.bali)        return t('join.errBali');
         }
         if (n === 3) {
-          if (!d.level) return 'Pick the level that fits you.';
+          if (!d.level) return t('join.errLevel');
         }
         if (n === 4) {
-          if (!d.position.length) return 'Pick at least one position (or "Anywhere").';
+          if (!d.position.length) return t('join.errPosition');
         }
         if (n === 5) {
-          if (!d.sessions.length) return 'Pick at least one session.';
+          if (!d.sessions.length) return t('join.errSessions');
         }
         return null;
       }
@@ -1351,15 +1445,15 @@
 
         // Visible summary card (so they can sanity-check before tapping)
         doneSum.innerHTML =
-          '<div class="join-done-summary-head mono">YOUR SIGNUP</div>' +
+          '<div class="join-done-summary-head mono">' + t('join.sumHead') + '</div>' +
           '<dl class="join-done-summary-list">' +
-            row('Name', d.name) +
-            row('Age', d.age) +
-            row('Nationality', d.nationality) +
-            row('In Bali', baliLabels[d.bali] || d.bali) +
-            row('Level', levelLabels[d.level] || d.level) +
-            row('Position', d.position.map(p => positionLabels[p] || p).join(' · ')) +
-            row('Sessions', d.sessions.join(' · ')) +
+            row(t('join.sumName'), d.name) +
+            row(t('join.sumAge'), d.age) +
+            row(t('join.sumNationality'), d.nationality) +
+            row(t('join.sumInBali'), baliLabels[d.bali] || d.bali) +
+            row(t('join.sumLevel'), levelLabels[d.level] || d.level) +
+            row(t('join.sumPosition'), d.position.map(p => positionLabels[p] || p).join(' · ')) +
+            row(t('join.sumSessions'), d.sessions.map(s => sessionLabels[s] || s).join(' · ')) +
           '</dl>';
 
         showStep(TOTAL_STEPS + 1); // success
@@ -1373,6 +1467,17 @@
           { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]
         ));
       }
+
+      // === Language toggled in place ========================================
+      document.addEventListener('i18n:changed', function () {
+        buildLabels();
+        // The eyebrow's inner #join-step-num is replaced by the text swap — re-acquire it.
+        stepNum = document.getElementById('join-step-num');
+        if (stepNum && state.step <= TOTAL_STEPS) stepNum.textContent = String(state.step);
+        if (modal.classList.contains('is-open') && state.step <= TOTAL_STEPS) {
+          nextBtn.textContent = t(state.step === TOTAL_STEPS ? 'join.finish' : 'join.continue');
+        }
+      });
 
       // === Init =============================================================
       showStep(1);

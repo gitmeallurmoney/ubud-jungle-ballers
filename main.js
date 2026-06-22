@@ -16,7 +16,7 @@
 
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import earcut from "./vendor/earcut.js";
+import earcut from "/vendor/earcut.js";
 import { NATIONALITIES } from "./players.js";
 
 // ---------- Constants ----------
@@ -119,8 +119,8 @@ let countryGeo = null;
 const NAT_BY_ISO = new Map(NATIONALITIES.map(n => [String(n.iso), n]));
 
 Promise.all([
-  loadEarthImage("./vendor/textures/earth-blue-marble.jpg"),
-  fetch("./vendor/countries-110m.geo.json").then(r => r.json()).catch(() => null),
+  loadEarthImage("/vendor/textures/earth-blue-marble.jpg"),
+  fetch("/vendor/countries-110m.geo.json").then(r => r.json()).catch(() => null),
 ])
   .then(([img, geo]) => {
     countryGeo = geo;
@@ -141,7 +141,7 @@ Promise.all([
 // Bump/relief map adds the leather "panel" feel to the surface
 const texLoader = new THREE.TextureLoader();
 texLoader.load(
-  "./vendor/textures/earth-topology.png",
+  "/vendor/textures/earth-topology.png",
   (tex) => {
     sphereMat.bumpMap = tex;
     sphereMat.bumpScale = 0.045;            // pronounced enough to read as leather
@@ -877,6 +877,17 @@ function rowInitials(name) {
   return parts.map((p) => p[0]?.toUpperCase() ?? "").join("") || "UJB";
 }
 
+// i18n bridge — the runtime (i18n/i18n.js) loads before this module, but fall
+// back to English so the globe never breaks if it's somehow absent.
+const I18N = (typeof window !== "undefined" && window.UBJ_I18N) || {
+  t: (k) => k,
+  countryName: (code, fallback) => fallback,
+};
+// Localized, uppercased country name (e.g. "GERMANY" / "JERMAN").
+const natName = (nat) => String(I18N.countryName(nat.code, nat.name) || nat.name).toUpperCase();
+const playersTap = (n) => I18N.t(n === 1 ? "hero.playersTapOne" : "hero.playersTapOther", { n });
+const playersOnSquad = (n) => I18N.t(n === 1 ? "hero.onSquadOne" : "hero.onSquadOther", { n });
+
 function renderRosterRows(nat, container) {
   container.innerHTML = "";
   nat.players.forEach((p) => {
@@ -903,8 +914,8 @@ function openCountryPanel(nat) {
     // ===== MOBILE: populate compact popover. Roster is in the bottom sheet. =====
     if (popover) {
       cpFlag.textContent  = nat.flag;
-      cpName.textContent  = nat.name.toUpperCase();
-      cpCount.textContent = `${nat.players.length} PLAYER${nat.players.length === 1 ? "" : "S"} · TAP TO VIEW`;
+      cpName.textContent  = natName(nat);
+      cpCount.textContent = playersTap(nat.players.length);
       popover.classList.add("is-open");
       popover.setAttribute("aria-hidden", "false");
     }
@@ -917,8 +928,8 @@ function openCountryPanel(nat) {
       popover.setAttribute("aria-hidden", "true");
     }
     panelFlag.textContent = nat.flag;
-    panelCountry.textContent = nat.name.toUpperCase();
-    panelMeta.textContent = `${nat.players.length} player${nat.players.length === 1 ? "" : "s"} on the squad`;
+    panelCountry.textContent = natName(nat);
+    panelMeta.textContent = playersOnSquad(nat.players.length);
     panelNote.textContent = nat.note || "";
     renderRosterRows(nat, panelRoster);
     panel.classList.add("open");
@@ -932,8 +943,8 @@ function openCountrySheet() {
   // Tap on the compact popover card opens the full bottom sheet
   if (!selectedNat || !sheet) return;
   csFlag.textContent  = selectedNat.flag;
-  csName.textContent  = selectedNat.name.toUpperCase();
-  csMeta.textContent  = `${selectedNat.players.length} player${selectedNat.players.length === 1 ? "" : "s"} on the squad`;
+  csName.textContent  = natName(selectedNat);
+  csMeta.textContent  = playersOnSquad(selectedNat.players.length);
   csNote.textContent  = selectedNat.note || "";
   renderRosterRows(selectedNat, csRoster);
   sheet.classList.add("is-open");
@@ -947,6 +958,24 @@ function closeCountrySheet() {
   sheet.setAttribute("aria-hidden", "true");
   document.body.style.overflow = "";
 }
+
+// Language toggled in place → refresh any open panel/popover/sheet, since the
+// country name + player counts are JS-rendered (not [data-i18n]).
+document.addEventListener("i18n:changed", () => {
+  if (!selectedNat) return;
+  if (panel && panel.classList.contains("open")) {
+    panelCountry.textContent = natName(selectedNat);
+    panelMeta.textContent = playersOnSquad(selectedNat.players.length);
+  }
+  if (popover && popover.classList.contains("is-open")) {
+    cpName.textContent = natName(selectedNat);
+    cpCount.textContent = playersTap(selectedNat.players.length);
+  }
+  if (sheet && sheet.classList.contains("is-open")) {
+    csName.textContent = natName(selectedNat);
+    csMeta.textContent = playersOnSquad(selectedNat.players.length);
+  }
+});
 
 function closeCountryPanel() {
   panel.classList.remove("open");

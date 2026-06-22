@@ -13,7 +13,7 @@ let rosterPromise = null;
 
 export async function loadRoster() {
   if (!rosterPromise) {
-    rosterPromise = fetch("./roster.json", { cache: "no-cache" })
+    rosterPromise = fetch("/roster.json", { cache: "no-cache" })
       .then((r) => {
         if (!r.ok) throw new Error(`roster.json fetch failed: ${r.status}`);
         return r.json();

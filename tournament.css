@@ -1,0 +1,715 @@
+/* ============================================================
+   King of the Jungle — tournament landing + registration
+   Page-specific styles. Relies on style.css for tokens, fonts,
+   nav, footer, buttons, and the .join-* modal system (reused).
+   ============================================================ */
+
+/* The step counter reuses .join-* markup; its ink-colour rule targets the
+   homepage's #join-step-num, so re-apply it to our class here. */
+.join-modal-eyebrow .tour-step-num { color: var(--ink); }
+
+/* ---------- HERO ---------------------------------------------------- */
+/* Fills the full viewport and bleeds under the fixed nav (like the landing
+   page); the top padding clears the 76px nav so content never tucks under it. */
+/* nav + hero + fact strip share one viewport so the sponsor row never clips */
+.tour-firstview {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.tour-firstview .tour-factbar { flex: 0 0 auto; }
+
+.tour-hero {
+  position: relative;
+  overflow: hidden;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 170px 0 clamp(48px, 6vh, 80px); /* copy top-aligned, dropped lower below the nav */
+  background-color: var(--bg);
+  background-image:
+    /* left scrim — keeps the hero copy legible over the busy art */
+    linear-gradient(90deg, rgba(7, 22, 15, 0.92) 0%, rgba(7, 22, 15, 0.74) 26%, rgba(7, 22, 15, 0.40) 52%, rgba(7, 22, 15, 0.16) 100%),
+    /* top + bottom grounding for the nav and CTA row */
+    linear-gradient(0deg, rgba(7, 22, 15, 0.90) 0%, rgba(7, 22, 15, 0.06) 40%, rgba(7, 22, 15, 0.24) 100%),
+    /* King of the Jungle key art */
+    url('./assets/tournament/hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-bottom: 1px solid var(--line);
+}
+/* Decorative contour lines, echoing the homepage hero */
+.tour-hero-topo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: none; /* hidden: the key-art background now carries the texture */
+  pointer-events: none;
+}
+.tour-hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: 1.5fr 0.78fr;
+  gap: 56px;
+  align-items: center;
+}
+.tour-hero-copy { min-width: 0; }
+
+.tour-hero-eyebrow { margin-bottom: 22px; }
+.tour-hero-eyebrow .mono {
+  font-size: 12px;
+  letter-spacing: 0.24em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+.tour-hero-title {
+  font-size: clamp(48px, 8.5vw, 124px);
+  line-height: 0.94;          /* roomier so the stacked rows don't collide */
+  margin: 0;
+  color: var(--ink);
+}
+.tour-hero-title .gold { color: var(--gold); }
+
+/* ---- Key-art hero treatment: lift the copy off the busy background ---- */
+.tour-hero-title { text-shadow: 0 2px 30px rgba(0, 0, 0, 0.55); }
+.tour-hero-sub   { text-shadow: 0 1px 16px rgba(0, 0, 0, 0.60); }
+/* nudge the copy further left, into the art's darker left zone (wide screens only) */
+@media (min-width: 1200px) {
+  .tour-hero-copy { transform: translateX(calc((1200px - 100vw) / 4)); }
+}
+@media (max-width: 960px) {
+  .tour-hero {
+    padding-top: 104px;
+    /* uniform vertical scrim for the stacked single-column mobile layout */
+    background-image:
+      linear-gradient(180deg, rgba(7, 22, 15, 0.82) 0%, rgba(7, 22, 15, 0.55) 42%, rgba(7, 22, 15, 0.90) 100%),
+      url('./assets/tournament/hero-bg.jpg');
+    background-position: 58% center;
+  }
+}
+.tour-hero-sub {
+  margin: 26px 0 0;
+  max-width: 56ch;
+  font-size: clamp(16px, 2vw, 20px);
+  line-height: 1.55;
+  color: var(--ink-dim);
+}
+
+/* Date / location ribbon — two columns: When + Kick-off on top, Where + Format below */
+.tour-hero-meta {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  gap: 20px 48px;
+  margin-top: 30px;
+}
+.tour-hero-meta .tour-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.tour-meta-k {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+.tour-meta-v {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--display);
+  text-transform: uppercase;
+  font-size: clamp(18px, 2.6vw, 26px);
+  line-height: 1;
+  color: var(--ink);
+}
+.tour-meta-ico {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  color: var(--gold);
+}
+.tour-meta-ico svg { width: 100%; height: 100%; display: block; }
+
+.tour-hero-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 22px;
+  margin-top: 38px;
+}
+.tour-hero-cta-row .btn { font-size: 15px; }
+.tour-fee-flash {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+.tour-fee-flash strong {
+  color: var(--gold);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: var(--gold);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+/* Current-page nav item (tournament page "Events") */
+.site-nav .links a.nav-current { color: var(--gold); border-bottom-color: var(--gold); }
+
+/* Inline link inside card notes / copy */
+.tour-link { color: var(--gold); white-space: nowrap; }
+.tour-link:hover { color: var(--gold-2); }
+
+/* ---------- HERO POSTER ("Welcome to the Jungle" key art) ----------- */
+.tour-hero-poster { display: none; } /* replaced by the full-bleed key-art hero background */
+.tour-poster-frame {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: 34px 28px 28px;
+  border: 1px solid rgba(232, 179, 57, 0.45);
+  border-radius: 16px;
+  background:
+    repeating-linear-gradient(60deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 26px),
+    repeating-linear-gradient(-60deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 26px),
+    radial-gradient(130% 90% at 50% -10%, #2c6f56 0%, #14402c 55%, var(--bg-2) 100%);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5), inset 0 0 0 4px rgba(245, 241, 232, 0.04);
+}
+.tour-poster-badge {
+  width: clamp(92px, 13vw, 132px);
+  height: auto;
+  display: block;
+  margin: 0 auto 22px;
+  filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.45));
+}
+.tour-poster-title {
+  font-size: clamp(32px, 3.4vw, 46px);
+  line-height: 0.92;
+  letter-spacing: 0.01em;
+  margin: 0 0 16px;
+  color: transparent;
+  -webkit-text-stroke: 1.4px var(--ink);
+  text-stroke: 1.4px var(--ink);
+}
+.tour-poster-tag {
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  margin-bottom: 24px;
+}
+.tour-poster-sponsors {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(245, 241, 232, 0.14);
+}
+.tour-poster-sponsors span {
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  opacity: 0.82;
+}
+
+/* ---------- FACT STRIP (key event details, docked under the hero) --- */
+.tour-factbar {
+  background: var(--bg-2);
+  border-bottom: 1px solid var(--line);
+  padding: 24px 0 20px;
+}
+.tour-factbar-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.tour-fact {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  padding: 2px 28px;
+  border-left: 1px solid var(--line);
+}
+.tour-fact:first-child { border-left: none; }
+.tour-fact-k {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+.tour-fact-v {
+  font-family: var(--display);
+  text-transform: uppercase;
+  font-size: clamp(19px, 1.9vw, 26px);
+  line-height: 1;
+  color: var(--ink);
+}
+.tour-fact--fee .tour-fact-v { color: var(--gold); }
+.tour-factbar-partners {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+.tour-factbar-partners span { color: var(--ink); opacity: 0.9; }
+@media (max-width: 760px) {
+  .tour-factbar-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 22px; }
+  .tour-fact { padding: 0; border-left: none; }
+  .tour-fact--fee { grid-column: 1 / -1; }
+}
+
+/* ---------- GENERIC SECTION SHELL ----------------------------------- */
+.tour-section { padding: clamp(56px, 9vw, 104px) 0; }
+.tour-section--alt { background: var(--bg-2); border-block: 1px solid var(--line); }
+.tour-section-head { max-width: 720px; margin-bottom: 44px; }
+.tour-section-head .eyebrow { margin-bottom: 14px; }
+.tour-section-title {
+  /* Font, size, uppercase, line-height & tracking all come from the shared
+     .display + .cd-section-title classes (same as the landing page) so section
+     titles read identically across the site. */
+  color: var(--ink);
+}
+.tour-section-lead {
+  margin: 18px 0 0;
+  max-width: 60ch;
+  color: var(--ink-dim);
+  line-height: 1.6;
+  font-size: 17px;
+}
+
+/* ---------- INFO CARD GRID ------------------------------------------ */
+.tour-info-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.tour-card {
+  background: var(--bg-3);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 26px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 168px;
+}
+.tour-card-ico {
+  width: 30px;
+  height: 30px;
+  color: var(--gold);
+  margin-bottom: 2px;
+}
+.tour-card-ico svg { width: 100%; height: 100%; display: block; }
+.tour-card-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.tour-card-value {
+  font-family: var(--display);
+  text-transform: uppercase;
+  font-size: clamp(24px, 3vw, 34px);
+  line-height: 0.96;
+  color: var(--ink);
+}
+.tour-card-note {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink-dim);
+  margin-top: auto;
+}
+
+/* ---------- TWO-COLUMN: included + rules ---------------------------- */
+.tour-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+.tour-panel {
+  background: var(--bg-3);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 32px;
+}
+.tour-panel h3 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--display);
+  text-transform: uppercase;
+  font-size: 26px;
+  letter-spacing: 0.01em;
+  margin: 0 0 20px;
+  color: var(--ink);
+}
+.tour-panel-ico {
+  width: 26px;
+  height: 26px;
+  flex: 0 0 26px;
+  color: var(--gold);
+}
+.tour-panel-ico svg { width: 100%; height: 100%; display: block; }
+.tour-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+.tour-list li {
+  position: relative;
+  padding-left: 30px;
+  color: var(--ink);
+  line-height: 1.5;
+}
+.tour-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 12px;
+  height: 12px;
+  background: var(--gold);
+  clip-path: polygon(50% 0, 100% 38%, 82% 100%, 18% 100%, 0 38%);
+}
+.tour-list li span { display: block; color: var(--ink-dim); font-size: 14px; margin-top: 2px; }
+
+/* ---------- ENTRY & PAYMENT CARD ------------------------------------ */
+.tour-pay {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 0;
+  background: linear-gradient(180deg, var(--bg-2), var(--bg));
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+}
+.tour-pay-amount {
+  padding: 40px;
+  background:
+    radial-gradient(90% 80% at 20% 0%, rgba(232, 179, 57, 0.14), transparent 60%),
+    var(--bg-3);
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.tour-pay-amount .tour-card-label { margin-bottom: 12px; }
+.tour-pay-fee {
+  font-family: var(--display);
+  text-transform: uppercase;
+  font-size: clamp(40px, 6vw, 64px);
+  line-height: 0.9;
+  color: var(--gold);
+}
+.tour-pay-fee-note { color: var(--ink-dim); font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; margin-top: 10px; }
+.tour-pay-deadline { margin-top: 22px; font-size: 14px; color: var(--ink-dim); line-height: 1.5; }
+.tour-pay-deadline strong { color: var(--ink); }
+
+.tour-pay-detail { padding: 36px 40px; display: flex; flex-direction: column; gap: 18px; }
+.tour-pay-detail h3 {
+  font-family: var(--display); text-transform: uppercase;
+  font-size: 22px; margin: 0 0 4px; color: var(--ink);
+}
+.tour-pay-line { display: flex; justify-content: space-between; gap: 18px; padding: 12px 0; border-bottom: 1px dashed var(--line); }
+.tour-pay-line:last-of-type { border-bottom: none; }
+.tour-pay-line dt { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-dim); }
+.tour-pay-line dd { margin: 0; text-align: right; color: var(--ink); font-weight: 600; }
+.tour-pay-hint { font-size: 13px; color: var(--ink-dim); line-height: 1.55; }
+.tour-pay-hint a { color: var(--gold); }
+
+/* ---------- REGISTER CTA BAND --------------------------------------- */
+.tour-cta-band {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: clamp(60px, 10vw, 120px) 0;
+  background: var(--gold);
+  color: #1a1408;
+}
+.tour-cta-band h2 {
+  font-family: var(--display); text-transform: uppercase;
+  font-size: clamp(36px, 7vw, 88px); line-height: 0.9; margin: 0 0 18px; color: #1a1408;
+}
+.tour-cta-band p { max-width: 50ch; margin: 0 auto 32px; color: #1a1408; line-height: 1.6; }
+/* dark button so it reads on the gold band */
+.tour-cta-band .btn--gold { background: #1a1408; color: var(--gold); border-color: #1a1408; }
+.tour-cta-band .btn--gold:hover { background: #2a2110; color: var(--gold-2); border-color: #2a2110; }
+.tour-cta-contact { margin-top: 22px; font-size: 14px; color: #1a1408; }
+.tour-cta-contact a { color: #1a1408; font-weight: 700; white-space: nowrap; text-decoration: underline; }
+.tour-cta-contact a:hover { color: #000; }
+
+/* ---------- LOGO UPLOAD (inside the reused modal) ------------------- */
+.tour-logo-drop {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  border: 1.5px dashed var(--line);
+  border-radius: 12px;
+  background: var(--bg-3);
+  cursor: pointer;
+  transition: border-color 160ms ease, background 160ms ease;
+}
+.tour-logo-drop:hover,
+.tour-logo-drop.is-drag,
+.tour-logo-drop:focus-within { border-color: var(--gold); background: rgba(232, 179, 57, 0.06); }
+.tour-logo-drop:focus-within { outline: 2px solid var(--gold); outline-offset: 2px; }
+.tour-logo-input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.tour-logo-thumb {
+  width: 64px; height: 64px; flex: 0 0 64px;
+  border-radius: 10px;
+  background: var(--bg-2) center / cover no-repeat;
+  border: 1px solid var(--line);
+  display: grid; place-items: center;
+  color: var(--ink-dim);
+  overflow: hidden;
+}
+.tour-logo-thumb svg { width: 26px; height: 26px; }
+.tour-logo-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.tour-logo-copy { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.tour-logo-title { color: var(--ink); font-weight: 600; }
+.tour-logo-hint { font-size: 12px; color: var(--ink-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Spinner state on the Finish button while submitting */
+.join-next.is-loading { pointer-events: none; opacity: 0.7; }
+.join-next.is-loading::after {
+  content: "";
+  display: inline-block;
+  width: 13px; height: 13px;
+  margin-left: 8px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  vertical-align: -1px;
+  animation: tourSpin 0.7s linear infinite;
+}
+@keyframes tourSpin { to { transform: rotate(360deg); } }
+
+/* Success-screen payment recap */
+/* Secondary "join the group" link under the gold payment-proof button.
+   Styled as a block, so pair with a [hidden] guard or it overrides the UA rule. */
+.tour-done-group {
+  display: inline-block;
+  margin-top: 14px;
+  color: var(--gold);
+  font-weight: 600;
+  font-size: 14px;
+}
+.tour-done-group:hover { color: var(--gold-2); text-decoration: underline; }
+.tour-done-group[hidden] { display: none !important; }
+
+.tour-done-pay {
+  width: 100%;
+  margin-top: 22px;
+  text-align: left;
+  background: var(--bg-3);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 18px 20px;
+}
+.tour-done-pay-head { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+.tour-done-pay dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; }
+.tour-done-pay dt { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-dim); }
+.tour-done-pay dd { margin: 0; text-align: right; color: var(--ink); font-weight: 600; }
+
+/* ---------- RESPONSIVE ---------------------------------------------- */
+@media (max-width: 960px) {
+  .tour-hero-inner { grid-template-columns: 1fr; gap: 44px; max-width: 760px; }
+  .tour-hero-poster { max-width: 380px; width: 100%; margin: 0 auto; }
+  .tour-info-grid { grid-template-columns: repeat(2, 1fr); }
+  .tour-split { grid-template-columns: 1fr; }
+  .tour-pay { grid-template-columns: 1fr; }
+  .tour-pay-amount { border-right: none; border-bottom: 1px solid var(--line); }
+}
+@media (max-width: 600px) {
+  .tour-info-grid { grid-template-columns: 1fr; }
+  .tour-card { min-height: 0; }
+  .tour-hero-meta { gap: 18px 22px; }
+  .tour-pay-detail { padding: 28px 24px; }
+}
+
+
+/* ====================================================================
+   King of the Jungle — added sections: mobile hero fee, prize pool,
+   tournament bracket, tournament partners (appended)
+   ==================================================================== */
+
+/* Mobile-only entry fee under the Register button (hidden on desktop) */
+.tour-hero-fee { display: none; }
+
+/* ---------- PRIZE POOL --------------------------------------------- */
+.tour-podium {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  align-items: end;
+  gap: 18px;
+  max-width: 940px;
+  margin: 0 auto;
+}
+.tour-prize {
+  background: var(--bg-3);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 28px 22px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.tour-prize--second, .tour-prize--third { margin-bottom: 16px; }
+.tour-prize--first {
+  background:
+    radial-gradient(90% 80% at 50% 0%, rgba(232,179,57,0.16), transparent 60%),
+    var(--bg-3);
+  border-color: rgba(232,179,57,0.5);
+  padding-top: 40px;
+  box-shadow: 0 22px 54px rgba(0,0,0,0.45);
+}
+.tour-prize-crown { width: 42px; height: 42px; margin: 0 auto 2px; color: var(--gold); }
+.tour-prize-crown svg { width: 100%; height: 100%; display: block; }
+.tour-prize-medal { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); }
+.tour-prize-amount {
+  font-family: var(--display);
+  text-transform: uppercase;
+  font-size: clamp(24px, 3.2vw, 38px);
+  line-height: 0.96;
+  color: var(--ink);
+}
+.tour-prize--first .tour-prize-amount { color: var(--gold); }
+.tour-prize-note { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-dim); }
+
+/* ---------- TOURNAMENT BRACKET ------------------------------------- */
+.tour-bracket {
+  margin-top: 40px;
+  background: var(--bg-3);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 28px;
+}
+.tour-bracket-head { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 22px; }
+.tour-bracket-flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; align-items: center; }
+.tour-bracket-stage { display: flex; flex-direction: column; gap: 10px; }
+.tour-bracket-stage:nth-child(3), .tour-bracket-stage--crown { justify-content: center; }
+.tour-stage-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-dim); margin-bottom: 2px; }
+.tour-groups { display: flex; flex-direction: column; gap: 12px; }
+.tour-group { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--bg-2); flex: 1; }
+.tour-group-name {
+  font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold);
+  padding: 8px 12px; border-bottom: 1px solid var(--line); background: rgba(232,179,57,0.06);
+}
+.tour-group-slot { padding: 8px 12px; font-size: 13px; color: var(--ink-dim); border-bottom: 1px solid var(--line); }
+.tour-group-slot:last-child { border-bottom: none; }
+.tour-stage-foot { margin-top: auto; font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-dim); padding-top: 6px; }
+.tour-tie {
+  border: 1px solid var(--line); border-radius: 10px; background: var(--bg-2);
+  padding: 12px 14px; display: flex; flex-direction: column; gap: 6px; color: var(--ink); font-size: 13px;
+}
+.tour-tie-vs { font-size: 9px; letter-spacing: 0.2em; color: var(--ink-dim); }
+.tour-tie--final {
+  border-color: rgba(232,179,57,0.5);
+  background: radial-gradient(90% 90% at 50% 0%, rgba(232,179,57,0.10), transparent 60%), var(--bg-2);
+}
+.tour-champion {
+  display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center;
+  border: 1px solid rgba(232,179,57,0.5); border-radius: 12px; padding: 22px 14px;
+  background: radial-gradient(90% 80% at 50% 0%, rgba(232,179,57,0.16), transparent 65%), var(--bg-2);
+}
+.tour-champion svg { width: 34px; height: 34px; color: var(--gold); }
+.tour-champion .display { font-size: clamp(17px, 1.5vw, 21px); text-transform: uppercase; line-height: 1; color: var(--gold); }
+
+/* ---------- TOURNAMENT PARTNERS ------------------------------------ */
+.tour-tpartners { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; max-width: 860px; margin: 0 auto; }
+.tour-tpartner {
+  display: flex; flex-direction: column; align-items: center; gap: 16px;
+  background: var(--bg-3); border: 1px solid var(--line); border-radius: 16px; padding: 30px 24px;
+}
+.tour-tpartner-logo {
+  display: grid; place-items: center; width: 100%; height: 96px;
+  background: #fff; border-radius: 10px; padding: 18px;
+}
+.tour-tpartner-logo img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
+.tour-tpartner-name { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-dim); }
+
+/* ---------- MOBILE: hide eyebrow + description, fit nav+hero+strip to screen --- */
+@media (max-width: 960px) {
+  .tour-firstview { min-height: 100svh; }
+  .tour-hero-eyebrow { display: none; }
+  .tour-hero-sub { display: none; }
+  .tour-hero-fee {
+    display: block; margin-top: 18px;
+    font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-dim);
+  }
+  .tour-hero-fee strong { color: var(--gold); font-weight: 700; }
+  .tour-fact--fee { display: none; }
+  .tour-partners-prefix { display: none; }
+  .tour-factbar-partners { white-space: nowrap; font-size: 9.5px; }
+  .tour-bracket-flow { grid-template-columns: 1fr; gap: 22px; }
+  .tour-groups { flex-direction: row; }
+  .tour-bracket-stage:nth-child(3), .tour-bracket-stage--crown { justify-content: flex-start; }
+}
+@media (max-width: 600px) {
+  .tour-podium { grid-template-columns: 1fr; gap: 14px; }
+  .tour-prize--second, .tour-prize--third { margin-bottom: 0; }
+  .tour-prize--first { order: -1; }
+  .tour-tpartners { grid-template-columns: 1fr; }
+}
+
+/* Partner logo containment fix: definite height so object-fit can clamp */
+.tour-tpartner-logo { height: 104px; overflow: hidden; }
+.tour-tpartner-logo img { width: 100%; height: 100%; object-fit: contain; }
+/* Fixed px cap so wide/tall logos never overflow the chip */
+.tour-tpartner-logo img { width: auto; height: auto; max-width: 100%; max-height: 62px; }
+
+/* bracket: uppercase team titles (keep the 'vs' as-is) */
+.tour-group-slot,
+.tour-tie span:not(.tour-tie-vs) { text-transform: uppercase; }
+
+/* ---------- MOBILE-ONLY: centre hero content + title, left-justify strip widgets ---- */
+@media (max-width: 960px) {
+  .tour-hero { justify-content: center; }
+  .tour-hero-inner { justify-items: center; }
+  .tour-hero-copy { text-align: center; }
+  .tour-hero-cta-row { justify-content: center; }
+  .tour-fact { align-items: flex-start; text-align: left; }
+  .tour-fact:first-child { padding-left: 0; }
+}
+
+/* ---------- Partners: bigger, logo-only cards (no name, no card bg) — desktop + mobile ---------- */
+.tour-tpartners { max-width: 980px; }
+.tour-tpartner { background: none; border: none; padding: 0; gap: 0; }
+.tour-tpartner-name { display: none; }
+.tour-tpartner-logo { height: 172px; padding: 30px; border-radius: 14px; }
+.tour-tpartner-logo img { max-height: 108px; }
+
+/* ---------- MOBILE: bigger title, slimmer info strip (~80/20 hero/strip) ---------- */
+@media (max-width: 960px) {
+  .tour-hero-title { font-size: clamp(58px, 17vw, 88px); }
+  .tour-factbar { padding: 16px 0 14px; }
+  .tour-fact { gap: 5px; }
+  .tour-fact-k { font-size: 9px; }
+  .tour-fact-v { font-size: 16px; }
+  .tour-factbar-inner { gap: 12px 22px; }
+  .tour-factbar-partners { margin-top: 14px; padding-top: 12px; }
+}
+
+/* Partner logo cards: gold (not white) */
+.tour-tpartner-logo { background: var(--gold); }
+
+/* Futtos logo: recolour its green to solid black */
+.tour-tpartner-logo img[alt="Futtos"] { filter: brightness(0); }

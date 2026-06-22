@@ -1,8 +1,48 @@
 # Ubud Jungle Ballers — website
 
-Marketing site for a football club based in Ubud, Bali. Static HTML/CSS/JS with a vendored Three.js globe. **No build step, no framework, no server-side anything.** Deployed on Vercel via GitHub push.
+Marketing site for a football club based in Ubud, Bali. Static HTML/CSS/JS with a vendored Three.js globe — **no framework, no bundler, no server-side rendering**. A tiny Node codegen step (Supabase env keys + the Bahasa Indonesia pages) runs on deploy and locally; there is no npm dependency tree. Deployed on Vercel via GitHub push.
 
 The parent directory `../` holds private business plan + governance docs — only the `website/` folder is published.
+
+---
+
+## ⚑ Agent rules — read before editing
+
+This is a **bilingual (EN + ID)**, **no-bundler** static site with a deliberate visual identity. Three rules are non-negotiable; the rest of this doc is reference.
+
+### 1. Translate every user-facing string (no exceptions)
+
+Both languages are first-class — English at `/` + `/events`, Bahasa Indonesia at `/id/` + `/id/events`. **Any** copy a visitor can read must exist in both. Two mechanisms:
+
+- **Static HTML** → tag it: `data-i18n="key"` (element text) or `data-i18n-attr="attr:key"` (an attribute like `placeholder`/`aria-label`/`alt`/`content`). The English text stays inline; the build renders the `/id/` pages from `i18n/id.json`.
+- **JS-generated text** → call the global `t('key')` (or `t('key', { n })` to interpolate). **Never hardcode a visible string in JS.**
+
+For every new or changed string:
+1. Add the key to **both** `i18n/en.json` and `i18n/id.json` — same path, same shape (they must stay key-for-key in parity).
+2. Run `node scripts/build-i18n.mjs`. It **warns** on any key missing/extra between the catalogs — keep it silent.
+3. If your JS renders translated content, re-render it on the document `i18n:changed` event (the EN/ID toggle switches in place — see `i18n/README.md`).
+
+**Numbers, currency, dates, country names** → use the locale-aware helpers, never hardcode: `UBJ_I18N.formatCurrency(1500000,'IDR')` → `IDR 1,500,000` / `Rp 1.500.000`; also `.formatNumber`, `.formatDate`, `.countryName`.
+
+**Gotchas:** never nest a `data-i18n` inside another `data-i18n` value (the build replaces inner HTML by key — inline the text or use a runtime-filled `data-cfg` span). **Do not translate** brand/proper nouns: `Ubud Jungle Ballers`, `King of the Jungle`, `Welcome to the Jungle`, `Liga Raya`, sponsor names, player names, position codes (GK/DEF/MID/FWD), `SALAM HIJAU`.
+
+Audit before finishing: `node scripts/build-i18n.mjs` (warns on keys missing from `id.json`) **and** `node scripts/scan-i18n.mjs` (lists any visible text not wrapped in `data-i18n` — exits non-zero if it finds untranslated copy). Both must be clean. Full guide: **`i18n/README.md`**.
+
+### 2. Match the visual identity
+
+Editorial, premium, jungle. Don't introduce new fonts, colours, or bespoke component styles — reuse what's there.
+
+- **Colours:** only the CSS tokens (`var(--bg)`, `--bg-2`, `--bg-3`, `--line`, `--ink`, `--ink-dim`, `--gold`, `--gold-2`). Never hardcode a hex. **Gold is the only accent** — use it sparingly, for CTAs and highlights.
+- **Type:** `.display` (Anton) for headlines; `.mono` (JetBrains Mono, UPPERCASE, wide `letter-spacing`) for eyebrows / labels / metadata; Archivo for body. Section eyebrows follow the `0X / NAME` mono pattern.
+- **Components:** buttons are `.btn.btn--gold` / `.btn.btn--ghost`; sections use the `.cd-section` rhythm with hairline (`--line`) borders and generous whitespace.
+- **Motion:** animate **`transform`/`opacity` only** — never `width`/`height` (it caused flicker on the scroll-pinned hero).
+- **Responsive:** the breakpoint is **≤960px** (with ≤600px tweaks) — hamburger drawer, bottom sheets. Test both.
+
+### 3. Respect the no-bundler architecture
+
+- No npm packages, no frameworks, no build tooling beyond the two Node codegen scripts. Match the existing vanilla patterns.
+- Shared assets/scripts are referenced **root-absolute** (`/style.css`, `/assets/…`, `/vendor/…`, `/main.js`) so the `/id/` pages resolve them; keep new ones root-absolute. **Page-to-page links stay relative** (`tournament.html`, `index.html#about`) so navigation keeps the active locale.
+- After editing copy or i18n, **rebuild** (`node scripts/build-i18n.mjs`) and **verify both languages in the browser** — the `/id/` pages and `i18n/strings.js` are generated (git-ignored).
 
 ---
 
@@ -124,11 +164,23 @@ In the join modal, the original `showStep()` did `stepNum.parentElement.innerHTM
 
 ---
 
+## Internationalization (EN / ID)
+
+The site is bilingual: English at `/` + `/events`, Bahasa Indonesia at `/id/` + `/id/events`. Full guide in `i18n/README.md`. In short:
+
+- Strings live in `i18n/en.json` + `i18n/id.json` (`id` mirrors `en` key-for-key).
+- Static HTML is tagged `data-i18n="key"` / `data-i18n-attr="attr:key"`; English stays inline, and `scripts/build-i18n.mjs` pre-renders the `/id/*.html` pages by swapping in `id.json`. JS-generated text calls the global `t('key')`.
+- The build also generates `i18n/strings.js` (runtime catalog). Both `i18n/strings.js` and `/id/` are git-ignored — produced by `vercel.json`'s build command and by `start.command` locally. **Re-run `node scripts/build-i18n.mjs` after editing the JSON or any tagged copy.**
+- Numbers/currency/country names use the `Intl` formatters in `i18n/i18n.js` (`UBJ_I18N.formatCurrency`, `.countryName`). The tournament fee is `CONFIG.feeAmount` (a number) formatted per-locale.
+- **Gotcha:** never nest a `data-i18n` inside another `data-i18n` value (the build replaces inner HTML by key) — inline the text, or use a runtime-filled `data-cfg` span.
+
+---
+
 ## Tweaking content
 
 - **Squad rosters** → `squads.js`. Each tier (`first-team`, `second-team`, `fun-first`) has 15 players with `{ number, name, position, flag, role? }`
 - **Player-nationality globe markers** → `players.js`. Each entry needs `iso` (ISO 3166-1 numeric, not alpha), `lat`, `lon`
-- **Hero copy + section copy** → directly in `index.html`
+- **Hero copy + section copy** → directly in `index.html` (then mirror the change into `i18n/en.json` + `i18n/id.json` and rebuild — see the i18n section above)
 - **Brand palette** → CSS variables at top of `style.css`
 - **Club mockup photos** → `assets/club/`. Swap files in place keeping filenames, or update `index.html` references
 

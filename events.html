@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- ============== i18n: first-visit language routing (zero-flash) ============== -->
+  <script>
+    window.__I18N_ALT = { en: '/events.html', id: '/id/events.html' };
+    (function () {
+      try {
+        var cur = (document.documentElement.getAttribute('lang') || 'en').slice(0, 2).toLowerCase();
+        var saved = localStorage.getItem('ubj.lang');
+        var want = (saved === 'en' || saved === 'id') ? saved
+          : (/^id\b/i.test(navigator.language || '') ? 'id' : 'en');
+        if (want !== cur) {
+          var target = want === 'id' ? window.__I18N_ALT.id : window.__I18N_ALT.en;
+          if (target) location.replace(target + (location.hash || ''));
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <title data-i18n="tmeta.title">King of the Jungle — Ubud Jungle Ballers Tournament</title>
+  <meta name="description" data-i18n-attr="content:tmeta.desc" content="King of the Jungle — a one-day football tournament hosted by Ubud Jungle Ballers. Register your team in Ubud, Bali on 4 July 2026." />
+
+  <!-- SEO: canonical + locale alternates (fully-qualified for production).
+       The build (scripts/build-i18n.mjs) rewrites canonical + og:url to the
+       /id/events URL when generating the Bahasa page. -->
+  <link rel="canonical" href="https://ubudjungleballers.com/events" />
+  <link rel="alternate" hreflang="en" href="https://ubudjungleballers.com/events" />
+  <link rel="alternate" hreflang="id" href="https://ubudjungleballers.com/id/events" />
+  <link rel="alternate" hreflang="x-default" href="https://ubudjungleballers.com/events" />
+
+  <!-- Open Graph — link preview on WhatsApp, Instagram, Facebook, LinkedIn -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Ubud Jungle Ballers" />
+  <meta property="og:title" data-i18n-attr="content:tmeta.title" content="King of the Jungle — Ubud Jungle Ballers Tournament" />
+  <meta property="og:description" data-i18n-attr="content:tmeta.desc" content="King of the Jungle — a one-day football tournament hosted by Ubud Jungle Ballers. Register your team in Ubud, Bali on 4 July 2026." />
+  <meta property="og:url" content="https://ubudjungleballers.com/events" />
+  <meta property="og:image" content="https://ubudjungleballers.com/assets/og/og-events.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" data-i18n-attr="content:tmeta.ogImageAlt" content="King of the Jungle — football tournament in Ubud, Bali" />
+  <meta property="og:locale" data-i18n-attr="content:tmeta.ogLocale" content="en_US" />
+  <meta property="og:locale:alternate" content="id_ID" />
+
+  <!-- Twitter / X card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" data-i18n-attr="content:tmeta.title" content="King of the Jungle — Ubud Jungle Ballers Tournament" />
+  <meta name="twitter:description" data-i18n-attr="content:tmeta.desc" content="King of the Jungle — a one-day football tournament hosted by Ubud Jungle Ballers. Register your team in Ubud, Bali on 4 July 2026." />
+  <meta name="twitter:image" content="https://ubudjungleballers.com/assets/og/og-events.jpg" />
+
+  <!-- Structured data: the tournament -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsEvent",
+    "name": "King of the Jungle",
+    "sport": "Football",
+    "startDate": "2026-07-04T15:00:00+08:00",
+    "endDate": "2026-07-04T22:00:00+08:00",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "url": "https://ubudjungleballers.com/events",
+    "image": "https://ubudjungleballers.com/assets/og/og-events.jpg",
+    "description": "A one-day football tournament hosted by Ubud Jungle Ballers in Ubud, Bali.",
+    "location": {
+      "@type": "Place",
+      "name": "Liga Raya, Gianyar",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Ubud",
+        "addressRegion": "Bali",
+        "addressCountry": "ID"
+      }
+    },
+    "organizer": {
+      "@type": "SportsOrganization",
+      "name": "Ubud Jungle Ballers",
+      "url": "https://ubudjungleballers.com"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "1500000",
+      "priceCurrency": "IDR",
+      "url": "https://ubudjungleballers.com/events",
+      "availability": "https://schema.org/LimitedAvailability",
+      "validThrough": "2026-07-01T23:59:00+08:00"
+    }
+  }
+  </script>
+
+  <!-- Google Fonts: see ../BRAND.md -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800;900&family=Bebas+Neue&family=Bricolage+Grotesque:wght@400;500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="/tournament.css" />
+
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <link rel="apple-touch-icon" href="/assets/icon-logo.png" />
+
+  <!-- i18n runtime: generated catalog + translator / Intl formatters / toggle -->
+  <script src="/i18n/strings.js"></script>
+  <script src="/i18n/i18n.js"></script>
+</head>
+<body>
+
+  <!-- ============== NAV ============== -->
+  <header class="site-nav is-scrolled" id="site-nav">
+    <div class="container nav-inner">
+      <a class="brand-mark" href="index.html">
+        <img class="brand-icon" src="/assets/icon-logo-bone.png" alt="" aria-hidden="true" />
+        <div class="brand-wordmark">
+          <div class="brand-name">Ubud Jungle <span class="gold">Ballers</span></div>
+          <div class="brand-eyebrow mono">EST. 2026 · UBUD · BALI</div>
+        </div>
+      </a>
+      <nav class="links">
+        <a href="index.html#about" data-i18n="nav.club">The Club</a>
+        <a href="index.html#community" data-i18n="nav.community">Community</a>
+        <a href="index.html#squad" data-i18n="nav.squad">Squad</a>
+        <a href="index.html#partners" data-i18n="nav.partners">Partners</a>
+        <a href="events.html" class="nav-current" aria-current="page" data-i18n="nav.events">Events</a>
+        <a href="#register" class="nav-cta" data-register data-i18n="nav.register">Register a Team →</a>
+        <span class="lang-toggle" role="group" aria-label="Language" data-i18n-attr="aria-label:lang.switch">
+          <button type="button" class="lang-btn" data-lang-set="en">EN</button>
+          <button type="button" class="lang-btn" data-lang-set="id">ID</button>
+        </span>
+      </nav>
+      <button class="nav-burger" id="nav-burger" aria-label="Open menu" data-i18n-attr="aria-label:common.openMenu" aria-expanded="false" aria-controls="mobile-drawer">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ============== MOBILE DRAWER ============== -->
+  <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+    <div class="mobile-drawer-backdrop" data-drawer-close></div>
+    <aside class="mobile-drawer-panel" role="dialog" aria-label="Menu" data-i18n-attr="aria-label:common.menu">
+      <header class="mobile-drawer-head">
+        <div class="brand-wordmark">
+          <div class="brand-name">Ubud Jungle <span class="gold">Ballers</span></div>
+          <div class="brand-eyebrow mono">KING OF THE JUNGLE</div>
+        </div>
+        <button class="mobile-drawer-close" aria-label="Close menu" data-i18n-attr="aria-label:common.closeMenu" data-drawer-close>×</button>
+      </header>
+      <nav class="mobile-drawer-links">
+        <a href="#details"  data-drawer-close><span class="mono drawer-idx">01</span><span data-i18n="tour.navTournament">The Tournament</span></a>
+        <a href="#prizes"   data-drawer-close><span class="mono drawer-idx">02</span><span data-i18n="tour.navFormat">Format &amp; Prize</span></a>
+        <a href="#register"  data-drawer-close><span class="mono drawer-idx">03</span><span data-i18n="tour.navPayment">Entry &amp; Payment</span></a>
+        <a href="index.html" data-drawer-close><span class="mono drawer-idx">04</span><span data-i18n="nav.backToClub">Back to Club</span></a>
+      </nav>
+      <a href="#register" class="btn btn--gold mobile-drawer-cta" data-register data-i18n="nav.register">Register a Team →</a>
+      <div class="lang-toggle lang-toggle--drawer" role="group" aria-label="Language" data-i18n-attr="aria-label:lang.switch">
+        <button type="button" class="lang-btn" data-lang-set="en">EN</button>
+        <button type="button" class="lang-btn" data-lang-set="id">ID</button>
+      </div>
+    </aside>
+  </div>
+
+  <main class="tour-main">
+
+    <!-- ====== NAV + HERO + STRIP share one viewport ====== -->
+    <div class="tour-firstview">
+
+    <!-- ============== HERO ============== -->
+    <section class="tour-hero">
+      <svg class="tour-hero-topo" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <g stroke="var(--line)" stroke-width="0.6" fill="none">
+          <path d="M -100 80 C 200 40, 600 140, 900 60 S 1500 120, 1600 90"/>
+          <path d="M -100 150 C 200 110, 600 210, 900 130 S 1500 190, 1600 160"/>
+          <path d="M -100 220 C 200 180, 600 280, 900 200 S 1500 260, 1600 230"/>
+          <path d="M -100 290 C 200 250, 600 350, 900 270 S 1500 330, 1600 300"/>
+          <path d="M -100 360 C 200 320, 600 420, 900 340 S 1500 400, 1600 370"/>
+          <path d="M -100 430 C 200 390, 600 490, 900 410 S 1500 470, 1600 440"/>
+          <path d="M -100 500 C 200 460, 600 560, 900 480 S 1500 540, 1600 510"/>
+        </g>
+      </svg>
+      <div class="container tour-hero-inner">
+        <div class="tour-hero-copy">
+          <div class="label-line tour-hero-eyebrow">
+            <span class="mono" data-i18n="tour.heroEyebrow">UBUD JUNGLE BALLERS PRESENTS</span>
+          </div>
+          <!-- EDIT: tournament name (brand name — not translated) -->
+          <h1 class="tour-hero-title display">King of<br/>the <span class="gold">Jungle</span></h1>
+          <!-- EDIT: hero tagline -->
+          <p class="tour-hero-sub" data-i18n="tour.heroSub">One ball, six teams — and one crown. Gather your team and conquer the jungle at Liga Raya, Gianyar.</p>
+
+          <div class="tour-hero-cta-row">
+            <a href="#register" class="btn btn--gold" data-register data-i18n="tour.ctaRegister">Register your team →</a>
+          </div>
+          <!-- Mobile-only entry fee, shown under the Register button -->
+          <div class="tour-hero-fee mono"><span data-i18n="tour.factEntry">Entry</span> <strong data-cfg="fee">—</strong> <span data-i18n="tour.feeNote">per team</span></div>
+        </div>
+
+        <!-- Club poster, integrated from the "Welcome to the Jungle" key art -->
+        <aside class="tour-hero-poster" aria-label="Ubud Jungle Ballers">
+          <div class="tour-poster-frame">
+            <img class="tour-poster-badge" src="/assets/badge-logo.png" alt="Ubud Jungle Ballers club badge" />
+            <div class="tour-poster-title display">Welcome<br/>to the<br/>Jungle</div>
+            <div class="tour-poster-tag mono" data-i18n="tour.posterTag">Community · Brotherhood · Football</div>
+            <div class="tour-poster-sponsors">
+              <span class="mono">Common Sense</span>
+              <span class="mono">Futtos</span>
+              <span class="mono">Vaniglia</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============== FACT STRIP ============== -->
+    <section class="tour-factbar" aria-label="Tournament details">
+      <div class="container">
+        <div class="tour-factbar-inner">
+          <div class="tour-fact">
+            <span class="tour-fact-k mono" data-i18n="tour.factWhen">When</span>
+            <span class="tour-fact-v" data-i18n="tour.factWhenVal">Sat · 4 July 2026</span>
+          </div>
+          <div class="tour-fact">
+            <span class="tour-fact-k mono" data-i18n="tour.factKick">Kick-off</span>
+            <span class="tour-fact-v" data-i18n="tour.factKickVal">3 – 10 PM</span>
+          </div>
+          <div class="tour-fact">
+            <span class="tour-fact-k mono" data-i18n="tour.factWhere">Where</span>
+            <span class="tour-fact-v">Liga Raya, Gianyar</span>
+          </div>
+          <div class="tour-fact">
+            <span class="tour-fact-k mono" data-i18n="tour.factFormat">Format</span>
+            <span class="tour-fact-v" data-i18n="tour.factFormatVal">7-a-side · 6 teams</span>
+          </div>
+          <div class="tour-fact tour-fact--fee">
+            <span class="tour-fact-k mono" data-i18n="tour.factEntry">Entry</span>
+            <span class="tour-fact-v"><span data-cfg="fee">—</span></span>
+          </div>
+        </div>
+        <div class="tour-factbar-partners mono" data-i18n="tour.factPartners"><span class="tour-partners-prefix">In partnership with </span><span>Common Sense</span> · <span>Futtos</span> · <span>Vaniglia</span></div>
+      </div>
+    </section>
+    </div><!-- /.tour-firstview -->
+
+    <!-- ============== PRIZE POOL ============== -->
+    <section class="tour-section" id="prizes">
+      <div class="container">
+        <div class="tour-section-head">
+          <div class="eyebrow" data-i18n="tour.prizesEyebrow">Prize Pool</div>
+          <h2 class="display cd-section-title tour-section-title" data-i18n="tour.prizesTitle">Play for<br/>the crown.</h2>
+          <p class="tour-section-lead" data-i18n="tour.prizesLead">Win through the groups and the knockouts — <strong>IDR 10,000,000</strong> is on the line, and only one team walks out King of the Jungle.</p>
+        </div>
+
+        <div class="tour-podium">
+          <div class="tour-prize tour-prize--second">
+            <div class="tour-prize-medal mono" data-i18n="tour.prize2Medal">2nd</div>
+            <div class="tour-prize-amount display" data-i18n="tour.prize2Amount">IDR 3,000,000</div>
+            <div class="tour-prize-note mono" data-i18n="tour.prize2Note">Runner-up</div>
+          </div>
+          <div class="tour-prize tour-prize--first">
+            <div class="tour-prize-crown" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 7l4.5 4L12 4l4.5 7L21 7l-1.8 11.5H4.8L3 7z"/></svg></div>
+            <div class="tour-prize-medal mono" data-i18n="tour.prize1Medal">1st · Champions</div>
+            <div class="tour-prize-amount display" data-i18n="tour.prize1Amount">IDR 5,000,000</div>
+            <div class="tour-prize-note mono">King of the Jungle</div>
+          </div>
+          <div class="tour-prize tour-prize--third">
+            <div class="tour-prize-medal mono" data-i18n="tour.prize3Medal">3rd</div>
+            <div class="tour-prize-amount display" data-i18n="tour.prize3Amount">IDR 2,000,000</div>
+            <div class="tour-prize-note mono" data-i18n="tour.prize3Note">Third place</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== INCLUDED + RULES ============== -->
+    <section class="tour-section tour-section--alt" id="details">
+      <div class="container">
+        <div class="tour-section-head">
+          <div class="eyebrow" data-i18n="tour.detailEyebrow">Format · what to know</div>
+          <h2 class="display cd-section-title tour-section-title" data-i18n="tour.detailTitle">How the<br/>day runs.</h2>
+        </div>
+        <div class="tour-split">
+          <div class="tour-panel">
+            <h3><span class="tour-panel-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M7 6H4.5v1.4A3 3 0 0 0 7.6 10.4M17 6h2.5v1.4a3 3 0 0 1-3.1 3"/><path d="M9.5 16.5h5M8.5 20h7M12 14.2v2.3"/></svg></span><span data-i18n="tour.fmtHead">The format</span></h3>
+            <ul class="tour-list">
+              <li data-i18n="tour.fmtList.0">6 teams · two groups of three<span>Every team drawn into a group of three</span></li>
+              <li data-i18n="tour.fmtList.1">Group stage: play each rival twice<span>Double round-robin · 2 &times; 10 min games</span></li>
+              <li data-i18n="tour.fmtList.2">Top two in each group advance<span>Straight into the semi-finals</span></li>
+              <li data-i18n="tour.fmtList.3">Knockouts: 2 &times; 15 min<span>Semis, a 3rd-place play-off, then the final</span></li>
+            </ul>
+          </div>
+          <div class="tour-panel">
+            <h3><span class="tour-panel-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.2"/><path d="M12 7.7h.01"/></svg></span><span data-i18n="tour.knowHead">Good to know</span></h3>
+            <ul class="tour-list">
+              <li data-i18n="tour.knowList.0">7-a-side<span>Seven out on the pitch, roll your subs freely</span></li>
+              <li data-i18n="tour.knowList.1">Bring your own jersey<span>Every team needs its own matching kit</span></li>
+              <li data-i18n="tour.knowList.2">Qualified referees<span>Every match is properly officiated</span></li>
+              <li data-i18n="tour.knowList.3">Entry per team<span><span data-cfg="fee">—</span> · covers your group games and knockout run</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="tour-bracket">
+          <div class="tour-bracket-head mono" data-i18n="tour.brHead">The bracket · group stage → knockouts</div>
+          <div class="tour-bracket-flow">
+            <div class="tour-bracket-stage">
+              <div class="tour-stage-label mono" data-i18n="tour.brGroups">Groups</div>
+              <div class="tour-groups">
+                <div class="tour-group">
+                  <div class="tour-group-name mono" data-i18n="tour.brGroupA">Group A</div>
+                  <div class="tour-group-slot" data-i18n="tour.brTeam1">Team 1</div>
+                  <div class="tour-group-slot" data-i18n="tour.brTeam2">Team 2</div>
+                  <div class="tour-group-slot" data-i18n="tour.brTeam3">Team 3</div>
+                </div>
+                <div class="tour-group">
+                  <div class="tour-group-name mono" data-i18n="tour.brGroupB">Group B</div>
+                  <div class="tour-group-slot" data-i18n="tour.brTeam1">Team 1</div>
+                  <div class="tour-group-slot" data-i18n="tour.brTeam2">Team 2</div>
+                  <div class="tour-group-slot" data-i18n="tour.brTeam3">Team 3</div>
+                </div>
+              </div>
+              <div class="tour-stage-foot mono" data-i18n="tour.brTop2">Top 2 advance</div>
+            </div>
+            <div class="tour-bracket-stage">
+              <div class="tour-stage-label mono" data-i18n="tour.brSemis">Semi-finals</div>
+              <div class="tour-tie"><span data-i18n="tour.brWinnerA">Winner A</span><span class="tour-tie-vs mono" data-i18n="tour.brVs">vs</span><span data-i18n="tour.brSecondB">Second B</span></div>
+              <div class="tour-tie"><span data-i18n="tour.brWinnerB">Winner B</span><span class="tour-tie-vs mono" data-i18n="tour.brVs">vs</span><span data-i18n="tour.brSecondA">Second A</span></div>
+              <div class="tour-stage-foot mono" data-i18n="tour.brLosers">Losers → 3rd-place play-off</div>
+            </div>
+            <div class="tour-bracket-stage">
+              <div class="tour-stage-label mono" data-i18n="tour.brFinal">Final</div>
+              <div class="tour-tie tour-tie--final"><span data-i18n="tour.brSemi1Winner">Semi 1 winner</span><span class="tour-tie-vs mono" data-i18n="tour.brVs">vs</span><span data-i18n="tour.brSemi2Winner">Semi 2 winner</span></div>
+            </div>
+            <div class="tour-bracket-stage tour-bracket-stage--crown">
+              <div class="tour-stage-label mono" data-i18n="tour.brChampion">Champion</div>
+              <div class="tour-champion">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 7l4.5 4L12 4l4.5 7L21 7l-1.8 11.5H4.8L3 7z"/></svg>
+                <span class="display">King of the Jungle</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== TOURNAMENT PARTNERS ============== -->
+    <section class="tour-section" id="tournament-partners">
+      <div class="container">
+        <div class="tour-section-head">
+          <div class="eyebrow" data-i18n="tour.tpartnersEyebrow">Partners</div>
+          <h2 class="display cd-section-title tour-section-title" data-i18n="tour.tpartnersTitle">Backed by<br/>the jungle.</h2>
+          <p class="tour-section-lead" data-i18n="tour.tpartnersLead">King of the Jungle is powered by local partners who make the day happen.</p>
+        </div>
+        <div class="tour-tpartners">
+          <div class="tour-tpartner">
+            <span class="tour-tpartner-logo"><img src="/assets/partners/Common%20Sense%20Trading_FA.png" alt="Common Sense" loading="lazy" /></span>
+            <span class="tour-tpartner-name mono">Common Sense</span>
+          </div>
+          <div class="tour-tpartner">
+            <span class="tour-tpartner-logo"><img src="/assets/partners/Futtos.png" alt="Futtos" loading="lazy" /></span>
+            <span class="tour-tpartner-name mono">Futtos</span>
+          </div>
+          <div class="tour-tpartner">
+            <span class="tour-tpartner-logo"><img src="/assets/partners/Logo%20Vaniglia.png" alt="Vaniglia" loading="lazy" /></span>
+            <span class="tour-tpartner-name mono">Vaniglia</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== REGISTER CTA BAND ============== -->
+    <section class="tour-cta-band" id="register">
+      <div class="container">
+        <h2 class="display" data-i18n="tour.bandTitle">Take the jungle.</h2>
+        <p data-i18n="tour.bandBody">Two minutes to register. Team name, your crest, a contact, and squad size — that's it.</p>
+        <a href="#register" class="btn btn--gold" data-register data-i18n="tour.ctaRegister">Register your team →</a>
+        <div class="tour-cta-contact">
+          <span data-i18n="tour.ctaContactQ">Questions about the tournament?</span>
+          <a data-cfg-href="whatsappAsk" href="#" target="_blank" rel="noopener" data-i18n="tour.ctaContactLink">Message us on WhatsApp →</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============== FOOTER (shared) ============== -->
+  <footer class="cd-footer" id="contact">
+    <div class="container">
+      <div class="cd-footer-grid">
+        <div class="cd-footer-brand">
+          <img class="cd-footer-badge" src="/assets/badge-logo.png" alt="Ubud Jungle Ballers club badge" />
+          <p class="cd-footer-tagline" data-i18n="footer.tagline">
+            A football club from Ubud, Bali. Open to everyone who'll run for the
+            man next to them — competitive at regional level.
+          </p>
+          <ul class="socials cd-footer-socials" aria-label="Follow Ubud Jungle Ballers" data-i18n-attr="aria-label:footer.socialsAria">
+            <li>
+              <a class="social-btn" href="https://instagram.com/ubudjungleballers" target="_blank" rel="noopener" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/>
+                  <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
+                  <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a class="social-btn" href="https://tiktok.com/@ubudjungleballers" target="_blank" rel="noopener" aria-label="TikTok">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.6 5.82a4.28 4.28 0 0 1-1.18-2.32V3h-3.32v13.27a2.46 2.46 0 0 1-2.5 2.46 2.46 2.46 0 0 1-2.46-2.46 2.46 2.46 0 0 1 2.46-2.46c.18 0 .36.02.53.06v-3.36a5.84 5.84 0 0 0-.54-.03 5.81 5.81 0 1 0 5.81 5.79V9.93a7.62 7.62 0 0 0 4.46 1.43V8.04a4.5 4.5 0 0 1-3.26-2.22z"/></svg>
+              </a>
+            </li>
+            <li>
+              <a class="social-btn" href="https://chat.whatsapp.com/LutV2MjmrMHEkOTy2IEHtR" target="_blank" rel="noopener" aria-label="WhatsApp">
+                <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16 3a13 13 0 0 0-11.04 19.83L3 29l6.34-1.93A13 13 0 1 0 16 3zm0 23.6a10.6 10.6 0 0 1-5.4-1.48l-.39-.23-3.76 1.14 1.16-3.66-.25-.4A10.6 10.6 0 1 1 16 26.6z"/></svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="cd-footer-col">
+          <div class="eyebrow" data-i18n="tour.footColTournament">Tournament</div>
+          <a href="#details" data-i18n="tour.footLinkTournament">The Tournament</a>
+          <a href="#prizes" data-i18n="tour.footLinkFormat">Format &amp; Prize</a>
+          <a href="#register" data-i18n="tour.footLinkPayment">Entry &amp; Payment</a>
+          <a href="#register" data-register data-i18n="tour.footLinkRegister">Register a Team</a>
+        </div>
+
+        <div class="cd-footer-col">
+          <div class="eyebrow" data-i18n="footer.colClub">The Club</div>
+          <a href="index.html#about" data-i18n="footer.linkManifesto">Manifesto</a>
+          <a href="index.html#squad" data-i18n="footer.linkSquad">Squad</a>
+          <a href="index.html#community" data-i18n="footer.linkSessions">Sessions</a>
+          <a href="index.html#partners" data-i18n="footer.linkPartners">Partners</a>
+        </div>
+
+        <div class="cd-footer-col">
+          <div class="eyebrow" data-i18n="footer.colContact">Contact</div>
+          <div class="cd-footer-contact">
+            <div data-i18n="footer.contactLocation">Ubud, Bali, Indonesia</div>
+            <div data-i18n="tour.footContactDate">Tournament: 4 July 2026</div>
+            <div class="cd-footer-link"><a href="mailto:hello@ubudjungleballers.com">hello@ubudjungleballers.com</a></div>
+            <div class="cd-footer-link"><a href="https://chat.whatsapp.com/LutV2MjmrMHEkOTy2IEHtR" data-i18n="footer.contactWhatsApp">WhatsApp Community</a></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hairline cd-footer-rule"></div>
+
+      <div class="cd-footer-fine">
+        <div class="mono" data-i18n="footer.fineLeft">© 2026 UBUD JUNGLE BALLERS · ALL RIGHTS RESERVED · SALAM HIJAU</div>
+        <div class="mono">KING OF THE JUNGLE · UBUD · BALI</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============== TEAM REGISTRATION MODAL (reuses .join-* styles) ============== -->
+  <div class="join-modal" id="tour-modal" aria-hidden="true">
+    <div class="join-modal-backdrop" data-tour-close></div>
+    <aside class="join-modal-panel" role="dialog" aria-modal="true" aria-labelledby="tour-modal-title">
+      <header class="join-modal-head">
+        <div class="join-modal-handle" aria-hidden="true"></div>
+        <div class="mono join-modal-eyebrow" id="tour-eyebrow">
+          <span class="join-eyebrow-progress" data-i18n="tour.regEyebrowProgress">REGISTER A TEAM · STEP <span class="tour-step-num" id="tour-step-num">1</span> / 3</span>
+          <span class="join-eyebrow-done" hidden data-i18n="tour.regEyebrowDone">YOUR TEAM IS IN</span>
+        </div>
+        <button class="join-modal-close" type="button" aria-label="Close" data-i18n-attr="aria-label:common.close" data-tour-close>×</button>
+        <div class="join-modal-progress" aria-hidden="true">
+          <div class="join-modal-progress-bar" id="tour-progress-bar"></div>
+        </div>
+      </header>
+
+      <form class="join-modal-form" id="tour-form" novalidate>
+
+        <!-- Step 1 / Team identity -->
+        <fieldset class="join-step is-active" data-step="1">
+          <legend class="join-step-title display" id="tour-modal-title" data-i18n="tour.s1Title">Your team.</legend>
+          <p class="join-step-sub" data-i18n="tour.s1Sub">Name it, then drop your crest. This is how you'll show up on the bracket.</p>
+          <div class="join-field">
+            <label class="join-label mono" for="tour-team" data-i18n="tour.lblTeam">TEAM NAME</label>
+            <input class="join-input" id="tour-team" name="team" type="text" placeholder="e.g. Monkey Forest FC" data-i18n-attr="placeholder:tour.phTeam" maxlength="48" required />
+          </div>
+          <div class="join-field">
+            <span class="join-label mono" data-i18n="tour.lblLogo">TEAM LOGO</span>
+            <label class="tour-logo-drop" id="tour-logo-drop">
+              <input class="tour-logo-input" id="tour-logo" name="logo" type="file" accept="image/png,image/jpeg,image/webp" />
+              <span class="tour-logo-thumb" id="tour-logo-thumb" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 16l5-5 4 4 3-3 4 4"/><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="9" r="1.4"/></svg>
+              </span>
+              <span class="tour-logo-copy">
+                <span class="tour-logo-title" data-i18n="tour.logoTitle">Upload your crest</span>
+                <span class="tour-logo-hint" id="tour-logo-hint" data-i18n="tour.logoHint">PNG, JPG or WEBP · up to 4 MB</span>
+              </span>
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- Step 2 / Captain / admin -->
+        <fieldset class="join-step" data-step="2" hidden>
+          <legend class="join-step-title display" data-i18n="tour.s2Title">Who's the<br/>captain?</legend>
+          <p class="join-step-sub" data-i18n="tour.s2Sub">One contact per team. We'll send the venue, kickoff times and fixtures here.</p>
+          <div class="join-field">
+            <label class="join-label mono" for="tour-admin" data-i18n="tour.lblAdmin">ADMIN / CAPTAIN NAME</label>
+            <input class="join-input" id="tour-admin" name="admin" type="text" autocomplete="name" maxlength="60" required />
+          </div>
+          <div class="join-field">
+            <label class="join-label mono" for="tour-wa" data-i18n="tour.lblWa">WHATSAPP NUMBER</label>
+            <input class="join-input" id="tour-wa" name="whatsapp" type="tel" inputmode="tel" placeholder="+62 812 3456 7890" autocomplete="tel" required />
+          </div>
+        </fieldset>
+
+        <!-- Step 3 / Squad size -->
+        <fieldset class="join-step" data-step="3" hidden>
+          <legend class="join-step-title display" data-i18n="tour.s3Title">How big is<br/>the squad?</legend>
+          <p class="join-step-sub" data-i18n="tour.s3Sub">7 on the pitch, up to 5 subs. Roughly how many players are you bringing?</p>
+          <div class="join-field">
+            <label class="join-label mono" for="tour-roster" data-i18n="tour.lblRoster">SQUAD SIZE (INC. SUBS)</label>
+            <input class="join-input" id="tour-roster" name="roster" type="number" min="7" max="20" inputmode="numeric" placeholder="e.g. 10" data-i18n-attr="placeholder:tour.phRoster" required />
+          </div>
+          <p class="join-step-sub" style="margin-top:4px" data-i18n="tour.s3Note">Final player names aren't needed now — bring your squad on the day. Entry fee is <strong data-cfg="fee">—</strong> <span data-cfg="feeNote">per team</span>, payable after you register.</p>
+        </fieldset>
+
+        <!-- Step 4 / Success -->
+        <div class="join-step join-step--done" data-step="4" hidden>
+          <div class="join-done-badge">
+            <img src="/assets/badge-logo.png" alt="Ubud Jungle Ballers badge" />
+          </div>
+          <h3 class="join-step-title display" data-i18n="tour.doneTitle">Team registered.</h3>
+          <p class="join-step-sub" id="tour-done-msg" data-i18n="tour.doneSub">You're on the board. One step left — pay the entry fee to lock your spot, then send the screenshot on WhatsApp.</p>
+          <a class="btn btn--gold join-done-cta" id="tour-done-wa" href="#" target="_blank" rel="noopener" data-i18n="tour.doneCta">Send payment proof on WhatsApp →</a>
+          <a class="tour-done-group" id="tour-done-group" data-cfg-href="whatsappGroup" href="#" target="_blank" rel="noopener" hidden data-i18n="tour.doneGroupCta">Join the tournament WhatsApp group →</a>
+
+          <div class="tour-done-pay">
+            <div class="tour-done-pay-head" data-i18n="tour.payBlockHead">Pay the entry fee</div>
+            <dl>
+              <dt data-i18n="tour.pbAmount">Amount</dt><dd data-cfg="fee">—</dd>
+              <dt data-i18n="tour.pbBank">Bank</dt><dd data-cfg="bankName">—</dd>
+              <dt data-i18n="tour.pbAccount">Account</dt><dd data-cfg="accountName">—</dd>
+              <dt data-i18n="tour.pbNo">No.</dt><dd data-cfg="accountNumber">—</dd>
+              <dt data-i18n="tour.pbEwallet">E-wallet</dt><dd><span data-cfg="ewalletName">—</span> · <span data-cfg="ewalletNumber">—</span></dd>
+            </dl>
+          </div>
+
+          <div class="join-done-summary" id="tour-done-summary" aria-live="polite"></div>
+        </div>
+
+        <div class="join-modal-error mono" id="tour-error" hidden></div>
+
+        <footer class="join-modal-foot">
+          <button type="button" class="btn btn--ghost join-back" id="tour-back" data-i18n="join.back">← Back</button>
+          <button type="button" class="btn btn--gold join-next" id="tour-next" data-i18n="join.continue">Continue →</button>
+        </footer>
+      </form>
+    </aside>
+  </div>
+
+  <!-- Sticky nav scroll-state -->
+  <script>
+    (function() {
+      const nav = document.getElementById('site-nav');
+      const onScroll = () => nav.classList.toggle('is-scrolled', window.scrollY > 20);
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+  </script>
+
+  <!-- Mobile hamburger drawer -->
+  <script>
+    (function() {
+      const burger = document.getElementById('nav-burger');
+      const drawer = document.getElementById('mobile-drawer');
+      if (!burger || !drawer) return;
+      function setOpen(open) {
+        drawer.classList.toggle('is-open', open);
+        drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+        burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        document.body.style.overflow = open ? 'hidden' : '';
+      }
+      burger.addEventListener('click', () => setOpen(!drawer.classList.contains('is-open')));
+      drawer.addEventListener('click', (e) => { if (e.target.matches('[data-drawer-close]')) setOpen(false); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && drawer.classList.contains('is-open')) setOpen(false); });
+    })();
+  </script>
+
+  <!-- Generated from .env.local / Vercel env by scripts/gen-env.mjs (gitignored). -->
+  <script src="/env.js"></script>
+  <script src="/tournament.js"></script>
+</body>
+</html>

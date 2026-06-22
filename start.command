@@ -36,6 +36,16 @@ else
   exit 1
 fi
 
+# Generate env.js + the i18n catalog and localized /id/ pages before serving,
+# so the dynamic strings and the Indonesian site are present locally too.
+# (Node is used only for these small codegen scripts — no npm install.)
+if command -v node >/dev/null 2>&1; then
+  node scripts/gen-env.mjs 2>/dev/null || true
+  node scripts/build-i18n.mjs 2>/dev/null || true
+else
+  echo "  ⚠ Node not found — skipping i18n build; the /id/ pages won't be generated."
+fi
+
 # Open the browser shortly after the server starts
 ( sleep 1 && open "${URL}" ) &
 

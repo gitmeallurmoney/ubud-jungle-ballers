@@ -3769,3 +3769,101 @@ footer .marks a:hover { color: var(--ujb-gold); }
   .join-checks { grid-template-columns: repeat(2, 1fr); }
   .join-done-summary-list { grid-template-columns: 84px 1fr; }
 }
+
+/* ============================================================
+   Language toggle (EN / ID) — recessed track with a sliding gold
+   thumb + mono labels. The `.lang-toggle-thumb` is injected by
+   i18n/i18n.js; `.is-en` / `.is-id` on the container drives it.
+   ============================================================ */
+.lang-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: stretch;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg-3);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+  -webkit-tap-highlight-color: transparent;
+}
+/* In the nav, mirror the CTA's own margin so the gap on either side of the
+   register button is equal (32px links gap + 8px = 40px, like the last link). */
+.site-nav .links .lang-toggle { margin-left: 8px; }
+.lang-toggle-thumb {
+  position: absolute;
+  z-index: 0;
+  top: 3px;
+  bottom: 3px;
+  left: 3px;
+  width: calc(50% - 3px);
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--gold-2), var(--gold));
+  box-shadow: 0 1px 6px rgba(232, 179, 57, 0.4),
+              inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  transition: transform 0.32s cubic-bezier(0.34, 1.4, 0.5, 1);
+}
+.lang-toggle.is-id .lang-toggle-thumb { transform: translateX(100%); }
+.lang-btn {
+  position: relative;
+  z-index: 1;
+  flex: 1 1 0;
+  min-width: 36px;
+  text-align: center;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-weight: 700;
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  color: var(--ink-dim);
+  background: transparent;
+  border: 0;
+  border-radius: 999px;
+  padding: 7px 12px;
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+.lang-btn:not(.is-active):hover { color: var(--ink); }
+.lang-btn.is-active { color: var(--bg); }   /* dark jungle ink on the gold thumb */
+.lang-btn:focus-visible {
+  outline: 2px solid var(--gold-2);
+  outline-offset: 2px;
+}
+/* Drawer variant: standalone, full-width, slightly larger touch target */
+.lang-toggle--drawer {
+  display: flex;
+  margin-top: 22px;
+  width: 148px;
+}
+.lang-toggle--drawer .lang-btn {
+  padding: 9px 12px;
+  font-size: 12px;
+}
+
+/* ---------- Partner logo cards (gold) — sponsors section ---------- */
+.sponsor-logos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  max-width: 980px;
+  margin: 0 auto;
+}
+.sponsor-card {
+  display: grid;
+  place-items: center;
+  height: 172px;
+  background: var(--gold);
+  border-radius: 14px;
+  padding: 30px;
+  overflow: hidden;
+}
+.sponsor-card img { max-width: 100%; max-height: 108px; object-fit: contain; display: block; }
+.sponsor-card img[alt="Futtos"] { filter: brightness(0); }
+@media (max-width: 640px) {
+  .sponsor-logos { grid-template-columns: 1fr; }
+}
+
+/* more breathing room between the section divider and the sponsor cards */
+.sponsor-logos { margin-top: 52px; }
+
+/* match the cards->CTA gap to the divider->cards gap */
+.partner-cta { margin-top: 52px; }

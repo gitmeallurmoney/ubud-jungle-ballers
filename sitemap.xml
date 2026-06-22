@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://ubudjungleballers.com/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ubudjungleballers.com/" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://ubudjungleballers.com/id/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ubudjungleballers.com/" />
+  </url>
+  <url>
+    <loc>https://ubudjungleballers.com/id/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ubudjungleballers.com/" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://ubudjungleballers.com/id/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ubudjungleballers.com/" />
+  </url>
+  <url>
+    <loc>https://ubudjungleballers.com/events</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ubudjungleballers.com/events" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://ubudjungleballers.com/id/events" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ubudjungleballers.com/events" />
+  </url>
+  <url>
+    <loc>https://ubudjungleballers.com/id/events</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ubudjungleballers.com/events" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://ubudjungleballers.com/id/events" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ubudjungleballers.com/events" />
+  </url>
+</urlset>

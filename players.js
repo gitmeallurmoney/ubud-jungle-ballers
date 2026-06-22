@@ -53,7 +53,7 @@ const COUNTRY_META = {
 async function buildNationalities() {
   let players = [];
   try {
-    const r = await fetch("./roster.json", { cache: "no-cache" });
+    const r = await fetch("/roster.json", { cache: "no-cache" });
     if (!r.ok) throw new Error(`roster.json ${r.status}`);
     const data = await r.json();
     players = data.players ?? [];
