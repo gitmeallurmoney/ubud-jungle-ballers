@@ -37,6 +37,7 @@ const ORIGIN = 'https://ubudjungleballers.com';
 const PAGES = [
   { src: 'index.html',      out: 'id/index.html',      canonical: ORIGIN + '/id/' },
   { src: 'events.html',     out: 'id/events.html',     canonical: ORIGIN + '/id/events' },
+  { src: 'faq.html',        out: 'id/faq.html',        canonical: ORIGIN + '/id/faq' },
 ];
 
 // ---- locale catalogs --------------------------------------------------------
@@ -178,12 +179,34 @@ function applyAttrs(html, dict, missing) {
   return html;
 }
 
+// Rebuild the FAQPage JSON-LD (marked data-faq-jsonld) from the catalog so the
+// localized page's structured data matches its visible (translated) Q&A text.
+function localizeFaqJsonLd(html, dict) {
+  const items = get(dict, 'faq.items');
+  if (!Array.isArray(items)) return html;
+  const payload = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: items.map((it) => ({
+      '@type': 'Question',
+      name: it.q,
+      acceptedAnswer: { '@type': 'Answer', text: it.a },
+    })),
+  };
+  const json = JSON.stringify(payload, null, 2);
+  return html.replace(
+    /(<script type="application\/ld\+json" data-faq-jsonld>)[\s\S]*?(<\/script>)/,
+    () => '<script type="application/ld+json" data-faq-jsonld>\n  ' + json + '\n  </script>'
+  );
+}
+
 function buildIdPage(page) {
   let html = readFileSync(join(ROOT, page.src), 'utf8');
   const missing = new Set();
 
   html = applyInner(html, id, missing);
   html = applyAttrs(html, id, missing);
+  html = localizeFaqJsonLd(html, id);
 
   // <html lang="en"> → "id" (first occurrence = the document element)
   html = html.replace(/<html\s+lang="en"/, '<html lang="id"');

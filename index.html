@@ -23,8 +23,8 @@
     })();
   </script>
 
-  <title data-i18n="hmeta.title">Ubud Jungle Ballers — Community. Brotherhood. Football.</title>
-  <meta name="description" data-i18n-attr="content:hmeta.desc" content="A football brotherhood rooted in Ubud, Bali. Locals and internationals — one squad, many flags." />
+  <title data-i18n="hmeta.title">Ubud Jungle Ballers — Football, Futsal &amp; Mini-Soccer in Ubud, Bali</title>
+  <meta name="description" data-i18n-attr="content:hmeta.desc" content="Play football, futsal &amp; mini-soccer in Ubud, Bali — open community sessions almost every day, from fun to competitive, for internationals and locals. One squad, many flags." />
 
   <!-- SEO: canonical + locale alternates (fully-qualified for production).
        The build (scripts/build-i18n.mjs) rewrites canonical + og:url to the
@@ -37,47 +37,74 @@
   <!-- Open Graph — link preview on WhatsApp, Instagram, Facebook, LinkedIn -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Ubud Jungle Ballers" />
-  <meta property="og:title" data-i18n-attr="content:hmeta.title" content="Ubud Jungle Ballers — Community. Brotherhood. Football." />
-  <meta property="og:description" data-i18n-attr="content:hmeta.desc" content="A football brotherhood rooted in Ubud, Bali. Locals and internationals — one squad, many flags." />
+  <meta property="og:title" data-i18n-attr="content:hmeta.title" content="Ubud Jungle Ballers — Football, Futsal &amp; Mini-Soccer in Ubud, Bali" />
+  <meta property="og:description" data-i18n-attr="content:hmeta.desc" content="Play football, futsal &amp; mini-soccer in Ubud, Bali — open community sessions almost every day, from fun to competitive, for internationals and locals. One squad, many flags." />
   <meta property="og:url" content="https://ubudjungleballers.com/" />
   <meta property="og:image" content="https://ubudjungleballers.com/assets/og/og-home.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" data-i18n-attr="content:hmeta.ogImageAlt" content="Ubud Jungle Ballers — football brotherhood in Ubud, Bali" />
+  <meta property="og:image:alt" data-i18n-attr="content:hmeta.ogImageAlt" content="Ubud Jungle Ballers — football, futsal &amp; mini-soccer in Ubud, Bali" />
   <meta property="og:locale" data-i18n-attr="content:hmeta.ogLocale" content="en_US" />
   <meta property="og:locale:alternate" content="id_ID" />
 
   <!-- Twitter / X card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" data-i18n-attr="content:hmeta.title" content="Ubud Jungle Ballers — Community. Brotherhood. Football." />
-  <meta name="twitter:description" data-i18n-attr="content:hmeta.desc" content="A football brotherhood rooted in Ubud, Bali. Locals and internationals — one squad, many flags." />
+  <meta name="twitter:title" data-i18n-attr="content:hmeta.title" content="Ubud Jungle Ballers — Football, Futsal &amp; Mini-Soccer in Ubud, Bali" />
+  <meta name="twitter:description" data-i18n-attr="content:hmeta.desc" content="Play football, futsal &amp; mini-soccer in Ubud, Bali — open community sessions almost every day, from fun to competitive, for internationals and locals. One squad, many flags." />
   <meta name="twitter:image" content="https://ubudjungleballers.com/assets/og/og-home.jpg" />
 
-  <!-- Structured data: the club -->
+  <!-- Structured data: the club + the site (helps Google + AI engines treat
+       "Jungle Ballers" / "UJB" as this entity). -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "SportsOrganization",
-    "name": "Ubud Jungle Ballers",
-    "sport": "Football",
-    "url": "https://ubudjungleballers.com",
-    "logo": "https://ubudjungleballers.com/assets/badge-logo.png",
-    "image": "https://ubudjungleballers.com/assets/og/og-home.jpg",
-    "foundingDate": "2026",
-    "location": {
-      "@type": "Place",
-      "name": "Ubud, Bali",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Ubud",
-        "addressRegion": "Bali",
-        "addressCountry": "ID"
+    "@graph": [
+      {
+        "@type": "SportsOrganization",
+        "@id": "https://ubudjungleballers.com/#club",
+        "name": "Ubud Jungle Ballers",
+        "alternateName": ["Jungle Ballers", "UJB", "UBJ"],
+        "sport": ["Football", "Futsal", "Mini-soccer"],
+        "url": "https://ubudjungleballers.com",
+        "logo": "https://ubudjungleballers.com/assets/badge-logo.png",
+        "image": "https://ubudjungleballers.com/assets/og/og-home.jpg",
+        "description": "Play football, futsal and mini-soccer in Ubud, Bali. Ubud Jungle Ballers is an open football club for internationals and locals in the Ubud and Gianyar area, with community sessions almost every day — from fun, social games to competitive regional-level football across three squads — plus the annual Jungle Kings Cup tournament. All levels welcome.",
+        "keywords": "football in Ubud, play football Ubud, futsal Ubud, mini soccer Ubud, soccer Ubud Bali, football club Ubud, football Gianyar, pickup football Bali, expat football Bali, football sessions Ubud, where to play football in Bali",
+        "foundingDate": "2026",
+        "location": {
+          "@type": "Place",
+          "name": "Ubud, Bali",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Ubud",
+            "addressRegion": "Bali",
+            "addressCountry": "ID"
+          }
+        },
+        "areaServed": [
+          { "@type": "Place", "name": "Ubud, Bali" },
+          { "@type": "Place", "name": "Gianyar, Bali" },
+          { "@type": "Place", "name": "Bali, Indonesia" }
+        ],
+        "audience": {
+          "@type": "Audience",
+          "audienceType": "Footballers in Ubud and Gianyar — internationals and locals, all levels, fun to competitive"
+        },
+        "sameAs": [
+          "https://instagram.com/ubudjungleballers",
+          "https://tiktok.com/@ubudjungleballers",
+          "https://youtube.com/@ubudjungleballers"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://ubudjungleballers.com/#website",
+        "name": "Ubud Jungle Ballers",
+        "alternateName": "Jungle Ballers",
+        "url": "https://ubudjungleballers.com",
+        "inLanguage": ["en", "id"],
+        "publisher": { "@id": "https://ubudjungleballers.com/#club" }
       }
-    },
-    "sameAs": [
-      "https://instagram.com/ubudjungleballers",
-      "https://tiktok.com/@ubudjungleballers",
-      "https://youtube.com/@ubudjungleballers"
     ]
   }
   </script>
@@ -89,13 +116,19 @@
 
   <link rel="stylesheet" href="/style.css" />
 
-  <!-- Real chameleon-icon favicon -->
-  <link rel="icon" type="image/png" href="/assets/favicon.png" />
-  <link rel="apple-touch-icon" href="/assets/icon-logo.png" />
+  <!-- Real chameleon-icon favicon. /favicon.ico (root) is what Google + most
+       crawlers fetch by default; the PNG covers high-DPI browser tabs. -->
+  <link rel="icon" href="/favicon.ico?v=3" sizes="any" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png?v=3" sizes="256x256" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=3" />
 
   <!-- i18n runtime: generated catalog + translator / Intl formatters / toggle -->
   <script src="/i18n/strings.js"></script>
   <script src="/i18n/i18n.js"></script>
+
+  <!-- Supabase keys (window.__ENV) — generated from .env.local / Vercel env by
+       scripts/gen-env.mjs (gitignored). Used to store club sign-ups. -->
+  <script src="/env.js"></script>
 
   <!-- Three.js via importmap — vendored locally, no CDN required -->
   <script type="importmap">
@@ -214,10 +247,10 @@
           <span class="hero-line" data-i18n="hero.line2">One <span class="gold">jungle</span>.</span>
           <span class="hero-line" data-i18n="hero.line3">Many flags.</span>
         </h1>
-        <p class="tagline" data-i18n="hero.tagline">Community. Brotherhood. Football.</p>
+        <p class="tagline" data-i18n="hero.tagline">Community. Family. Football.</p>
         <p class="lede" data-i18n="hero.lede">
           A Bali football club competing at regional level — built by Balinese
-          and international men who travelled here to wear the green.
+          and internationals who travelled here to wear the green.
           Spin the ball. Find the squad.
         </p>
         <div class="cta-row">
@@ -299,10 +332,10 @@
         <div class="mono cd-section-idx" data-i18n="club.idx">02 / THE CLUB</div>
         <div class="cd-section-titles">
           <div class="eyebrow" data-i18n="club.eyebrow">Manifesto</div>
-          <h2 class="display cd-section-title" data-i18n="club.title">Brotherhood,<br/>built to compete.</h2>
+          <h2 class="display cd-section-title" data-i18n="club.title">Family,<br/>built to compete.</h2>
         </div>
         <div class="mono cd-section-kicker" data-i18n="club.kicker">
-          A football club with regional ambition. Brotherhood as foundation. Standards as the gate.
+          A football club with regional ambition. Family as foundation. Standards as the gate.
         </div>
       </header>
 
@@ -322,7 +355,7 @@
           <p class="club-para" data-i18n="club.para2">
             Some of us were born five minutes from the pitch. Some flew
             sixteen hours and never went back. The green doesn't ask where
-            you're from — only if you'll run for the man next to you.
+            you're from — only if you'll run for the player next to you.
           </p>
 
           <div class="tenets">
@@ -344,49 +377,51 @@
             <div class="tenet">
               <div class="mono tenet-num">03</div>
               <div>
-                <div class="display tenet-title" data-i18n="club.tenet3Title">Standards earn brotherhood.</div>
-                <div class="tenet-body" data-i18n="club.tenet3Body">Brotherhood without structure stagnates. Show up. Train honestly. Earn the green.</div>
+                <div class="display tenet-title" data-i18n="club.tenet3Title">Standards earn your place.</div>
+                <div class="tenet-body" data-i18n="club.tenet3Body">A family without structure stagnates. Show up. Train honestly. Earn the green.</div>
               </div>
             </div>
           </div>
         </div>
 
         <div class="club-media">
-          <!-- Hero: floodlit soccer pitch / sunset training -->
+          <!-- Hero: the full squad (real club photo) -->
           <figure class="club-media-hero">
             <img
-              src="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=1600&q=80&auto=format&fit=crop"
-              onerror="this.onerror=null;this.src='https://picsum.photos/seed/ujb-pitch-sunset/1400/900';"
-              data-i18n-attr="alt:club.alt1" alt="A floodlit football pitch at dusk" loading="lazy" />
-            <figcaption class="mono club-media-cap" data-i18n="club.cap1">TRAINING NIGHT · UBUD</figcaption>
+              src="/assets/club/squad-group.jpg"
+              onerror="this.onerror=null;this.src='/assets/club/hero-mock.jpg';"
+              data-i18n-attr="alt:club.alt1" alt="The Ubud Jungle Ballers squad together after a session" loading="lazy" />
+            <figcaption class="mono club-media-cap" data-i18n="club.cap1">ONE SQUAD · MANY FLAGS</figcaption>
           </figure>
 
           <div class="club-media-row">
-            <!-- Bottom-left: ball / boots / mud close-up -->
+            <!-- Indoor night training, yellow bibs -->
             <figure class="club-media-sub">
               <img
-                src="https://images.unsplash.com/photo-1577471488278-16eec37ffcc2?w=900&q=80&auto=format&fit=crop"
-                onerror="this.onerror=null;this.src='https://picsum.photos/seed/ujb-boots/900/600';"
-                data-i18n-attr="alt:club.alt2" alt="Football boots on muddy grass" loading="lazy" />
-              <figcaption class="mono club-media-cap" data-i18n="club.cap2">MATCHDAY · BOOTS</figcaption>
+                src="/assets/club/training-night.jpg"
+                onerror="this.onerror=null;this.src='/assets/club/kit-training.jpg';"
+                data-i18n-attr="alt:club.alt2" alt="Players in yellow bibs during a night training match" loading="lazy" />
+              <figcaption class="mono club-media-cap" data-i18n="club.cap2">TRAINING NIGHT · UBUD</figcaption>
             </figure>
 
-            <!-- Bottom-right: action / pass / tropical pitch -->
+            <!-- Daytime futsal -->
             <figure class="club-media-sub">
               <img
-                src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=900&q=80&auto=format&fit=crop"
-                onerror="this.onerror=null;this.src='https://picsum.photos/seed/ujb-pitch/900/600';"
-                data-i18n-attr="alt:club.alt3" alt="Player about to strike a ball on a green pitch" loading="lazy" />
-              <figcaption class="mono club-media-cap" data-i18n="club.cap3">SESSION · TIER 01</figcaption>
+                src="/assets/club/futsal-day.jpg"
+                onerror="this.onerror=null;this.src='/assets/club/kit-match.jpg';"
+                data-i18n-attr="alt:club.alt3" alt="A player dribbling past a defender on a futsal court" loading="lazy" />
+              <figcaption class="mono club-media-cap" data-i18n="club.cap3">SESSION · UBUD</figcaption>
+            </figure>
+
+            <!-- After the whistle: the crew (black &amp; white) -->
+            <figure class="club-media-sub">
+              <img
+                src="/assets/club/crew.jpg"
+                onerror="this.onerror=null;this.src='/assets/club/hero-mock.jpg';"
+                data-i18n-attr="alt:club.alt4" alt="Teammates relaxing on the steps after training" loading="lazy" />
+              <figcaption class="mono club-media-cap" data-i18n="club.cap4">AFTER THE WHISTLE</figcaption>
             </figure>
           </div>
-          <blockquote class="club-quote">
-            <div class="eyebrow club-quote-head" data-i18n="club.quoteHead">Quote · Captain</div>
-            <p class="display club-quote-body" data-i18n="club.quoteBody">
-              "If you can run, you can play.<br/>If you can listen, you can lead."
-            </p>
-            <div class="mono club-quote-attrib" data-i18n="club.quoteAttrib">— MADE PUTRA, #08 · CAPTAIN</div>
-          </blockquote>
         </div>
       </div>
     </div>
@@ -407,6 +442,10 @@
           The non-negotiable rhythm. Show up to one. Show up to all four. Bring boots.
         </div>
       </header>
+
+      <p class="club-para community-lead" data-i18n="community.seoLine">
+        Open football, futsal and mini-soccer sessions in Ubud and the Gianyar area — almost every day of the week, for all levels, with internationals and locals welcome.
+      </p>
 
       <div class="sessions-grid">
         <div class="session-card">
@@ -454,8 +493,7 @@
       </div>
 
       <div class="community-foot">
-        <div class="mono community-foot-loc" data-i18n="community.footLoc">📍 Ubud, Bali · GPS 8°30′24″S 115°15′45″E · Venues posted weekly</div>
-        <a href="#join" class="btn btn--ghost" data-i18n="community.footCta">Request to join →</a>
+        <div class="mono community-foot-loc" data-i18n="community.footLoc">📍 Ubud, Bali · Venues posted weekly</div>
       </div>
     </div>
   </section>
@@ -466,7 +504,7 @@
       <header class="cd-section-head">
         <div class="mono cd-section-idx" data-i18n="squad.idx">04 / SQUAD</div>
         <div class="cd-section-titles">
-          <div class="eyebrow" data-i18n="squad.eyebrow">The Brotherhood</div>
+          <div class="eyebrow" data-i18n="squad.eyebrow">The Family</div>
           <h2 class="display cd-section-title" data-i18n="squad.title">Three teams.<br/><span class="gold">One standard.</span></h2>
         </div>
         <div class="mono cd-section-kicker" data-i18n="squad.kicker">
@@ -578,9 +616,9 @@
       <div class="partner-cta">
         <div>
           <div class="display partner-cta-title" data-i18n="partners.ctaTitle">Become a partner.</div>
-          <div class="mono partner-cta-meta" data-i18n="partners.ctaMeta">FROM IDR 5M / SEASON · BADGE · SHIRT · MATCHDAY</div>
+          <div class="mono partner-cta-meta" data-i18n="partners.ctaMeta">FROM IDR 1M / SEASON · BADGE · SHIRT · MATCHDAY</div>
         </div>
-        <a href="mailto:hello@ubudjungleballers.com" class="btn btn--gold" data-i18n="partners.ctaBtn">Partnership deck →</a>
+        <a href="/assets/jungle-kings-cup-sponsor-prospectus.pdf" target="_blank" rel="noopener" class="btn btn--gold" data-i18n="partners.ctaBtn">Partnership deck →</a>
       </div>
     </div>
   </section>
@@ -592,7 +630,7 @@
         <div class="mono cd-cta-idx" data-i18n="joinCta.idx">06 / JOIN OUR CLUB</div>
         <h2 class="display cd-cta-title" data-i18n="joinCta.title">Join our<br/>club.</h2>
         <p class="cd-cta-body" data-i18n="joinCta.body">
-          The brotherhood already lives in WhatsApp. Sign-ups, venue calls,
+          The community already lives in WhatsApp. Sign-ups, venue calls,
           ride-shares, the daily small talk that keeps a club honest. New
           members get added to the right group within 24 hours.
         </p>
@@ -604,8 +642,8 @@
           <li data-i18n="joinCta.check2">Message us on WhatsApp.</li>
           <li data-i18n="joinCta.check3">Show up. Bring boots.</li>
         </ul>
-        <a href="https://chat.whatsapp.com/LutV2MjmrMHEkOTy2IEHtR" class="btn btn--gold cd-cta-btn" data-i18n="joinCta.btn">Open WhatsApp →</a>
-        <div class="mono cd-cta-fineprint" data-i18n="joinCta.fineprint">Or email <a href="mailto:hello@ubudjungleballers.com">hello@ubudjungleballers.com</a></div>
+        <a href="https://chat.whatsapp.com/LutV2MjmrMHEkOTy2IEHtR" class="btn btn--gold cd-cta-btn" data-i18n="joinCta.btn">Join our club →</a>
+        <div class="mono cd-cta-fineprint" data-i18n="joinCta.fineprint">Or DM us on Instagram <a href="https://instagram.com/ubudjungleballers" target="_blank" rel="noopener">@ubudjungleballers</a></div>
       </div>
     </div>
   </section>
@@ -618,7 +656,7 @@
           <img class="cd-footer-badge" src="/assets/badge-logo.png" alt="Ubud Jungle Ballers club badge" />
           <p class="cd-footer-tagline" data-i18n="footer.tagline">
             A football club from Ubud, Bali. Open to everyone who'll run for the
-            man next to them — competitive at regional level.
+            player next to them — competitive at regional level.
           </p>
           <ul class="socials cd-footer-socials" aria-label="Follow Ubud Jungle Ballers" data-i18n-attr="aria-label:footer.socialsAria">
             <li>
@@ -640,11 +678,6 @@
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg>
               </a>
             </li>
-            <li>
-              <a class="social-btn" href="https://chat.whatsapp.com/LutV2MjmrMHEkOTy2IEHtR" target="_blank" rel="noopener" aria-label="WhatsApp">
-                <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16 3a13 13 0 0 0-11.04 19.83L3 29l6.34-1.93A13 13 0 1 0 16 3zm0 23.6a10.6 10.6 0 0 1-5.4-1.48l-.39-.23-3.76 1.14 1.16-3.66-.25-.4A10.6 10.6 0 1 1 16 26.6z"/></svg>
-              </a>
-            </li>
           </ul>
         </div>
 
@@ -654,6 +687,7 @@
           <a href="#squad" data-i18n="footer.linkSquad">Squad</a>
           <a href="#community" data-i18n="footer.linkSessions">Sessions</a>
           <a href="#partners" data-i18n="footer.linkPartners">Partners</a>
+          <a href="faq.html" data-i18n="footer.linkFaq">FAQ</a>
         </div>
 
         <div class="cd-footer-col">
@@ -669,8 +703,8 @@
           <div class="cd-footer-contact">
             <div data-i18n="footer.contactLocation">Ubud, Bali, Indonesia</div>
             <div data-i18n="footer.contactSessions">Sessions in central Ubud</div>
-            <div class="cd-footer-link"><a href="mailto:hello@ubudjungleballers.com">hello@ubudjungleballers.com</a></div>
-            <div class="cd-footer-link"><a href="https://chat.whatsapp.com/LutV2MjmrMHEkOTy2IEHtR" data-i18n="footer.contactWhatsApp">WhatsApp Community</a></div>
+            <div class="cd-footer-link"><a href="mailto:support@ubudjungleballers.com">support@ubudjungleballers.com</a></div>
+            <div class="cd-footer-link"><a href="https://instagram.com/ubudjungleballers" target="_blank" rel="noopener">@ubudjungleballers</a></div>
           </div>
         </div>
       </div>
@@ -679,7 +713,7 @@
 
       <div class="cd-footer-fine">
         <div class="mono" data-i18n="footer.fineLeft">© 2026 UBUD JUNGLE BALLERS · ALL RIGHTS RESERVED · SALAM HIJAU</div>
-        <div class="mono" data-i18n="footer.fineRight">PRIVACY · TERMS · COOKIES · SITE BY THE BROTHERHOOD</div>
+        <div class="mono" data-i18n="footer.fineRight">PRIVACY · TERMS · COOKIES · SITE BY THE COMMUNITY</div>
       </div>
     </div>
   </footer>
@@ -692,7 +726,7 @@
         <div class="join-modal-handle" aria-hidden="true"></div>
         <div class="mono join-modal-eyebrow" id="join-eyebrow">
           <span class="join-eyebrow-progress" data-i18n="join.eyebrowProgress">JOIN OUR CLUB · STEP <span id="join-step-num">1</span> / 5</span>
-          <span class="join-eyebrow-done" hidden data-i18n="join.eyebrowDone">WELCOME TO THE BROTHERHOOD</span>
+          <span class="join-eyebrow-done" hidden data-i18n="join.eyebrowDone">WELCOME TO THE FAMILY</span>
         </div>
         <button class="join-modal-close" type="button" aria-label="Close" data-i18n-attr="aria-label:common.close" data-join-close>×</button>
         <div class="join-modal-progress" aria-hidden="true">
@@ -826,7 +860,7 @@
             <img src="/assets/badge-logo.png" alt="Ubud Jungle Ballers badge" />
           </div>
           <h3 class="join-step-title display" data-i18n="join.doneTitle">You're in.</h3>
-          <p class="join-step-sub" data-i18n="join.doneSub">Welcome to the brotherhood<span id="join-done-name-suffix"></span>. Tap below to drop into the WhatsApp community — we'll route you to the right group within 24 hours.</p>
+          <p class="join-step-sub" data-i18n="join.doneSub">Welcome to the family<span id="join-done-name-suffix"></span>. Tap below to drop into the WhatsApp community — we'll route you to the right group within 24 hours.</p>
           <a class="btn btn--gold join-done-cta" id="join-done-wa" href="#" target="_blank" rel="noopener" data-i18n="join.doneCta">Open WhatsApp →</a>
           <div class="join-done-summary" id="join-done-summary" aria-live="polite"></div>
         </div>
@@ -1226,6 +1260,48 @@
       // WhatsApp number for the admin/community line. Update if it changes.
       const WA_COMMUNITY = 'https://chat.whatsapp.com/LutV2MjmrMHEkOTy2IEHtR';
 
+      // === Supabase: store each club sign-up ================================
+      // Keys come from env.js (window.__ENV); when unset it runs in harmless
+      // "preview mode" (nothing stored). One-time table setup: SETUP-CLUB.md.
+      const SB_ENV = (typeof window !== 'undefined' && window.__ENV) || {};
+      const SB = {
+        url:   SB_ENV.SUPABASE_URL      || '',
+        key:   SB_ENV.SUPABASE_ANON_KEY || '',
+        table: 'club_signups'
+      };
+      const sbConfigured = SB.url && SB.key &&
+        !SB.url.includes('YOUR-PROJECT') && !SB.key.includes('YOUR-ANON');
+
+      async function storeClubSignup(d) {
+        const ctrl = new AbortController();
+        const timer = setTimeout(() => ctrl.abort(), 12000);
+        try {
+          const ageNum = parseInt(d.age, 10);
+          const res = await fetch(SB.url + '/rest/v1/' + SB.table, {
+            method: 'POST',
+            headers: {
+              apikey: SB.key,
+              Authorization: 'Bearer ' + SB.key,
+              'Content-Type': 'application/json',
+              Prefer: 'return=minimal'
+            },
+            body: JSON.stringify({
+              name:           d.name,
+              age:            Number.isFinite(ageNum) ? ageNum : null,
+              nationality:    d.nationality,
+              bali_timeframe: d.bali,
+              level:          d.level,
+              positions:      d.position,
+              sessions:       d.sessions
+            }),
+            signal: ctrl.signal
+          });
+          if (!res.ok) throw new Error('club signup save failed (' + res.status + '): ' + (await res.text()));
+        } finally {
+          clearTimeout(timer);
+        }
+      }
+
       const state = {
         step: 1,
         data: {
@@ -1456,6 +1532,14 @@
             row(t('join.sumSessions'), d.sessions.map(s => sessionLabels[s] || s).join(' · ')) +
           '</dl>';
 
+        // Store the sign-up in Supabase (best-effort, in the background — never
+        // block a new member from joining the community over a backend hiccup).
+        if (sbConfigured) {
+          storeClubSignup(d).catch((err) => console.error('[UJB club signup]', err));
+        } else {
+          console.warn('[UJB club signup] PREVIEW MODE — Supabase not configured (env.js); sign-up not stored.');
+        }
+
         showStep(TOTAL_STEPS + 1); // success
       }
 
@@ -1481,6 +1565,49 @@
 
       // === Init =============================================================
       showStep(1);
+    })();
+  </script>
+
+  <!-- Scrollspy: highlight the nav link for the section currently in view -->
+  <script>
+    (function () {
+      var nav = document.querySelector('.site-nav .links');
+      if (!nav) return;
+      // Same-page anchor links, mapped to their section id.
+      var byId = {};
+      nav.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        var id = a.getAttribute('href').slice(1);
+        if (id) byId[id] = a;
+      });
+      // Track the real content sections (skip the hero + the #join CTA button).
+      var sections = ['about', 'community', 'squad', 'partners', 'contact']
+        .map(function (id) { return { id: id, el: document.getElementById(id), link: byId[id] }; })
+        .filter(function (s) { return s.el && s.link; });
+      if (!sections.length) return;
+
+      var current;
+      function spy() {
+        var active = null;
+        for (var i = 0; i < sections.length; i++) {
+          // Last section whose top has passed just below the fixed nav.
+          if (sections[i].el.getBoundingClientRect().top <= 140) active = sections[i];
+        }
+        var id = active ? active.id : null;
+        if (id === current) return;
+        current = id;
+        sections.forEach(function (s) {
+          var on = s.id === id;
+          s.link.classList.toggle('is-active', on);
+          if (on) s.link.setAttribute('aria-current', 'true');
+          else s.link.removeAttribute('aria-current');
+        });
+      }
+
+      // spy() is cheap (a few getBoundingClientRect reads + an early-out when
+      // the section hasn't changed), so run it straight off the scroll event.
+      window.addEventListener('scroll', spy, { passive: true });
+      window.addEventListener('resize', spy, { passive: true });
+      spy();
     })();
   </script>
 </body>

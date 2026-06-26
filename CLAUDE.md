@@ -24,7 +24,7 @@ For every new or changed string:
 
 **Numbers, currency, dates, country names** → use the locale-aware helpers, never hardcode: `UBJ_I18N.formatCurrency(1500000,'IDR')` → `IDR 1,500,000` / `Rp 1.500.000`; also `.formatNumber`, `.formatDate`, `.countryName`.
 
-**Gotchas:** never nest a `data-i18n` inside another `data-i18n` value (the build replaces inner HTML by key — inline the text or use a runtime-filled `data-cfg` span). **Do not translate** brand/proper nouns: `Ubud Jungle Ballers`, `King of the Jungle`, `Welcome to the Jungle`, `Liga Raya`, sponsor names, player names, position codes (GK/DEF/MID/FWD), `SALAM HIJAU`.
+**Gotchas:** never nest a `data-i18n` inside another `data-i18n` value (the build replaces inner HTML by key — inline the text or use a runtime-filled `data-cfg` span). **Do not translate** brand/proper nouns: `Ubud Jungle Ballers`, `Jungle Kings Cup` (the tournament), `Welcome to the Jungle`, `Liga Raya`, sponsor names, player names, position codes (GK/DEF/MID/FWD), `SALAM HIJAU`.
 
 Audit before finishing: `node scripts/build-i18n.mjs` (warns on keys missing from `id.json`) **and** `node scripts/scan-i18n.mjs` (lists any visible text not wrapped in `data-i18n` — exits non-zero if it finds untranslated copy). Both must be clean. Full guide: **`i18n/README.md`**.
 

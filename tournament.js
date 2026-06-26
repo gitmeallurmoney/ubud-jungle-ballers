@@ -1,5 +1,5 @@
 /* ============================================================
-   King of the Jungle — tournament registration flow
+   Jungle Kings Cup — tournament registration flow
    - Multi-step modal (reuses the .join-* styling from style.css)
    - Submits each team to Supabase: logo -> Storage, row -> table
    - No build step, no SDK: plain fetch against Supabase REST + Storage.
@@ -25,20 +25,18 @@ const CONFIG = {
   /* ----- Entry fee — a NUMBER in IDR. Formatted per active language via Intl:
      1500000 → "IDR 1,500,000" (en) / "Rp 1.500.000" (id). The "per team"
      caption is a translation (i18n/*.json → tour.feeNote), not set here. ----- */
-  feeAmount: 1500000,       // EDIT
+  feeAmount: 1800000,       // EDIT
 
-  /* ----- Where teams pay (bank / e-wallet transfer) ----- */
-  bankName:      'BCA',                       // EDIT
-  accountName:   'Ubud Jungle Ballers',       // EDIT
-  accountNumber: '0000000000',                // EDIT
-  ewalletName:   'GoPay / OVO',               // EDIT
-  ewalletNumber: '+62 812-0000-0000',         // EDIT
+  /* ----- Where teams pay (bank transfer) ----- */
+  bankName:      'BCA',                          // EDIT
+  accountName:   'I Putu Gede Arimbawa',         // EDIT
+  accountNumber: '4160294278',                   // EDIT
 
   /* ----- WhatsApp line for questions + payment proof (digits, intl format) ----- */
   whatsappAdmin: '6281234567890',             // EDIT
   /* ----- WhatsApp GROUP invite link (https://chat.whatsapp.com/...) -----
-     Optional: leave '' to hide the "Join the group" link until you have one. */
-  whatsappGroup: '',                          // EDIT
+     Sign-ups are redirected here after registering. */
+  whatsappGroup: 'https://chat.whatsapp.com/CEmGL8UB8w6JEK4t40KKJ7?mode=gi_t',
 };
 
 (function () {
@@ -67,12 +65,7 @@ const CONFIG = {
     document.querySelectorAll('[data-cfg-href="whatsappLink"]').forEach((a) => {
       a.href = 'https://wa.me/' + CONFIG.whatsappAdmin.replace(/\D/g, '');
     });
-    // General "got a question" contact link, with a friendly pre-filled message.
-    const askText = encodeURIComponent("Hi! I've got a question about the King of the Jungle tournament.");
-    document.querySelectorAll('[data-cfg-href="whatsappAsk"]').forEach((a) => {
-      a.href = 'https://wa.me/' + CONFIG.whatsappAdmin.replace(/\D/g, '') + '?text=' + askText;
-    });
-    // WhatsApp group invite link — only shown once a link is configured.
+    // WhatsApp group invite link — sign-ups are pointed here after registering.
     document.querySelectorAll('[data-cfg-href="whatsappGroup"]').forEach((a) => {
       if (CONFIG.whatsappGroup) { a.href = CONFIG.whatsappGroup; a.hidden = false; }
       else { a.hidden = true; }
@@ -93,7 +86,6 @@ const CONFIG = {
   const backBtn    = document.getElementById('tour-back');
   const nextBtn    = document.getElementById('tour-next');
   const errorEl    = document.getElementById('tour-error');
-  const doneWa     = document.getElementById('tour-done-wa');
   const doneMsg    = document.getElementById('tour-done-msg');
   const doneSum    = document.getElementById('tour-done-summary');
   const ebProgress = modal.querySelector('.join-eyebrow-progress');
@@ -365,7 +357,7 @@ const CONFIG = {
           logo_url:       state.data.logoUrl,
         });
       } else {
-        console.warn('[King of the Jungle] PREVIEW MODE — Supabase not configured in tournament.js, so this signup was NOT stored. Fill in CONFIG.supabaseUrl / supabaseAnonKey to go live. See SETUP-TOURNAMENT.md.');
+        console.warn('[Jungle Kings Cup] PREVIEW MODE — Supabase not configured in tournament.js, so this signup was NOT stored. Fill in CONFIG.supabaseUrl / supabaseAnonKey to go live. See SETUP-TOURNAMENT.md.');
       }
       renderSuccess();
       showStep(TOTAL_STEPS + 1);
@@ -384,19 +376,6 @@ const CONFIG = {
 
   function renderSuccess() {
     const d = state.data;
-
-    // WhatsApp deep-link pre-filled with the team's details + a payment prompt.
-    // Build the message as plain text, then encode the whole thing once.
-    const msg = [
-      '*King of the Jungle — team registration*',
-      'Team: ' + d.team,
-      'Captain: ' + d.admin,
-      'WhatsApp: ' + d.whatsapp,
-      'Squad size: ' + d.roster,
-      '',
-      'Sending payment proof for the ' + feeDisplay() + ' entry fee.',
-    ].join('\n');
-    doneWa.href = 'https://wa.me/' + CONFIG.whatsappAdmin.replace(/\D/g, '') + '?text=' + encodeURIComponent(msg);
 
     const first = (d.admin.split(/\s+/)[0] || '').trim();
     doneMsg.textContent = first

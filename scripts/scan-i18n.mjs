@@ -20,12 +20,12 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 // Brand / proper nouns / codes that are intentionally NOT translated.
 const ALLOW = [
-  'Ubud Jungle', 'Ballers', 'UJB', 'King of', 'the', 'Jungle', 'King of the Jungle',
+  'Ubud Jungle', 'Ballers', 'UJB', 'the', 'Jungle', 'Jungle Kings', 'Cup', 'Jungle Kings Cup',
   'Welcome', 'to the', 'EST. 2026 · UBUD · BALI', 'EST. 2026 · UBUD · BALI · ID',
-  'KING OF THE JUNGLE', 'KING OF THE JUNGLE · UBUD · BALI', 'SALAM HIJAU',
-  'Liga Raya', 'Bali', 'BASILICO', 'Common Sense', 'Common Sense Trading', 'Futtos',
+  'JUNGLE KINGS CUP', 'JUNGLE KINGS CUP · UBUD · BALI', 'SALAM HIJAU',
+  'Liga Raya', 'Liga Raya, Gianyar', 'Gianyar', 'Bali', 'BASILICO', 'Common Sense', 'Common Sense Trading', 'Futtos',
   'Vaniglia', 'EN', 'ID', 'GK', 'DEF', 'MID', 'FWD', 'ANY',
-  'hello@ubudjungleballers.com', '!DOCTYPE html>',
+  'support@ubudjungleballers.com', '@ubudjungleballers', '!DOCTYPE html>',
 ];
 const allow = new Set(ALLOW.map((s) => s.toLowerCase()));
 
@@ -62,7 +62,7 @@ function scan(file) {
 }
 
 let total = 0;
-for (const f of ['index.html', 'events.html']) {
+for (const f of ['index.html', 'events.html', 'faq.html']) {
   const hits = scan(f);
   total += hits.length;
   if (!hits.length) console.log(`${f}: no untranslated text found ✓`);

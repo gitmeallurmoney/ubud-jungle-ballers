@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- ============== i18n: first-visit language routing (zero-flash) ============== -->
+  <script>
+    window.__I18N_ALT = { en: '/faq.html', id: '/id/faq.html' };
+    (function () {
+      try {
+        var cur = (document.documentElement.getAttribute('lang') || 'en').slice(0, 2).toLowerCase();
+        var saved = localStorage.getItem('ubj.lang');
+        var want = (saved === 'en' || saved === 'id') ? saved
+          : (/^id\b/i.test(navigator.language || '') ? 'id' : 'en');
+        if (want !== cur) {
+          var target = want === 'id' ? window.__I18N_ALT.id : window.__I18N_ALT.en;
+          if (target) location.replace(target + (location.hash || ''));
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <title data-i18n="fmeta.title">FAQ — Football, Futsal &amp; Mini-Soccer in Ubud, Bali | Ubud Jungle Ballers</title>
+  <meta name="description" data-i18n-attr="content:fmeta.desc" content="Answers for playing football, futsal and mini-soccer in Ubud and Gianyar, Bali — sessions, levels, who can join, cost, and training times with Ubud Jungle Ballers." />
+
+  <!-- SEO: canonical + locale alternates (fully-qualified for production).
+       The build (scripts/build-i18n.mjs) rewrites canonical + og:url to the
+       /id/faq URL when generating the Bahasa page. -->
+  <link rel="canonical" href="https://ubudjungleballers.com/faq" />
+  <link rel="alternate" hreflang="en" href="https://ubudjungleballers.com/faq" />
+  <link rel="alternate" hreflang="id" href="https://ubudjungleballers.com/id/faq" />
+  <link rel="alternate" hreflang="x-default" href="https://ubudjungleballers.com/faq" />
+
+  <!-- Open Graph — link preview on WhatsApp, Instagram, Facebook, LinkedIn -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Ubud Jungle Ballers" />
+  <meta property="og:title" data-i18n-attr="content:fmeta.title" content="FAQ — Football, Futsal &amp; Mini-Soccer in Ubud, Bali | Ubud Jungle Ballers" />
+  <meta property="og:description" data-i18n-attr="content:fmeta.desc" content="Answers for playing football, futsal and mini-soccer in Ubud and Gianyar, Bali — sessions, levels, who can join, cost, and training times with Ubud Jungle Ballers." />
+  <meta property="og:url" content="https://ubudjungleballers.com/faq" />
+  <meta property="og:image" content="https://ubudjungleballers.com/assets/og/og-home.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" data-i18n-attr="content:fmeta.ogImageAlt" content="Ubud Jungle Ballers — football in Ubud, Bali" />
+  <meta property="og:locale" data-i18n-attr="content:fmeta.ogLocale" content="en_US" />
+  <meta property="og:locale:alternate" content="id_ID" />
+
+  <!-- Twitter / X card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" data-i18n-attr="content:fmeta.title" content="FAQ — Football, Futsal &amp; Mini-Soccer in Ubud, Bali | Ubud Jungle Ballers" />
+  <meta name="twitter:description" data-i18n-attr="content:fmeta.desc" content="Answers for playing football, futsal and mini-soccer in Ubud and Gianyar, Bali — sessions, levels, who can join, cost, and training times with Ubud Jungle Ballers." />
+  <meta name="twitter:image" content="https://ubudjungleballers.com/assets/og/og-home.jpg" />
+
+  <!-- FAQ structured data (English; the build localizes this for /id/). -->
+  <script type="application/ld+json" data-faq-jsonld>
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Where can I play football in Ubud?", "acceptedAnswer": { "@type": "Answer", "text": "Ubud Jungle Ballers runs open football sessions in central Ubud almost every day of the week — weekday trainings plus social games. Pick a session, bring boots, and show up; new players are always welcome." } },
+      { "@type": "Question", "name": "Do you play futsal or mini-soccer too?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Our Thursday Fun First session is a mixed-level, mixed-pace community game with futsal and mini-soccer, alongside full-pitch football across the rest of the week." } },
+      { "@type": "Question", "name": "Can foreigners and expats join, or is it just for locals?", "acceptedAnswer": { "@type": "Answer", "text": "Both. The club is built by Balinese locals and internationals living in or visiting Bali. All nationalities are welcome — locals, expats and travellers alike." } },
+      { "@type": "Question", "name": "I'm not very experienced — can I still play?", "acceptedAnswer": { "@type": "Answer", "text": "Absolutely. We run everything from casual, just-for-fun games to a competitive first team. Beginners and returning players are welcome at the open community sessions." } },
+      { "@type": "Question", "name": "Do you play in the Gianyar and wider Bali area?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. We're based in Ubud, in the Gianyar regency, and play regional fixtures around Bali — league and cup matches announced each week." } },
+      { "@type": "Question", "name": "How much does it cost to join?", "acceptedAnswer": { "@type": "Answer", "text": "Joining the community is free. Sign up through the join form or message us on WhatsApp, and you'll be added to the right group within 24 hours." } },
+      { "@type": "Question", "name": "When are training sessions?", "acceptedAnswer": { "@type": "Answer", "text": "Sessions are around 7 PM. First Team trains Monday and Friday, Second Team on Wednesday, the open Fun First community game is Thursday, and regional fixtures are on weekends." } },
+      { "@type": "Question", "name": "Can women and girls join too?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — Ubud Jungle Ballers is open to everyone. Women are part of our community and welcome at the open sessions. Come down, bring boots, and join in." } }
+    ]
+  }
+  </script>
+
+  <!-- Google Fonts: see ../BRAND.md -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800;900&family=Bebas+Neue&family=Bricolage+Grotesque:wght@400;500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="/style.css" />
+
+  <link rel="icon" href="/favicon.ico?v=3" sizes="any" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png?v=3" sizes="256x256" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=3" />
+
+  <!-- i18n runtime: generated catalog + translator / Intl formatters / toggle -->
+  <script src="/i18n/strings.js"></script>
+  <script src="/i18n/i18n.js"></script>
+</head>
+<body>
+
+  <!-- ============== NAV ============== -->
+  <header class="site-nav is-scrolled" id="site-nav">
+    <div class="container nav-inner">
+      <a class="brand-mark" href="index.html">
+        <img class="brand-icon" src="/assets/icon-logo-bone.png" alt="" aria-hidden="true" />
+        <div class="brand-wordmark">
+          <div class="brand-name">Ubud Jungle <span class="gold">Ballers</span></div>
+          <div class="brand-eyebrow mono">EST. 2026 · UBUD · BALI</div>
+        </div>
+      </a>
+      <nav class="links">
+        <a href="index.html#about" data-i18n="nav.club">The Club</a>
+        <a href="index.html#community" data-i18n="nav.community">Community</a>
+        <a href="index.html#squad" data-i18n="nav.squad">Squad</a>
+        <a href="index.html#partners" data-i18n="nav.partners">Partners</a>
+        <a href="events.html" data-i18n="nav.events">Events</a>
+        <a href="index.html#join" class="nav-cta" data-i18n="nav.join">Join our Club →</a>
+        <span class="lang-toggle" role="group" aria-label="Language" data-i18n-attr="aria-label:lang.switch">
+          <button type="button" class="lang-btn" data-lang-set="en">EN</button>
+          <button type="button" class="lang-btn" data-lang-set="id">ID</button>
+        </span>
+      </nav>
+      <button class="nav-burger" id="nav-burger" aria-label="Open menu" data-i18n-attr="aria-label:common.openMenu" aria-expanded="false" aria-controls="mobile-drawer">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ============== MOBILE DRAWER ============== -->
+  <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+    <div class="mobile-drawer-backdrop" data-drawer-close></div>
+    <aside class="mobile-drawer-panel" role="dialog" aria-label="Menu" data-i18n-attr="aria-label:common.menu">
+      <header class="mobile-drawer-head">
+        <div class="brand-wordmark">
+          <div class="brand-name">Ubud Jungle <span class="gold">Ballers</span></div>
+          <div class="brand-eyebrow mono">EST. 2026 · UBUD · BALI</div>
+        </div>
+        <button class="mobile-drawer-close" aria-label="Close menu" data-i18n-attr="aria-label:common.closeMenu" data-drawer-close>×</button>
+      </header>
+      <nav class="mobile-drawer-links">
+        <a href="index.html#about"     data-drawer-close><span class="mono drawer-idx">01</span><span data-i18n="nav.club">The Club</span></a>
+        <a href="index.html#community" data-drawer-close><span class="mono drawer-idx">02</span><span data-i18n="nav.community">Community</span></a>
+        <a href="index.html#squad"     data-drawer-close><span class="mono drawer-idx">03</span><span data-i18n="nav.squad">Squad</span></a>
+        <a href="index.html#partners"  data-drawer-close><span class="mono drawer-idx">04</span><span data-i18n="nav.partners">Partners</span></a>
+        <a href="events.html"          data-drawer-close><span class="mono drawer-idx">05</span><span data-i18n="nav.events">Events</span></a>
+      </nav>
+      <a href="index.html#join" class="btn btn--gold mobile-drawer-cta" data-drawer-close data-i18n="nav.join">Join our Club →</a>
+      <div class="lang-toggle lang-toggle--drawer" role="group" aria-label="Language" data-i18n-attr="aria-label:lang.switch">
+        <button type="button" class="lang-btn" data-lang-set="en">EN</button>
+        <button type="button" class="lang-btn" data-lang-set="id">ID</button>
+      </div>
+    </aside>
+  </div>
+
+  <main>
+    <!-- ============== FAQ ============== -->
+    <section class="cd-section faq faq-page" id="faq">
+      <div class="container">
+        <header class="cd-section-head">
+          <div class="mono cd-section-idx" data-i18n="faq.idx">01 / FAQ</div>
+          <div class="cd-section-titles">
+            <div class="eyebrow" data-i18n="faq.eyebrow">Questions</div>
+            <h2 class="display cd-section-title" data-i18n="faq.title">Good to <span class="gold">know</span>.</h2>
+          </div>
+          <div class="mono cd-section-kicker" data-i18n="faq.kicker">Football, futsal &amp; mini-soccer in Ubud — answered.</div>
+        </header>
+
+        <div class="faq-list">
+          <div class="faq-item">
+            <h3 class="faq-q" data-i18n="faq.items.0.q">Where can I play football in Ubud?</h3>
+            <p class="faq-a" data-i18n="faq.items.0.a">Ubud Jungle Ballers runs open football sessions in central Ubud almost every day of the week — weekday trainings plus social games. Pick a session, bring boots, and show up; new players are always welcome.</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q" data-i18n="faq.items.1.q">Do you play futsal or mini-soccer too?</h3>
+            <p class="faq-a" data-i18n="faq.items.1.a">Yes. Our Thursday "Fun First" session is a mixed-level, mixed-pace community game with futsal and mini-soccer, alongside full-pitch football across the rest of the week.</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q" data-i18n="faq.items.2.q">Can foreigners and expats join, or is it just for locals?</h3>
+            <p class="faq-a" data-i18n="faq.items.2.a">Both. The club is built by Balinese locals and internationals living in or visiting Bali. All nationalities are welcome — locals, expats and travellers alike.</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q" data-i18n="faq.items.7.q">Can women and girls join too?</h3>
+            <p class="faq-a" data-i18n="faq.items.7.a">Yes — Ubud Jungle Ballers is open to everyone. Women are part of our community and welcome at the open sessions. Come down, bring boots, and join in.</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q" data-i18n="faq.items.3.q">I'm not very experienced — can I still play?</h3>
+            <p class="faq-a" data-i18n="faq.items.3.a">Absolutely. We run everything from casual, just-for-fun games to a competitive first team. Beginners and returning players are welcome at the open community sessions.</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q" data-i18n="faq.items.4.q">Do you play in the Gianyar and wider Bali area?</h3>
+            <p class="faq-a" data-i18n="faq.items.4.a">Yes. We're based in Ubud, in the Gianyar regency, and play regional fixtures around Bali — league and cup matches announced each week.</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q" data-i18n="faq.items.5.q">How much does it cost to join?</h3>
+            <p class="faq-a" data-i18n="faq.items.5.a">Joining the community is free. Sign up through the join form or message us on WhatsApp, and you'll be added to the right group within 24 hours.</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q" data-i18n="faq.items.6.q">When are training sessions?</h3>
+            <p class="faq-a" data-i18n="faq.items.6.a">Sessions are around 7 PM. First Team trains Monday and Friday, Second Team on Wednesday, the open "Fun First" community game is Thursday, and regional fixtures are on weekends.</p>
+          </div>
+        </div>
+
+        <div class="faq-foot">
+          <a href="index.html#join" class="btn btn--gold" data-i18n="nav.join">Join our Club →</a>
+          <a href="events.html" class="btn btn--ghost" data-i18n="nav.events">Events</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============== FOOTER (shared) ============== -->
+  <footer class="cd-footer" id="contact">
+    <div class="container">
+      <div class="cd-footer-grid">
+        <div class="cd-footer-brand">
+          <img class="cd-footer-badge" src="/assets/badge-logo.png" alt="Ubud Jungle Ballers club badge" />
+          <p class="cd-footer-tagline" data-i18n="footer.tagline">
+            A football club from Ubud, Bali. Open to everyone who'll run for the
+            player next to them — competitive at regional level.
+          </p>
+          <ul class="socials cd-footer-socials" aria-label="Follow Ubud Jungle Ballers" data-i18n-attr="aria-label:footer.socialsAria">
+            <li>
+              <a class="social-btn" href="https://instagram.com/ubudjungleballers" target="_blank" rel="noopener" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/>
+                  <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
+                  <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a class="social-btn" href="https://tiktok.com/@ubudjungleballers" target="_blank" rel="noopener" aria-label="TikTok">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.6 5.82a4.28 4.28 0 0 1-1.18-2.32V3h-3.32v13.27a2.46 2.46 0 0 1-2.5 2.46 2.46 2.46 0 0 1-2.46-2.46 2.46 2.46 0 0 1 2.46-2.46c.18 0 .36.02.53.06v-3.36a5.84 5.84 0 0 0-.54-.03 5.81 5.81 0 1 0 5.81 5.79V9.93a7.62 7.62 0 0 0 4.46 1.43V8.04a4.5 4.5 0 0 1-3.26-2.22z"/></svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="cd-footer-col">
+          <div class="eyebrow" data-i18n="footer.colClub">The Club</div>
+          <a href="index.html#about" data-i18n="footer.linkManifesto">Manifesto</a>
+          <a href="index.html#squad" data-i18n="footer.linkSquad">Squad</a>
+          <a href="index.html#community" data-i18n="footer.linkSessions">Sessions</a>
+          <a href="index.html#partners" data-i18n="footer.linkPartners">Partners</a>
+          <a href="faq.html" data-i18n="footer.linkFaq">FAQ</a>
+        </div>
+
+        <div class="cd-footer-col">
+          <div class="eyebrow" data-i18n="footer.colInvolved">Get involved</div>
+          <a href="index.html#join" data-i18n="footer.linkTrials">Open trials</a>
+          <a href="index.html#community" data-i18n="footer.linkJoinSession">Join a session</a>
+          <a href="index.html#partners" data-i18n="footer.linkSponsor">Sponsor the club</a>
+          <a href="index.html#join" data-i18n="footer.linkVolunteer">Volunteer</a>
+        </div>
+
+        <div class="cd-footer-col">
+          <div class="eyebrow" data-i18n="footer.colContact">Contact</div>
+          <div class="cd-footer-contact">
+            <div data-i18n="footer.contactLocation">Ubud, Bali, Indonesia</div>
+            <div data-i18n="footer.contactSessions">Sessions in central Ubud</div>
+            <div class="cd-footer-link"><a href="mailto:support@ubudjungleballers.com">support@ubudjungleballers.com</a></div>
+            <div class="cd-footer-link"><a href="https://instagram.com/ubudjungleballers" target="_blank" rel="noopener">@ubudjungleballers</a></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hairline cd-footer-rule"></div>
+
+      <div class="cd-footer-fine">
+        <div class="mono" data-i18n="footer.fineLeft">© 2026 UBUD JUNGLE BALLERS · ALL RIGHTS RESERVED · SALAM HIJAU</div>
+        <div class="mono" data-i18n="footer.fineRight">PRIVACY · TERMS · COOKIES · SITE BY THE COMMUNITY</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Sticky nav scroll-state -->
+  <script>
+    (function() {
+      const nav = document.getElementById('site-nav');
+      const onScroll = () => nav.classList.toggle('is-scrolled', window.scrollY > 20);
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+  </script>
+
+  <!-- Mobile hamburger drawer -->
+  <script>
+    (function() {
+      const burger = document.getElementById('nav-burger');
+      const drawer = document.getElementById('mobile-drawer');
+      if (!burger || !drawer) return;
+      function setOpen(open) {
+        drawer.classList.toggle('is-open', open);
+        drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+        burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        document.body.style.overflow = open ? 'hidden' : '';
+      }
+      burger.addEventListener('click', () => setOpen(!drawer.classList.contains('is-open')));
+      drawer.addEventListener('click', (e) => { if (e.target.matches('[data-drawer-close]')) setOpen(false); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && drawer.classList.contains('is-open')) setOpen(false); });
+    })();
+  </script>
+
+</body>
+</html>

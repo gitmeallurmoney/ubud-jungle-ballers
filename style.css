@@ -209,6 +209,17 @@ body::before {
   color: var(--gold);
   border-bottom-color: var(--gold);
 }
+/* Scrollspy: highlight the nav link whose section is currently in view */
+.site-nav .links a.is-active {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+/* Smooth-scroll same-page nav anchors (reduced-motion safe); scroll-margin
+   clears the fixed nav so sections don't land tucked underneath it. */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+.cd-section, .cd-cta, .cd-footer { scroll-margin-top: 90px; }
 .nav-cta {
   margin-left: 8px;
   display: inline-flex;
@@ -1416,8 +1427,10 @@ aside.country-panel.open {
   overflow: hidden;
   background: var(--bg-3);
 }
-.club-media-hero { height: 360px; }
-.club-media-sub  { height: 220px; }
+/* Images flex-fill the media column so it ends level with the copy column.
+   The grid stretches both columns to equal height; these grow to fill it. */
+.club-media-hero { flex: 1.6 1 0; min-height: 240px; }
+.club-media-sub  { height: 100%; }
 
 .club-media-hero img,
 .club-media-sub img {
@@ -1458,27 +1471,11 @@ aside.country-panel.open {
 }
 
 .club-media-row {
+  flex: 1 1 0;
+  min-height: 200px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
-}
-.club-quote {
-  margin: 0;
-  border: 1px solid var(--line);
-  padding: 28px;
-  background: var(--bg-2);
-}
-.club-quote-head { margin-bottom: 12px; }
-.club-quote-body {
-  font-size: 28px;
-  line-height: 1.05;
-  margin: 0;
-}
-.club-quote-attrib {
-  font-size: 11px;
-  margin-top: 16px;
-  color: var(--ink-dim);
-  letter-spacing: 0.2em;
 }
 
 @media (max-width: 960px) {
@@ -1489,7 +1486,7 @@ aside.country-panel.open {
   }
   .cd-section-kicker { text-align: left; max-width: 100%; }
   .club-body { grid-template-columns: 1fr; gap: 48px; }
-  .club-media-row { grid-template-columns: 1fr; }
+  .club-media-row { grid-template-columns: repeat(3, 1fr); }
 }
 
 /* ----- 03 / Community / Sessions grid ----- */
@@ -1552,6 +1549,60 @@ aside.country-panel.open {
   color: var(--ink-dim);
   font-size: 12px;
   letter-spacing: 0.12em;
+}
+.community-foot-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Community SEO lead line — readable intro above the sessions grid */
+.community-lead {
+  max-width: 720px;
+  margin: 0 auto 36px;
+  text-align: center;
+}
+
+/* FAQ section — hairline-divided Q/A list, matching the .cd-section rhythm */
+.faq-list {
+  margin-top: 8px;
+}
+.faq-item {
+  padding: 28px 0;
+  border-bottom: 1px solid var(--line);
+}
+.faq-q {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.35;
+  color: var(--ink);
+  margin: 0 0 10px;
+}
+.faq-a {
+  color: var(--ink-dim);
+  font-size: 16px;
+  line-height: 1.7;
+  margin: 0;
+  max-width: 760px;
+}
+/* Standalone /faq page — clear the fixed nav + give the lone section room */
+.faq-page {
+  padding-top: clamp(120px, 16vh, 200px);
+  padding-bottom: clamp(80px, 12vh, 160px);
+}
+.faq-foot {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 48px;
+}
+@media (max-width: 600px) {
+  .faq-q { font-size: 18px; }
+  .community-lead { margin-bottom: 28px; text-align: justify; }
+  /* Standalone /faq page: the desktop nav-clearance padding stacks on the
+     container's own top padding (~135px dead gap on phones) — trim it. */
+  .faq-page { padding-top: 88px; padding-bottom: clamp(56px, 9vh, 96px); }
 }
 
 /* ----- 04 / Squad / Tier tabs + roster list + portrait detail ----- */
@@ -2948,7 +2999,6 @@ footer .marks a:hover { color: var(--ujb-gold); }
        4. Body paragraphs
        5. Three tenets
        6. Secondary images (kits)
-       7. Captain quote
   */
   .club-body {
     display: flex;
@@ -2959,17 +3009,16 @@ footer .marks a:hover { color: var(--ujb-gold); }
   .club-copy { display: contents; }
   .club-media { display: contents; }
 
-  /* Explicit flex order on mobile */
-  .club-media-hero { order: 1; height: 240px; }
+  /* Explicit flex order on mobile (reset the desktop flex-fill so the fixed
+     mobile image heights apply in the single-column stack) */
+  .club-media-hero { order: 1; height: 240px; flex: 0 0 auto; min-height: 0; }
   .club-pull       { order: 2; font-size: 26px; margin: 0; }
   .club-para       { order: 3; font-size: 16px; }
   .tenets          { order: 4; padding-top: 24px; margin-top: 8px; }
-  .club-media-row  { order: 5; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .club-quote      { order: 6; padding: 24px; }
+  .club-media-row  { order: 5; grid-template-columns: repeat(3, 1fr); gap: 12px; flex: 0 0 auto; min-height: 0; }
 
   /* Style refinements */
   .club-media-sub { height: 160px; }
-  .club-quote-body { font-size: 20px; line-height: 1.15; }
   .tenet { padding: 16px 0; }
   .tenet-title { font-size: 20px; }
   .tenet-body { font-size: 13.5px; }
@@ -3010,8 +3059,12 @@ footer .marks a:hover { color: var(--ujb-gold); }
   .roster-detail { display: none; }
 
   /* Mobile: drop the inline stat columns; the bottom sheet has the full stat strip. */
-  .roster-shell { height: auto; min-height: 0; }
-  .roster-list { overflow-y: visible; max-height: none; }
+  /* Team widget: cap height + scroll the roster internally instead of
+     expanding to the full ~50-row list. Detail panel stays hidden; tapping
+     a row still opens the player-sheet. grid-row 1fr + min-height:0 lets the
+     single column shrink so overflow-y can scroll. */
+  .roster-shell { height: min(560px, 68vh); min-height: 360px; grid-template-rows: 1fr; }
+  .roster-list { overflow-y: auto; max-height: none; min-height: 0; }
   .roster-row {
     grid-template-columns: 56px 1fr auto;
     padding: 14px 16px;
@@ -3285,9 +3338,28 @@ footer .marks a:hover { color: var(--ujb-gold); }
 @media (max-width: 480px) {
   .hero-text .hero-headline { font-size: clamp(40px, 14vw, 60px); }
   .hero-meta-val { font-size: 18px; }
+  /* 4-up stat strip gets too tight on small phones — reflow to 2×2 */
+  .hero-meta { grid-template-columns: 1fr 1fr; max-width: 100%; }
+  .hero-meta-cell:nth-child(2) { border-right: none; }
+  .hero-meta-cell:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
   .cd-section-title { font-size: clamp(32px, 11vw, 48px); }
   .session-day { font-size: 36px; }
-  .tier-tab-name { font-size: 18px; }
+  .tier-tab-name { font-size: 15px; line-height: 1.05; }
+}
+
+/* =====================================================================
+   MOBILE LAYOUT REFINEMENTS (≤600px) — verified mobile audit
+   Phone-only; placed after the ≤960 block so these win the cascade.
+   Desktop/tablet (≥601px) is untouched.
+   ===================================================================== */
+@media (max-width: 600px) {
+  /* 02 Club — tighten the oversized gap under the section head */
+  .club-body { margin-top: 36px; }
+  /* 02 Club — reflow the cramped 3-up support photos to 2-up
+     (third spans full width) so the tiles and captions get room */
+  .club-media-row { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .club-media-row .club-media-sub:nth-child(3) { grid-column: 1 / -1; }
+  .club-media-sub { height: 150px; }
 }
 
 /* =====================================================================
@@ -3660,6 +3732,9 @@ footer .marks a:hover { color: var(--ujb-gold); }
   padding: 28px 28px 32px;
   gap: 12px;
 }
+/* More breathing room between the success title and its message (the shared
+   .join-step-sub carries a negative top margin tuned for the form steps). */
+.join-step--done .join-step-sub { margin-top: 14px; }
 .join-done-badge {
   width: 78px;
   height: 78px;
@@ -3835,7 +3910,7 @@ footer .marks a:hover { color: var(--ujb-gold); }
   width: 148px;
 }
 .lang-toggle--drawer .lang-btn {
-  padding: 9px 12px;
+  padding: 16px 12px;
   font-size: 12px;
 }
 
@@ -3859,7 +3934,8 @@ footer .marks a:hover { color: var(--ujb-gold); }
 .sponsor-card img { max-width: 100%; max-height: 108px; object-fit: contain; display: block; }
 .sponsor-card img[alt="Futtos"] { filter: brightness(0); }
 @media (max-width: 640px) {
-  .sponsor-logos { grid-template-columns: 1fr; }
+  .sponsor-logos { grid-template-columns: 1fr; gap: 14px; }
+  .sponsor-card { height: 132px; padding: 22px; }
 }
 
 /* more breathing room between the section divider and the sponsor cards */

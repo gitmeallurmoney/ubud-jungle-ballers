@@ -502,17 +502,20 @@
 @keyframes tourSpin { to { transform: rotate(360deg); } }
 
 /* Success-screen payment recap */
-/* Secondary "join the group" link under the gold payment-proof button.
-   Styled as a block, so pair with a [hidden] guard or it overrides the UA rule. */
-.tour-done-group {
-  display: inline-block;
-  margin-top: 14px;
-  color: var(--gold);
-  font-weight: 600;
-  font-size: 14px;
-}
-.tour-done-group:hover { color: var(--gold-2); text-decoration: underline; }
+/* Primary "join the group" button on the success screen. It's a .btn.btn--gold,
+   so it needs an explicit [hidden] guard or .btn's display overrides the UA rule. */
 .tour-done-group[hidden] { display: none !important; }
+
+/* "Pay within 24h or your spot is released" note, docked under the bank details. */
+.tour-done-revoke {
+  margin: 16px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--ink-dim);
+}
+.tour-done-revoke strong { color: var(--ink); font-weight: 600; }
 
 .tour-done-pay {
   width: 100%;
@@ -556,10 +559,10 @@
 /* ---------- PRIZE POOL --------------------------------------------- */
 .tour-podium {
   display: grid;
-  grid-template-columns: 1fr 1.2fr 1fr;
+  grid-template-columns: 1.15fr 1fr;
   align-items: end;
   gap: 18px;
-  max-width: 940px;
+  max-width: 660px;
   margin: 0 auto;
 }
 .tour-prize {
@@ -632,9 +635,31 @@
 }
 .tour-champion svg { width: 34px; height: 34px; color: var(--gold); }
 .tour-champion .display { font-size: clamp(17px, 1.5vw, 21px); text-transform: uppercase; line-height: 1; color: var(--gold); }
+/* Champion (1st) prize, docked inside the champion widget */
+.tour-champion .tour-champion-cash {
+  width: 100%;
+  margin-top: 4px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(232, 179, 57, 0.3);
+  font-size: clamp(19px, 1.8vw, 26px);
+}
+/* Runner-up (2nd) prize, under the Final tie */
+.tour-stage-prize {
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+.tour-stage-prize-cash { color: var(--gold); }
 
 /* ---------- TOURNAMENT PARTNERS ------------------------------------ */
 .tour-tpartners { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; max-width: 860px; margin: 0 auto; }
+/* Centre the "Backed by the jungle" title block + its description on desktop */
+@media (min-width: 961px) {
+  #tournament-partners .tour-section-head { margin-left: auto; margin-right: auto; text-align: center; }
+  #tournament-partners .tour-section-lead { margin-left: auto; margin-right: auto; }
+}
 .tour-tpartner {
   display: flex; flex-direction: column; align-items: center; gap: 16px;
   background: var(--bg-3); border: 1px solid var(--line); border-radius: 16px; padding: 30px 24px;
@@ -713,3 +738,29 @@
 
 /* Futtos logo: recolour its green to solid black */
 .tour-tpartner-logo img[alt="Futtos"] { filter: brightness(0); }
+
+/* =====================================================================
+   MOBILE LAYOUT REFINEMENTS (≤600px) — verified mobile audit
+   Appended last so these win the cascade over earlier unscoped
+   .tour-* rules (e.g. .tour-tpartner-logo height at ~L722).
+   Only loaded by events.html; desktop (≥601px) is untouched.
+   ===================================================================== */
+@media (max-width: 600px) {
+  /* Reclaim side gutters — tournament sections keep the desktop 40px
+     otherwise (only .cd-section/.cd-footer containers get reduced) */
+  .tour-main .container { padding-left: 20px; padding-right: 20px; }
+  /* Tighten desktop-scale heading-to-content gap on the narrow column */
+  .tour-section-head { margin-bottom: 28px; }
+  /* Trim heavy insets so the bracket cards and format lists breathe */
+  .tour-bracket { padding: 22px 16px; }
+  .tour-panel { padding: 24px 20px; }
+  /* Stack the two group cards instead of squeezing them 2-up */
+  .tour-groups { flex-direction: column; }
+  /* Restore the champion title above its own (larger) cash figure */
+  .tour-champion .display { font-size: 22px; }
+  /* Three full-width 172px gold chips is too tall a run for 3 logos —
+     trim to 140px, but cap the logo so taller marks (Common Sense's
+     "TRADING", Futtos) stay fully inside the chip instead of clipping. */
+  .tour-tpartner-logo { height: 140px; padding: 24px; }
+  .tour-tpartner-logo img { max-height: 88px; }
+}

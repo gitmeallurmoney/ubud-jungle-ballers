@@ -1,4 +1,4 @@
-# King of the Jungle — tournament page setup
+# Jungle Kings Cup — tournament page setup
 
 The tournament page lives at **`/events`** (`events.html`). It shows the
 event info and a 3-step "Register a Team" flow that writes each signup to a
