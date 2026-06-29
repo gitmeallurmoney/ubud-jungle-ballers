@@ -22,10 +22,12 @@ const CONFIG = {
   logoBucket:      'team-logos',                            // Storage bucket name
   signupTable:     'tournament_signups',                    // table name
 
-  /* ----- Entry fee — a NUMBER in IDR. Formatted per active language via Intl:
-     1500000 → "IDR 1,500,000" (en) / "Rp 1.500.000" (id). The "per team"
+  /* ----- Entry fees — per person, in IDR. Two tiers: foreigner / local.
+     Formatted per active language via Intl:
+     150000 → "IDR 150,000" (en) / "Rp 150.000" (id). The "per person"
      caption is a translation (i18n/*.json → tour.feeNote), not set here. ----- */
-  feeAmount: 1800000,       // EDIT
+  feeForeigner: 150000,     // EDIT — per person, foreigner
+  feeLocal:     75000,      // EDIT — per person, local
 
   /* ----- Where teams pay (bank transfer) ----- */
   bankName:      'BCA',                          // EDIT
@@ -45,8 +47,9 @@ const CONFIG = {
   // i18n bridge — i18n/i18n.js loads before this script, but degrade gracefully.
   const tr = (typeof window !== 'undefined' && window.t) || ((k) => k);
   const I18N = (typeof window !== 'undefined' && window.UBJ_I18N) || { formatCurrency: (v) => String(v) };
-  // Entry fee, formatted for the active locale (Rp 1.500.000 vs IDR 1,500,000).
-  const feeDisplay = () => I18N.formatCurrency(CONFIG.feeAmount, 'IDR');
+  // Entry fees, formatted for the active locale (Rp 150.000 vs IDR 150,000).
+  const feeForeignerDisplay = () => I18N.formatCurrency(CONFIG.feeForeigner, 'IDR');
+  const feeLocalDisplay     = () => I18N.formatCurrency(CONFIG.feeLocal, 'IDR');
 
   // ---- Render CONFIG values into the page -----------------------------
   function applyConfig() {
@@ -54,10 +57,12 @@ const CONFIG = {
       const key = el.getAttribute('data-cfg');
       if (key === 'whatsappDisplay') {
         el.textContent = '+' + CONFIG.whatsappAdmin.replace(/\D/g, '');
-      } else if (key === 'fee') {
-        el.textContent = feeDisplay();
+      } else if (key === 'feeForeigner') {
+        el.textContent = feeForeignerDisplay();
+      } else if (key === 'feeLocal') {
+        el.textContent = feeLocalDisplay();
       } else if (key === 'feeNote') {
-        el.textContent = tr('tour.feeNote');     // localized "per team" / "per tim"
+        el.textContent = tr('tour.feeNote');     // localized "per person" / "per orang"
       } else if (key in CONFIG) {
         el.textContent = CONFIG[key];
       }
@@ -379,8 +384,8 @@ const CONFIG = {
 
     const first = (d.admin.split(/\s+/)[0] || '').trim();
     doneMsg.textContent = first
-      ? tr('tour.doneMsgNamed', { name: first, fee: feeDisplay() })
-      : tr('tour.doneMsgAnon', { fee: feeDisplay() });
+      ? tr('tour.doneMsgNamed', { name: first })
+      : tr('tour.doneMsgAnon');
 
     doneSum.innerHTML =
       '<div class="join-done-summary-head mono">' + tr('tour.sumHead') + '</div>' +

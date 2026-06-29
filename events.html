@@ -80,14 +80,26 @@
       "name": "Ubud Jungle Ballers",
       "url": "https://ubudjungleballers.com"
     },
-    "offers": {
-      "@type": "Offer",
-      "price": "1800000",
-      "priceCurrency": "IDR",
-      "url": "https://ubudjungleballers.com/events",
-      "availability": "https://schema.org/LimitedAvailability",
-      "validThrough": "2026-07-01T23:59:00+08:00"
-    }
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "Entry (foreigner)",
+        "price": "150000",
+        "priceCurrency": "IDR",
+        "url": "https://ubudjungleballers.com/events",
+        "availability": "https://schema.org/InStock",
+        "validThrough": "2026-07-04T15:00:00+08:00"
+      },
+      {
+        "@type": "Offer",
+        "name": "Entry (local)",
+        "price": "75000",
+        "priceCurrency": "IDR",
+        "url": "https://ubudjungleballers.com/events",
+        "availability": "https://schema.org/InStock",
+        "validThrough": "2026-07-04T15:00:00+08:00"
+      }
+    ]
   }
   </script>
 
@@ -188,13 +200,13 @@
           <!-- EDIT: tournament name (brand name — not translated) -->
           <h1 class="tour-hero-title display">Jungle Kings<br/><span class="gold">Cup</span></h1>
           <!-- EDIT: hero tagline -->
-          <p class="tour-hero-sub" data-i18n="tour.heroSub">One ball, six teams — and one crown. Gather your team and conquer the jungle at Liga Raya, Gianyar.</p>
+          <p class="tour-hero-sub" data-i18n="tour.heroSub">One ball, one crown. Gather your team and conquer the jungle at Liga Raya, Gianyar.</p>
 
           <div class="tour-hero-cta-row">
             <a href="#register" class="btn btn--gold" data-register data-i18n="tour.ctaRegister">Register your team →</a>
           </div>
           <!-- Mobile-only entry fee, shown under the Register button -->
-          <div class="tour-hero-fee mono"><span data-i18n="tour.factEntry">Entry</span> <strong data-cfg="fee">—</strong> <span data-i18n="tour.feeNote">per team</span></div>
+          <div class="tour-hero-fee mono"><span data-i18n="tour.factEntry">Entry</span> <strong data-cfg="feeForeigner">—</strong> / <strong data-cfg="feeLocal">—</strong> <span data-i18n="tour.feeNote">per person</span></div>
         </div>
 
         <!-- Club poster, integrated from the "Welcome to the Jungle" key art -->
@@ -231,11 +243,11 @@
           </div>
           <div class="tour-fact">
             <span class="tour-fact-k mono" data-i18n="tour.factFormat">Format</span>
-            <span class="tour-fact-v" data-i18n="tour.factFormatVal">7-a-side · 6 teams</span>
+            <span class="tour-fact-v" data-i18n="tour.factFormatVal">7-a-side · open entry</span>
           </div>
           <div class="tour-fact tour-fact--fee">
             <span class="tour-fact-k mono" data-i18n="tour.factEntry">Entry</span>
-            <span class="tour-fact-v"><span data-cfg="fee">—</span></span>
+            <span class="tour-fact-v"><span data-cfg="feeForeigner">—</span> / <span data-cfg="feeLocal">—</span></span>
           </div>
         </div>
         <div class="tour-factbar-partners mono" data-i18n="tour.factPartners"><span class="tour-partners-prefix">In partnership with </span><span>Common Sense</span> · <span>Futtos</span> · <span>Vaniglia</span></div>
@@ -254,7 +266,7 @@
           <div class="tour-panel">
             <h3><span class="tour-panel-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M7 6H4.5v1.4A3 3 0 0 0 7.6 10.4M17 6h2.5v1.4a3 3 0 0 1-3.1 3"/><path d="M9.5 16.5h5M8.5 20h7M12 14.2v2.3"/></svg></span><span data-i18n="tour.fmtHead">The format</span></h3>
             <ul class="tour-list">
-              <li data-i18n="tour.fmtList.0">6 teams · two groups of three<span>Every team drawn into a group of three</span></li>
+              <li data-i18n="tour.fmtList.0">Open entry · two groups<span>Teams drawn into groups — format scales with entries</span></li>
               <li data-i18n="tour.fmtList.1">Group stage: play each rival twice<span>Double round-robin · 2 &times; 10 min games</span></li>
               <li data-i18n="tour.fmtList.2">Top two in each group advance<span>Straight into the semi-finals</span></li>
               <li data-i18n="tour.fmtList.3">Knockouts: 2 &times; 15 min<span>Semis, a 3rd-place play-off, then the final</span></li>
@@ -266,7 +278,7 @@
               <li data-i18n="tour.knowList.0">7-a-side<span>Seven out on the pitch, roll your subs freely</span></li>
               <li data-i18n="tour.knowList.1">Bring your own jersey<span>Every team needs its own matching kit</span></li>
               <li data-i18n="tour.knowList.2">Qualified referees<span>Every match is properly officiated</span></li>
-              <li data-i18n="tour.knowList.3">Entry per team<span><span data-cfg="fee">—</span> · covers your group games and knockout run</span></li>
+              <li data-i18n="tour.knowList.3">Entry per person<span><span data-cfg="feeForeigner">—</span> foreigner / <span data-cfg="feeLocal">—</span> local</span></li>
             </ul>
           </div>
         </div>
@@ -300,14 +312,13 @@
             <div class="tour-bracket-stage">
               <div class="tour-stage-label mono" data-i18n="tour.brFinal">Final</div>
               <div class="tour-tie tour-tie--final"><span data-i18n="tour.brSemi1Winner">Semi 1 winner</span><span class="tour-tie-vs mono" data-i18n="tour.brVs">vs</span><span data-i18n="tour.brSemi2Winner">Semi 2 winner</span></div>
-              <div class="tour-stage-prize mono"><span data-i18n="tour.prize2Note">Runner-up</span> · <span class="tour-stage-prize-cash" data-i18n="tour.prize2Amount">IDR 2,000,000</span></div>
             </div>
             <div class="tour-bracket-stage tour-bracket-stage--crown">
               <div class="tour-stage-label mono" data-i18n="tour.brChampion">Champion</div>
               <div class="tour-champion">
                 <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 7l4.5 4L12 4l4.5 7L21 7l-1.8 11.5H4.8L3 7z"/></svg>
                 <span class="display">Jungle Kings Cup</span>
-                <span class="tour-champion-cash display" data-i18n="tour.prize1Amount">IDR 5,000,000</span>
+                <span class="tour-champion-cash display" data-i18n="tour.prize1Amount">IDR 3,000,000</span>
               </div>
             </div>
           </div>
@@ -483,7 +494,7 @@
             <label class="join-label mono" for="tour-roster" data-i18n="tour.lblRoster">SQUAD SIZE (INC. SUBS)</label>
             <input class="join-input" id="tour-roster" name="roster" type="number" min="7" max="20" inputmode="numeric" placeholder="e.g. 10" data-i18n-attr="placeholder:tour.phRoster" required />
           </div>
-          <p class="join-step-sub" style="margin-top:4px" data-i18n="tour.s3Note">Final player names aren't needed now — bring your squad on the day. Entry fee is <strong data-cfg="fee">—</strong> <span data-cfg="feeNote">per team</span>, due on sign-up.</p>
+          <p class="join-step-sub" style="margin-top:4px" data-i18n="tour.s3Note">Final player names aren't needed now — bring your squad on the day. Entry is <strong data-cfg="feeForeigner">—</strong> per foreigner / <strong data-cfg="feeLocal">—</strong> per local, due on sign-up.</p>
         </fieldset>
 
         <!-- Step 4 / Success -->
@@ -498,7 +509,8 @@
           <div class="tour-done-pay">
             <div class="tour-done-pay-head" data-i18n="tour.payBlockHead">Pay the entry fee</div>
             <dl>
-              <dt data-i18n="tour.pbAmount">Amount</dt><dd data-cfg="fee">—</dd>
+              <dt data-i18n="tour.pbForeigner">Foreigner</dt><dd data-cfg="feeForeigner">—</dd>
+              <dt data-i18n="tour.pbLocal">Local</dt><dd data-cfg="feeLocal">—</dd>
               <dt data-i18n="tour.pbBank">Bank</dt><dd data-cfg="bankName">—</dd>
               <dt data-i18n="tour.pbAccount">Account</dt><dd data-cfg="accountName">—</dd>
               <dt data-i18n="tour.pbNo">No.</dt><dd data-cfg="accountNumber">—</dd>
